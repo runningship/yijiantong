@@ -58,7 +58,7 @@
 		    url: '/yijiantong/c/product/save',
 		    data:a,
 		    mysuccess: function(data){
-		    	
+		    	layer.msg('添加商品成功');
 		    }
 	    });
 	}
@@ -66,11 +66,12 @@
 	var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
 	function tishi(){
 		var notice = new PNotify({
-			title: 'Notification',
-			text: 'Some notification text.',
+			title: '消息',
+			text: '商品添加成功.',
 			type: 'success',
 			addclass: 'stack-bar-top',
 			stack: stack_bar_top,
+			delay:1000,
 			width: "100%"
 		});
 	}
@@ -153,7 +154,6 @@
 							</form>
 						</div>	   
 					</div>
-					<button type="reset" class="bk-margin-5 btn btn-default" onclick="tishi();">tishi</button>
 				<!-- End Main Page -->	
 			</div>
 		</div>

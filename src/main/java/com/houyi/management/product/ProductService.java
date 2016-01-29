@@ -1,5 +1,6 @@
 package com.houyi.management.product;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +55,15 @@ public class ProductService {
 	}
 	
 	@WebMethod
-	public ModelAndView listProduct(Page<Product> page){
+	public ModelAndView listProduct(Page<Product> page , String title){
 		ModelAndView mv = new ModelAndView();
-		page = dao.findPage(page, "from Product");
+		StringBuilder sql = new StringBuilder("from Product where 1=1 ");
+		List<Object> params = new ArrayList<Object>();
+		if(StringUtils.isNotEmpty(title)){
+			sql.append(" and title like ?");
+			params.add("%"+title+"%");
+		}
+		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;
 	}

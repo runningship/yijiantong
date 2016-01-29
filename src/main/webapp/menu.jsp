@@ -5,7 +5,7 @@
 	<div class="sidebar-collapse">
 		<!-- Sidebar Header Logo-->
 		<div class="sidebar-header">
-			<img src="assets/img/logo.png" class="img-responsive" alt="" />
+			<img src="/yijiantong/assets/img/logo.png" class="img-responsive" alt="" />
 		</div>
 		<!-- Sidebar Menu-->
 		<div class="sidebar-menu">						
@@ -13,7 +13,7 @@
 				<ul class="nav nav-sidebar">
 					<div class="panel-body text-center">								
 						<div class="bk-avatar">
-							<img src="assets/img/avatar.jpg" class="img-circle bk-img-60" alt="" />
+							<img src="/yijiantong/assets/img/avatar.jpg" class="img-circle bk-img-60" alt="" />
 						</div>
 						<div class="bk-padding-top-10">
 							<i class="fa fa-circle text-success"></i> <small>管理员</small>
@@ -21,7 +21,7 @@
 					</div>
 					<div class="divider2"></div>
 					<li class="">
-						<a href="index.jsp">
+						<a href="/yijiantong/index.jsp">
 							<i class="fa fa-laptop" aria-hidden="true"></i><span>首页</span>
 						</a>
 					</li>
@@ -30,8 +30,8 @@
 							<i class="fa fa-copy" aria-hidden="true"></i><span>信息管理</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="page-activity.html"><span class="text"> 发布文章</span></a></li>
-							<li><a href="page-invoice.html"><span class="text"> 文章列表</span></a></li>										
+							<li><a href="/yijiantong/article/add.jsp"><span class="text"> 发布文章</span></a></li>
+							<li><a href="/yijiantong/article/list.jsp"><span class="text"> 文章列表</span></a></li>										
 						</ul>
 					</li>
 					<li class="nav-parent">

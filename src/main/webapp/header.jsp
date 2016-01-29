@@ -29,6 +29,9 @@
 		<link href="/yijiantong/assets/plugins/morris/css/morris.css" rel="stylesheet" />
 		<link href="/yijiantong/assets/plugins/pnotify/css/pnotify.custom.css" rel="stylesheet" />
 		
+		<link href="/yijiantong/assets/vendor/css/pace.preloader.css" rel="stylesheet" />
+		<link href="/yijiantong/assets/plugins/magnific-popup/css/magnific-popup.css" rel="stylesheet" />
+		
 		<!-- Theme CSS -->
 		<link href="/yijiantong/assets/css/jquery.mmenu.css" rel="stylesheet" />
 		
@@ -83,7 +86,7 @@
 		<script src="/yijiantong/assets/plugins/sparkline/js/jquery.sparkline.min.js"></script>
 		<script src="/yijiantong/assets/plugins/jquery-validation/js/jquery.validate.js"></script>
 		<script src="/yijiantong/assets/plugins/pnotify/js/pnotify.custom.js"></script>
-		
+		<script src="/yijiantong/assets/js/layer/layer.js"></script>
 		
 		
 		<!-- Theme JS -->		

@@ -19,7 +19,6 @@ overflow-x: hidden;
 overflow-y: scroll;
 }
 a {
-color: #cccccc;
 }
 a:hover, a:focus {
 color: #d9d9d9;
@@ -602,7 +601,6 @@ margin: 0 25px 0 10px;
 display: block;
 }
 .userbox .name {
-color: #000011;
 font-size: 13px;
 font-size: 1.3rem;
 line-height: 1.2em;
@@ -693,7 +691,7 @@ padding: 43px 0 0 0;
 /* Navbar Notifications */
 .navbar {
 margin: 0;
-padding: 0 10px 0 240px;
+padding: 0 0 0 240px;
 height: 62px;
 border: none;
 -webkit-border-radius: 0px;
@@ -708,6 +706,7 @@ z-index: 11;
 }
 .navbar .container-nav{
 height: 62px;
+background: #111;
 }
 .navbar .navbar-actions {
 font-size: 20px;
@@ -1044,7 +1043,7 @@ padding: 0px 15px;
 /* Page Header
 =================================================================== */
 .page-header {	
-background: #3BBFB4;
+background: #2D3F51;
 box-shadow: 1px 3px 0 1px #cccccc;
 height: 50px;
 padding: 0;
@@ -1118,7 +1117,7 @@ vertical-align: middle;
 /* Sidebar
 =================================================================== */
 .sidebar {
-background: #3BBFB4 !important;   
+background: #34495E !important;   
 color: #cccccc;
 position: fixed;
 top: 0;
@@ -1132,7 +1131,7 @@ backface-visibility: hidden;
 transform-style: preserve-3d;
 }
 .sidebar a {
-color: #C1ECE8;
+color: #fff;
 }
 .sidebar .sidebar-header {
 padding: 10px 35px;
@@ -1140,7 +1139,7 @@ height: 62px;
 line-height: 62px;
 text-align: center;
 position: relative;
-background: #ffffff !important;
+background: #111 !important;
 }
 .sidebar .sidebar-header img {
 width: 170px;
@@ -1179,7 +1178,7 @@ height: 60px;
 }
 .sidebar ul.nav.nav-sidebar li {
 margin: 0;
-border-top: 1px solid #00D9D9;
+border-top: 1px solid #3B4E4E;
 position: relative;
 }
 .sidebar ul.nav.nav-sidebar li:hover {
@@ -1284,7 +1283,7 @@ content: '\f106';
 display: block;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children {
-background: #2C8E86;
+background: #111;
 box-shadow: none;
 display: none;
 padding: 10px 0;
@@ -1322,7 +1321,7 @@ bottom: 0;
 left: 0;
 width: 240px;
 padding: 10px 20px 10px 20px;
-background: #3BBFB4;
+background: #2D3F51;
 height: 135px;
 border-right: 1px solid #eef0f4;
 }
@@ -8011,6 +8010,7 @@ height: 80px;
 padding: 95px 0 30px;
 }
 }
+label{font-weight:normal;}
 /*==================================================END CSS=====================================================*/
 /*==============================================================================================================*/
 /*==============================================================================================================*/

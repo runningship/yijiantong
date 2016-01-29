@@ -12,16 +12,29 @@
 			});
 			
 			function doSearch(){
+				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
 				    url: '/yijiantong/c/product/listProduct',
-				    data: {},
+				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
 				        buildHtmlWithJsonArray("repeat",json.page.data);
 				        Page.setPageInfo(json.page);
 				    }
 				  });
+			}
+			
+			function openPici(){
+				 layer.open({
+			            type: 2,
+			            title: '很多时候，我们想最大化看，比如像这个页面。',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['893px', '600px'],
+			            content: 'http://www.baidu.com/'
+			        });
 			}
 		</script>
 	</head>
@@ -60,11 +73,13 @@
 							<div class="panel panel-default bk-bg-white">
 								<div class="panel-body">
 									<div class="row">
-										<div class="col-sm-6">
-											<div class="bk-margin-bottom-10">
-												<button class="btn btn-info">添加 <i class="fa fa-plus"></i></button>
+											<form name="form1" onsubmit="doSearch();return false;">
+											<div class="col-sm-12 col-md-6">
+												<div id="datatable-default_filter" class="dataTables_filter">
+													<input type="search" name="title" class="form-control" placeholder="产品名称" aria-controls="datatable-default"><label></label>
+												</div>
 											</div>
-										</div>
+											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>
@@ -75,14 +90,15 @@
 											</tr>
 										</thead>
 										<tbody>
-											<tr class="gradeA repeat">
+											<tr class="gradeA repeat" style="display:none;">
 												<td>$[title]</td>
 												<td>$[spec]</td>
-												<td><a href="#">二维码</a></td>
+												<td><a class="pici" href="#" onclick="openPici();">批次信息</a></td>
 											</tr>
 										</tbody>
 									</table>
-									<div class=" datatables-footer">
+									<label></label>
+									<div>
 											<div class="maxHW mainCont ymx_page foot_page_box"></div>
 									</div>
 							</div>

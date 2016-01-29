@@ -1,0 +1,68 @@
+package com.houyi.management.article;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+import org.bc.sdak.CommonDaoService;
+import org.bc.sdak.GException;
+import org.bc.sdak.Page;
+import org.bc.sdak.TransactionalServiceHelper;
+import org.bc.sdak.utils.JSONHelper;
+import org.bc.web.ModelAndView;
+import org.bc.web.Module;
+import org.bc.web.PlatformExceptionType;
+import org.bc.web.WebMethod;
+
+import com.houyi.management.article.entity.Article;
+
+
+@Module(name="/Article")
+public class ArticleService {
+
+	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
+	
+	@WebMethod
+	public ModelAndView save(Article Article){
+		ModelAndView mv = new ModelAndView();
+		Article.addtime = new Date();
+		dao.saveOrUpdate(Article);
+		return mv;
+	}
+
+	@WebMethod
+	public ModelAndView update(Article Article){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(Article.title)){
+			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
+		}
+		Article.addtime = new Date();
+		dao.saveOrUpdate(Article);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView delete(int  id){
+		ModelAndView mv = new ModelAndView();
+		Article po = dao.get(Article.class, id);
+		if(po!=null){
+			dao.delete(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView list(Page<Article> page , String title){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder sql = new StringBuilder("from Article where 1=1 ");
+		List<Object> params = new ArrayList<Object>();
+		if(StringUtils.isNotEmpty(title)){
+			sql.append(" and title like ?");
+			params.add("%"+title+"%");
+		}
+		page = dao.findPage(page, sql.toString() , params.toArray());
+		mv.data.put("page", JSONHelper.toJSON(page));
+		return mv;
+	}
+}
