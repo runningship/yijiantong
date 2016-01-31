@@ -19,6 +19,7 @@
 		<link href="/yijiantong/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 		<link href="/yijiantong/assets/vendor/skycons/css/skycons.css" rel="stylesheet" />
 		<link href="/yijiantong/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+		<link href="/yijiantong/assets/vendor/css/pace.preloader.css" rel="stylesheet" />
 		
 		<!-- Plugins CSS-->		
 		<link href="/yijiantong/assets/plugins/bootkit/css/bootkit.css" rel="stylesheet" />	

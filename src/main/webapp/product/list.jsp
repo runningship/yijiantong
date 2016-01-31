@@ -25,15 +25,15 @@
 				  });
 			}
 			
-			function openPici(){
+			function openPici(id){
 				 layer.open({
 			            type: 2,
-			            title: '很多时候，我们想最大化看，比如像这个页面。',
+			            title: '批次信息',
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['893px', '600px'],
-			            content: 'http://www.baidu.com/'
+			            area: ['793px', '600px'],
+			            content: 'listBatch.jsp?productId='+id
 			        });
 			}
 		</script>
@@ -93,7 +93,9 @@
 											<tr class="gradeA repeat" style="display:none;">
 												<td>$[title]</td>
 												<td>$[spec]</td>
-												<td><a class="pici" href="#" onclick="openPici();">批次信息</a></td>
+												<td><a class="batch" href="#" onclick="openPici($[id]);">批次信息</a>
+														<a class="edit" href="#" onclick="openEdit($[id]);">编辑</a>
+												</td>
 											</tr>
 										</tbody>
 									</table>

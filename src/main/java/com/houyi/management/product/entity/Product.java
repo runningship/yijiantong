@@ -28,4 +28,7 @@ public class Product {
 	public Date addtime;
 	
 	public String conts;
+	
+	//主图片id
+	public Integer imgId;
 }

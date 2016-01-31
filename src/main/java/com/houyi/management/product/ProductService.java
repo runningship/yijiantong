@@ -16,6 +16,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.product.entity.Product;
+import com.houyi.management.product.entity.ProductBatch;
 import com.houyi.management.product.entity.ProductItem;
 import com.houyi.management.product.entity.QRTableInfo;
 
@@ -45,6 +46,16 @@ public class ProductService {
 	}
 	
 	@WebMethod
+	public ModelAndView saveBatch(ProductBatch batch){
+		ModelAndView mv = new ModelAndView();
+		batch.addtime = new Date();
+		//根据 batch.count找到合适的item表,插入数据并设置batch.tableOffset
+		batch.tableOffset="12";
+		dao.saveOrUpdate(batch);
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView delete(int  id){
 		ModelAndView mv = new ModelAndView();
 		Product po = dao.get(Product.class, id);
@@ -63,6 +74,20 @@ public class ProductService {
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
 		}
+		page = dao.findPage(page, sql.toString() , params.toArray());
+		mv.data.put("page", JSONHelper.toJSON(page));
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView listBatch(Page<ProductBatch> page , Integer productId){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder sql = new StringBuilder("from ProductBatch where productId=? ");
+		List<Object> params = new ArrayList<Object>();
+		params.add(productId);
+		page.pageSize=10;
+		page.order="desc";
+		page.orderBy="addtime";
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;

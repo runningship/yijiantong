@@ -18,16 +18,16 @@ import org.bc.web.WebMethod;
 import com.houyi.management.article.entity.Article;
 
 
-@Module(name="/Article")
+@Module(name="/article")
 public class ArticleService {
 
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
-	public ModelAndView save(Article Article){
+	public ModelAndView save(Article article){
 		ModelAndView mv = new ModelAndView();
-		Article.addtime = new Date();
-		dao.saveOrUpdate(Article);
+		article.addtime = new Date();
+		dao.saveOrUpdate(article);
 		return mv;
 	}
 

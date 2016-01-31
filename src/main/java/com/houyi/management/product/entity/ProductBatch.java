@@ -1,4 +1,4 @@
-package com.houyi.management.article.entity;
+package com.houyi.management.product.entity;
 
 import java.util.Date;
 
@@ -8,28 +8,26 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Article {
+public class ProductBatch {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
-	//发布人
-	public Integer uid;
-	
-	public String title;
+	public Integer productId;
 
-	public Integer readCount;
-	
-	public Integer orderx;
-	
-	public Date addtime;
-	
+	//批次号
+	public String no;
+
 	public String conts;
 	
-	public Integer publishFlag;
+	public Integer count;
 	
-	public String author;
+	//优惠券
+	public Integer lottery;
 	
-	public Integer imgId;
+	//ProductItem表名后缀
+	public String tableOffset;
+	
+	public Date addtime;
 }

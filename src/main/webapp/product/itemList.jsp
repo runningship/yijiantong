@@ -14,7 +14,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/article/list',
+				    url: '/yijiantong/c/article/listItem',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -71,7 +71,7 @@
 												<td>$[title]</td>
 												<td>$[readCount]</td>
 												<td>$[addtime]</td>
-												<td> <a href="#" onclick="openPici();">评论</a> <a href="#" onclick="openPici();">编辑</a> <a href="#" onclick="openPici();">删除</a> </td>
+												<td><a href="#" onclick="openPici();">查看二维码</a></td>
 											</tr>
 										</tbody>
 									</table>

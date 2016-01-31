@@ -303,8 +303,14 @@
 	  html.mm-opening .page-header  {	  
 	    left: 240px; }
 		
-	  html.mm-opening .page-header .pull-right {
+	  html.mm-opening .page-header .pull-right,
+	  html.mm-opening .media-gallery .inner-toolbar{
 		display: none;
+		-webkit-transition-duration: 0.9s;
+	    -moz-transition-duration: 0.9s;
+	    -ms-transition-duration: 0.9s;
+		-o-transition-duration: 0.9s;
+		transition-duration: 0.9s;
 	  }
 	  
 	  html.mm-opening .mm-page,

@@ -5,6 +5,8 @@
 
 	<head>
 	<jsp:include page="../header.jsp"></jsp:include>
+	
+	
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
@@ -41,21 +43,39 @@
 	            ]
 	        ]
 	  });
-		
-		PNotify.prototype.options.styling = "fontawesome";
 	});
+	
+	function openImagePanel(){
+		layer.open({
+            type: 2,
+            title: '图片库',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            content: '../image/gallery.jsp'
+        });
+	}
 	
 	function save(){
 		var conts = ue.getContent();
 	    if (conts==null||conts=='') {
-	    	alert('内容不能为空');
+	    	layer.msg('内容不能为空');
 	    	return;
 	    };
-	    
+	    if(!$('#imgId').val()){
+	    	layer.msg('请先选择图片');
+	    	return;
+	    }
+	    if($('#publishFlag').attr('checked')){
+	    	$('#publishFlag').val(1);
+	    }else{
+	    	$('#publishFlag').val(0);
+	    }
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/yijiantong/c/product/save',
+		    url: '/yijiantong/c/article/save',
 		    data:a,
 		    mysuccess: function(data){
 		    	layer.msg('添加商品成功');
@@ -74,6 +94,16 @@
 			delay:1000,
 			width: "100%"
 		});
+	}
+	
+	function setSelectImg(arr){
+		if(arr.length>0){
+			var img = arr[0];
+			var html = '<img style="width:200px;" src="'+img.path+'" />';
+			$('#imgId').val(img.id);
+			$('#imgContainer').empty();
+			$('#imgContainer').append(html);
+		}
 	}
 	</script>
 	</head>
@@ -94,19 +124,7 @@
 						
 				<!-- Main Page -->
 				<div class="main sidebar-minified">			
-					<!-- Page Header -->
-					<div class="page-header">
-						<div class="pull-left">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">								
-								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
-								<li><a href="#"><i class="fa fa-table"></i>商品管理</a></li>
-							</ol>						
-						</div>
-						<div class="pull-right">
-							<h2>添加商品</h2>
-						</div>					
-					</div>
-					<!-- End Page Header -->
+					
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
@@ -119,31 +137,39 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">排序 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">作者 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="vender" class="form-control" placeholder="" required/>
+												<input type="text" name="author" value="快易扫" class="form-control" placeholder="" required/>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">排序 </label>
+											<div class="col-sm-9">
+												<input type="text" name="orderx" class="form-control" placeholder="" />
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">是否发布</label>
 											<div class="col-lg-12 col-md-4 col-sm-4 col-xs-4">
-												<label class="switch switch-primary bk-margin-top-10">
-												  <input type="checkbox" class="switch-input" checked="">
-												  <span class="switch-label" data-on="On" data-off="Off"></span>
-												  <span class="switch-handle"></span>
-												</label>
-											</div>
+													<label class="switch switch-success bk-margin-top-10">
+													  <input type="checkbox"  value="1"  id="publishFlag" class="switch-input"  name="publishFlag" checked="">
+													  <span class="switch-label" data-on="On" data-off="Off"></span>
+													  <span class="switch-handle"></span>
+													</label>
+												</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">图片 <span class="required">*</span></label>
-											<div class="col-sm-9">
-												<input type="text" name="spec" class="form-control" placeholder="" required/>
+											<div class="col-sm-9" >
+												<input type="hidden" name="imgId"  id="imgId" class="form-control" placeholder="" required/>
+												<div id="imgContainer"></div>
+												<button type="button" class="btn btn-info btn-xs" onclick="openImagePanel()">图片库</button>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">文章内容</label>
 											<div class="col-sm-9">
-												<span id="editor" type="text/plain" name="conts" style="height:330px;width:100%;"></span>
+												<span id="editor" type="text/plain" name="conts" style="height:250px;width:100%;"></span>
 											</div>
 										</div>
 										<div class="row">
@@ -172,7 +198,8 @@
 		
 		<!-- Pages JS -->
 <!-- 		<script src="/yijiantong/assets/js/pages/form-validation.js"></script> -->
-		<script src="/yijiantong/assets/js/pages/ui-notifications.js"></script>
+<!-- 		<script src="/yijiantong/assets/js/pages/ui-notifications.js"></script> -->
+		<script src="/yijiantong/assets/js/pages/ui-elements.js"></script>
 		
 		<!-- end: JavaScript-->
 		

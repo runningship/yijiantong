@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String productId = request.getParameter("productId");
+	request.setAttribute("productId", productId);
+%>
 <!DOCTYPE html>
 <html lang="en">
+
 	<head>
 		<jsp:include page="../header.jsp"></jsp:include>
 		<script type="text/javascript">
@@ -14,8 +19,8 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/article/list',
-				    data: a,
+				    url: '/yijiantong/c/product/listBatch',
+				    data: {productId: ${productId}},
 				    dataType:'json',
 				    mysuccess: function(json){
 				        buildHtmlWithJsonArray("repeat",json.page.data);
@@ -24,13 +29,23 @@
 				  });
 			}
 			
+			function addBatch(){
+				 layer.open({
+			            type: 2,
+			            title: '增加批次',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['400px', '460px'],
+			            content: 'addBatch.jsp?productId=${productId}'
+			        });
+			}
 		</script>
 	</head>
 	
 	<body>
 	
 		<!-- Start: Header -->
-			<jsp:include page="../top.jsp"></jsp:include>
 		<!-- End: Header -->
 		
 		<!-- Start: Content -->
@@ -38,40 +53,38 @@
 			<div class="row">
 			
 				<!-- Sidebar -->
-				<jsp:include page="../menu.jsp"></jsp:include>
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->
-				<div class="main sidebar-minified">			
+				<div class="sidebar-minified">			
+					<!-- Page Header -->
+					<!-- End Page Header -->
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-							<div class="panel panel-default bk-bg-white">
+							<div class="panel panel-default bk-bg-white" style="height:100%;">
 								<div class="panel-body">
 									<div class="row">
-											<form name="form1" onsubmit="doSearch();return false;">
 											<div class="col-sm-12 col-md-6">
-												<div id="datatable-default_filter" class="dataTables_filter">
-													<input type="search" name="title" class="form-control" placeholder="产品名称" aria-controls="datatable-default"><label></label>
-												</div>
+												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="addBatch()">添加</button>
 											</div>
-											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>
 											<tr>
-												<th>标题</th>
-												<th>阅读</th>
-												<th>发布时间</th>
+												<th>编号</th>
+												<th>数量</th>
+												<th>奖券</th>
+												<th>描述</th>
 												<th>操作</th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
-												<td>$[title]</td>
-												<td>$[readCount]</td>
-												<td>$[addtime]</td>
-												<td> <a href="#" onclick="openPici();">评论</a> <a href="#" onclick="openPici();">编辑</a> <a href="#" onclick="openPici();">删除</a> </td>
+												<td>$[no]</td>
+												<td>$[count]</td>
+												<td>$[lottery]</td>
+												<td>$[conts]</td>
+												<td><a href="#" onclick="openPici();">二维码</a> <a href="#" onclick="openPici();">编辑</a></td>
 											</tr>
 										</tbody>
 									</table>

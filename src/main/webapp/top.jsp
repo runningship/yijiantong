@@ -7,18 +7,6 @@
 			<li class="visible-md visible-lg"><a href="index.html#" id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
 			<li class="visible-xs visible-sm"><a href="index.html#" id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>			
 		</ul>
-		<!-- Navbar Left -->
-		<div class="navbar-left">
-			<!-- Search Form -->					
-			<form class="search navbar-form">
-				<div class="input-group input-search">
-					<input type="text" class="form-control" name="q" id="q" placeholder="Search...">
-					<span class="input-group-btn">
-						<button class="btn btn-default" type="submit"><i class="fa fa-search"></i></button>
-					</span>
-				</div>						
-			</form>
-		</div>
 		<!-- Navbar Right -->
 		<div class="navbar-right">
 			<!-- Notifications -->
@@ -105,5 +93,7 @@
 			<!-- End Userbox -->
 		</div>
 		<!-- End Navbar Right -->
+		
+		<!-- 这里放内容 -->
 	</div>		
 </div>

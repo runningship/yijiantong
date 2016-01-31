@@ -1,11 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<style type="text/css">
+.mm-panel{height:100%;}
+</style>
 <!-- Sidebar -->
 <div class="sidebar">
 	<div class="sidebar-collapse">
 		<!-- Sidebar Header Logo-->
-		<div class="sidebar-header">
-			<img src="/yijiantong/assets/img/logo.png" class="img-responsive" alt="" />
+		<div class="sidebar-header" style="display:none;">
+			<img src="/yijiantong/assets/img/logo3.1.png" class="img-responsive" alt="" />
 		</div>
 		<!-- Sidebar Menu-->
 		<div class="sidebar-menu">						
@@ -63,18 +66,18 @@
 							<i class="fa fa-font" aria-hidden="true"></i><span>二维码管理</span>
 						</a>
 					</li>
+					<li>
+						<a href="typography.html">
+							<i class="fa fa-font" aria-hidden="true"></i><span>城市配置</span>
+						</a>
+					</li>
 				</ul>
 			</nav>
 		</div>
 		<!-- End Sidebar Menu-->
 	</div>
 	<!-- Sidebar Footer-->
-	<div class="sidebar-footer">	
-		<ul class="sidebar-terms">
-			<li><a href="index.html#">About</a></li>
-		</ul>
-		<div class="copyright text-center">
-		</div>					
+	<div class="">	
 	</div>
 	<!-- End Sidebar Footer-->
 </div>
