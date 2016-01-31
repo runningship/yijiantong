@@ -35,6 +35,6 @@ public class ProductItem {
 	public Integer lotteryOwnerId;
 	
 	//批次号
-	public String pici;
+	public Integer batchId;
 	
 }

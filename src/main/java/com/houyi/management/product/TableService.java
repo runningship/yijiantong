@@ -21,8 +21,7 @@ public class TableService {
 	}
 	
 	public QRTableInfo addNewQRTable(int offset){
-		String sql = "if not exists (select * from sysobjects where name='ProductItem_"+offset+"' and xtype='U') CREATE TABLE  [dbo].[ProductItem_"+offset+"] ([id] int NOT NULL IDENTITY(1,1) ,[qrCode] nvarchar(50) NOT NULL ,[verifyCode] nvarchar(50) NULL ,[productId] int NOT NULL ,[lottery] int NULL ,[lotteryActive] int NULL ,[lotteryOwnerId] int NULL ,[pici] nvarchar(50) NULL ,[addtime] datetime NULL)";
-//		String sql = "if not exists (select * from sysobjects where name='ProductItem_"+count+"' and xtype='U') CREATE TABLE  [dbo].[ProductItem_"+count+"] ([id] int NULL  ,[qrCode] nvarchar(50) NOT NULL ,[verifyCode] nvarchar(50) NULL ,[productId] int NOT NULL ,[lottery] int NULL ,[lotteryActive] int NULL ,[lotteryOwnerId] int NULL ,[pici] nvarchar(50) NULL ,[addtime] datetime NULL)";
+		String sql = "if not exists (select * from sysobjects where name='ProductItem_"+offset+"' and xtype='U') CREATE TABLE  [dbo].[ProductItem_"+offset+"] ([id] int NOT NULL IDENTITY(1,1) ,[qrCode] nvarchar(50) NOT NULL ,[verifyCode] nvarchar(50) NULL ,[productId] int NOT NULL ,[lottery] int NULL,[batchId] int NULL ,[lotteryActive] int NULL ,[lotteryOwnerId] int NULL ,[pici] nvarchar(50) NULL ,[addtime] datetime NULL)";
 		dao.executeSQL(sql);
 		QRTableInfo info = new QRTableInfo();
 		info.size = 0;

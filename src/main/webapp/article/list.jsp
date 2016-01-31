@@ -14,7 +14,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/article/list',
+				    url: '/c/article/list',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){

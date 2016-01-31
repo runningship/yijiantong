@@ -10,20 +10,22 @@ import org.hibernate.Interceptor;
 import org.hibernate.Transaction;
 import org.hibernate.type.Type;
 
+import com.houyi.management.product.entity.ProductItem;
+
 public class MyInterceptor extends EmptyInterceptor{
 
 	private static MyInterceptor instance = new MyInterceptor();
 	
 	//需要动态设置的表名前缀
-	public String tableNamePrefix;
+	public String tableNamePrefix = ProductItem.class.getSimpleName();
 	
 	//需要动态设置的表名后缀
 	//public int tableNameSuffix = 1;
 	
-	public ThreadLocal<Integer> tableNameSuffix = new ThreadLocal<Integer>();
+	public ThreadLocal<String> tableNameSuffix = new ThreadLocal<String>();
 	
 	private MyInterceptor(){
-		tableNameSuffix.set(1);
+		tableNameSuffix.set("");
 	}
 	public static MyInterceptor getInstance(){
 		return instance;

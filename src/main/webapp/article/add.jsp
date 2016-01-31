@@ -75,7 +75,7 @@
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/yijiantong/c/article/save',
+		    url: '/c/article/save',
 		    data:a,
 		    mysuccess: function(data){
 		    	layer.msg('添加商品成功');
@@ -197,9 +197,9 @@
 		
 		
 		<!-- Pages JS -->
-<!-- 		<script src="/yijiantong/assets/js/pages/form-validation.js"></script> -->
-<!-- 		<script src="/yijiantong/assets/js/pages/ui-notifications.js"></script> -->
-		<script src="/yijiantong/assets/js/pages/ui-elements.js"></script>
+<!-- 		<script src="/assets/js/pages/form-validation.js"></script> -->
+<!-- 		<script src="/assets/js/pages/ui-notifications.js"></script> -->
+		<script src="/assets/js/pages/ui-elements.js"></script>
 		
 		<!-- end: JavaScript-->
 		

@@ -13,7 +13,7 @@
 			.media-gallery{margin-top:25px;margin-left:20px;}
 			.btn-ok{position: absolute;    top: 0px;    right: 30px;}
 		</style>
-		<script type="text/javascript" src="/yijiantong/assets/js/uploadify/jquery.uploadify.js"></script>
+		<script type="text/javascript" src="/assets/js/uploadify/jquery.uploadify.js"></script>
 		<script type="text/javascript">
 			$(function(){
 				Page.Init();
@@ -24,7 +24,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/image/list',
+				    url: '/c/image/list',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -48,7 +48,7 @@
 			function deleteImage(id){
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/image/delete',
+				    url: '/c/image/delete',
 				    data: {id : id},
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -65,8 +65,8 @@
 			
 			function initUploadHouseImage(uid){
 				  $('#upload').uploadify({
-				      'swf'      : '/yijiantong/assets/js/uploadify/uploadify.swf',
-				      'uploader' : '/yijiantong/c/image/upload?uid='+uid,
+				      'swf'      : '/assets/js/uploadify/uploadify.swf',
+				      'uploader' : '/c/image/upload?uid='+uid,
 				      'buttonText': '上传图片',
 				      'removeTimeout': 0.1,
 				      'fileSizeLimit' : '5MB',

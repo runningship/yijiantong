@@ -29,7 +29,7 @@ public class LotteryService {
 	public ModelAndView save(String qrCode ,String tel, String verifyCode, String device , Float lat , Float lng){
 		ModelAndView mv = new ModelAndView();
 		String[] arr = qrCode.split(".");
-		MyInterceptor.getInstance().tableNameSuffix.set(Integer.valueOf(arr[1]));
+		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
 		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode" , qrCode);
 		if(item==null){
 			throw new GException(PlatformExceptionType.BusinessException,"没有找到兑奖信息");

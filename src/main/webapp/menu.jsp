@@ -8,7 +8,7 @@
 	<div class="sidebar-collapse">
 		<!-- Sidebar Header Logo-->
 		<div class="sidebar-header" style="display:none;">
-			<img src="/yijiantong/assets/img/logo3.1.png" class="img-responsive" alt="" />
+			<img src="/assets/img/logo3.1.png" class="img-responsive" alt="" />
 		</div>
 		<!-- Sidebar Menu-->
 		<div class="sidebar-menu">						
@@ -16,7 +16,7 @@
 				<ul class="nav nav-sidebar">
 					<div class="panel-body text-center">								
 						<div class="bk-avatar">
-							<img src="/yijiantong/assets/img/avatar.jpg" class="img-circle bk-img-60" alt="" />
+							<img src="/assets/img/avatar.jpg" class="img-circle bk-img-60" alt="" />
 						</div>
 						<div class="bk-padding-top-10">
 							<i class="fa fa-circle text-success"></i> <small>管理员</small>
@@ -24,7 +24,7 @@
 					</div>
 					<div class="divider2"></div>
 					<li class="">
-						<a href="/yijiantong/index.jsp">
+						<a href="/index.jsp">
 							<i class="fa fa-laptop" aria-hidden="true"></i><span>首页</span>
 						</a>
 					</li>
@@ -33,8 +33,8 @@
 							<i class="fa fa-copy" aria-hidden="true"></i><span>信息管理</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="/yijiantong/article/add.jsp"><span class="text"> 发布文章</span></a></li>
-							<li><a href="/yijiantong/article/list.jsp"><span class="text"> 文章列表</span></a></li>										
+							<li><a href="/article/add.jsp"><span class="text"> 发布文章</span></a></li>
+							<li><a href="/article/list.jsp"><span class="text"> 文章列表</span></a></li>										
 						</ul>
 					</li>
 					<li class="nav-parent">
@@ -52,8 +52,8 @@
 							<i class="fa fa-list-alt" aria-hidden="true"></i><span>商品管理</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="/yijiantong/product/add.jsp"><span class="text"> 添加商品</span></a></li>
-							<li><a href="/yijiantong/product/list.jsp"><span class="text"> 商品列表</span></a></li>
+							<li><a href="/product/add.jsp"><span class="text"> 添加商品</span></a></li>
+							<li><a href="/product/list.jsp"><span class="text"> 商品列表</span></a></li>
 						</ul>
 					</li>
 					<li>
@@ -62,8 +62,8 @@
 						</a>
 					</li>
 					<li>
-						<a href="typography.html">
-							<i class="fa fa-font" aria-hidden="true"></i><span>二维码管理</span>
+						<a href="/sys/list.jsp">
+							<i class="fa fa-font" aria-hidden="true"></i><span>表空间管理</span>
 						</a>
 					</li>
 					<li>

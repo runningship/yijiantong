@@ -35,7 +35,7 @@ public class ProductItemWorker extends Thread {
 
 	@Override
 	public void run() {
-		MyInterceptor.getInstance().tableNameSuffix.set(tableInfo.offset);
+		MyInterceptor.getInstance().tableNameSuffix.set(String.valueOf(tableInfo.offset));
 		for(int i=0;i<total/batchSize; i++){
 			add(batchSize);
 		}
@@ -52,7 +52,6 @@ public class ProductItemWorker extends Thread {
 			ProductItem item = new ProductItem();
 			item.addtime = new Date();
 			item.lotteryActive = 0;
-			item.pici = pici;
 			item.lottery=lottery;
 			item.productId = productId;
 			item.qrCode = System.currentTimeMillis()+"."+tableInfo.offset;

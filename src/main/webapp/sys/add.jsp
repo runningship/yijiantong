@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-	String productId = request.getParameter("productId");
-	request.setAttribute("productId", productId);
-%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,10 +36,10 @@
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/c/product/saveBatch',
+		    url: '/c/table/save',
 		    data:a,
 		    mysuccess: function(data){
-		    	layer.msg('添加批次成功');
+		    	layer.msg('添加表成功');
 		    	window.parent.doSearch();
 		    	var index =parent.layer.getFrameIndex(window.name);
 				parent.layer.close(index);
@@ -65,31 +61,12 @@
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
-								<input type="hidden" name="productId" value="${productId }"/>
 								<div class="panel panel-default" style="height:100%;">
 									<div class="panel-body">
 										<div class="form-group">
-											<label class="col-sm-2 control-label">批次号 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">编号 <span class="required">*</span></label>
 											<div class="col-sm-6">
-												<input type="text" name="no" class="form-control" placeholder="" required/>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">数量 <span class="required">*</span></label>
-											<div class="col-sm-6">
-												<input type="text" name="count" desc="数量" class="form-control" placeholder="" required/>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">奖券 <span class="required">*</span></label>
-											<div class="col-sm-6">
-												<input type="text" name="lottery" desc="奖券" class="form-control" placeholder="" required/>元
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">描述 <span class="required">*</span></label>
-											<div class="col-sm-6">
-												<input type="text" name="conts" value="" class="form-control" placeholder="" required/>
+												<input type="text" name="suffix" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="row">

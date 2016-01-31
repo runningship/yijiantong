@@ -15,17 +15,20 @@ import org.bc.web.Module;
 import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
+import com.houyi.management.MyInterceptor;
+import com.houyi.management.biz.entity.TableInfo;
 import com.houyi.management.product.entity.Product;
 import com.houyi.management.product.entity.ProductBatch;
 import com.houyi.management.product.entity.ProductItem;
-import com.houyi.management.product.entity.QRTableInfo;
 
 
 @Module(name="/product")
 public class ProductService {
 
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
-
+	
+	public static final int MAX_TABLE_ROWS=1000000;
+	
 	@WebMethod
 	public ModelAndView save(Product product){
 		ModelAndView mv = new ModelAndView();
@@ -51,6 +54,10 @@ public class ProductService {
 		batch.addtime = new Date();
 		//根据 batch.count找到合适的item表,插入数据并设置batch.tableOffset
 		batch.tableOffset="12";
+		long count = dao.countHql("select count (*) from ProductItem");
+		if(count>MAX_TABLE_ROWS){
+			
+		}
 		dao.saveOrUpdate(batch);
 		return mv;
 	}
@@ -94,6 +101,20 @@ public class ProductService {
 	}
 	
 	@WebMethod
+	public ModelAndView listItem(Page<ProductItem> page , Integer productId , Integer batchId){
+		ModelAndView mv = new ModelAndView();
+		TableInfo table = dao.get(TableInfo.class, batchId);
+		MyInterceptor.getInstance().tableNameSuffix.set(table.suffix);
+		StringBuilder sql = new StringBuilder("from ProductItem where productId=? and batchId=? ");
+		List<Object> params = new ArrayList<Object>();
+		params.add(productId);
+		params.add(batchId);
+		page = dao.findPage(page, sql.toString() , params.toArray());
+		mv.data.put("page", JSONHelper.toJSON(page));
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView getItem(String code){
 		ModelAndView mv = new ModelAndView();
 		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", code);
@@ -105,23 +126,6 @@ public class ProductService {
 		Product product = dao.get(Product.class, item.productId);
 		mv.data.put("product", JSONHelper.toJSON(product));
 		mv.data.put("result", 0);
-		return mv;
-	}
-	
-	@WebMethod
-	public ModelAndView addItems(Integer productId , Integer count , Integer lottery , String pici){
-		ModelAndView mv = new ModelAndView();
-		if(count==null){
-			throw new GException(PlatformExceptionType.BusinessException,"数量不能为空");
-		}
-		TableService ts = new TableService();
-		List<QRTableInfo> tables = ts.getTargetTable(3);
-		long start = System.currentTimeMillis();
-		for(QRTableInfo table : tables){
-			ProductItemWorker w = new ProductItemWorker(table ,count , pici , lottery, productId);
-			w.startTime = start;
-			w.start();
-		}
 		return mv;
 	}
 }

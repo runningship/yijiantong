@@ -19,7 +19,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/yijiantong/c/product/listBatch',
+				    url: '/c/product/listBatch',
 				    data: {productId: ${productId}},
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -38,6 +38,18 @@
 			            maxmin: true, //开启最大化最小化按钮
 			            area: ['400px', '460px'],
 			            content: 'addBatch.jsp?productId=${productId}'
+			        });
+			}
+			
+			function openItems(batchId){
+				 layer.open({
+			            type: 2,
+			            title: '二维码信息',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['400px', '460px'],
+			            content: 'itemList.jsp?productId=${productId}&batchId='+batchId
 			        });
 			}
 		</script>
@@ -84,7 +96,7 @@
 												<td>$[count]</td>
 												<td>$[lottery]</td>
 												<td>$[conts]</td>
-												<td><a href="#" onclick="openPici();">二维码</a> <a href="#" onclick="openPici();">编辑</a></td>
+												<td><a href="#" onclick="openItems($[id]);">二维码</a> <a href="#" onclick="openPici();">编辑</a></td>
 											</tr>
 										</tbody>
 									</table>
