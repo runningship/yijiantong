@@ -72,6 +72,11 @@
 	    }else{
 	    	$('#publishFlag').val(0);
 	    }
+	    if($('#isAd').attr('checked')){
+	    	$('#isAd').val(1);
+	    }else{
+	    	$('#isAd').val(0);
+	    }
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
@@ -106,6 +111,11 @@
 		}
 	}
 	</script>
+	<style type="text/css">
+		.adTip{
+			position: absolute;    top: 6px;    left: 83px;    color: #aaa;
+		}
+	</style>
 	</head>
 	
 	<body>
@@ -124,7 +134,19 @@
 						
 				<!-- Main Page -->
 				<div class="main sidebar-minified">			
-					
+					<!-- Page Header -->
+					<div class="page-header">
+						<div class="pull-left">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">								
+								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
+								<li><a href="#"><i class="fa fa-table"></i>信息管理</a></li>
+							</ol>						
+						</div>
+						<div class="pull-right">
+							<h2>发布信息</h2>
+						</div>					
+					</div>
+					<!-- End Page Header -->
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
@@ -150,9 +172,20 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">是否发布</label>
-											<div class="col-lg-12 col-md-4 col-sm-4 col-xs-4">
-													<label class="switch switch-success bk-margin-top-10">
+											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+													<label class="switch switch-success bk-margin-top-5">
 													  <input type="checkbox"  value="1"  id="publishFlag" class="switch-input"  name="publishFlag" checked="">
+													  <span class="switch-label" data-on="On" data-off="Off"></span>
+													  <span class="switch-handle"></span>
+													</label>
+												</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">是否广告</label>
+											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
+													<span class="adTip">(如果开启广告，则显示在APP广告区)</span>
+													<label class="switch switch-success bk-margin-top-5">
+													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  name="isAd">
 													  <span class="switch-label" data-on="On" data-off="Off"></span>
 													  <span class="switch-handle"></span>
 													</label>

@@ -30,4 +30,7 @@ public class ProductBatch {
 	public String tableOffset;
 	
 	public Date addtime;
+	
+	//是否已生成二维码
+	public Integer active;
 }

@@ -81,14 +81,13 @@
 										<thead>
 											<tr>
 												<th>编号</th>
-												<th>容量</th>
-												<th></th>
+												<th>使用量</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
-												<td>$[title]</td>
-												<td>$[spec]</td>
+												<td>$[suffix]</td>
+												<td>$[size]</td>
 											</tr>
 										</tbody>
 									</table>

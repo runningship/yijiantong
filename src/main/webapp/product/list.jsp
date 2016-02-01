@@ -32,8 +32,20 @@
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['793px', '600px'],
+			            area: ['900px', '800px'],
 			            content: 'listBatch.jsp?productId='+id
+			        });
+			}
+			
+			function openEdit(id){
+				 layer.open({
+			            type: 2,
+			            title: '批次信息',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['793px', '600px'],
+			            content: 'edit.jsp?productId='+id
 			        });
 			}
 		</script>
