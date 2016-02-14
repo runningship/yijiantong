@@ -1,16 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%	
+	
+	String path = request.getServletPath();
+	request.setAttribute("path", path);
+System.out.println();
+%>
 <div class="navbar" role="navigation">
 	<div class="container-fluid container-nav">				
 		<!-- Navbar Action -->
 		<ul class="nav navbar-nav navbar-actions navbar-left">
-			<li class="visible-md visible-lg"><a href="index.html#" id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
-			<li class="visible-xs visible-sm"><a href="index.html#" id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>			
+			<li class="visible-md visible-lg"><a href="${path }#" id="main-menu-toggle"><i class="fa fa-th-large"></i></a></li>
+			<li class="visible-xs visible-sm"><a href="${path }#" id="sidebar-menu"><i class="fa fa-navicon"></i></a></li>			
 		</ul>
 		<!-- Navbar Right -->
 		<div class="navbar-right">
 			<!-- Notifications -->
-			<ul class="notifications hidden-sm hidden-xs">
+			<ul class="notifications hidden-sm hidden-xs" style="display:none;">
 				<li>
 					<a href="#" class="dropdown-toggle notification-icon" data-toggle="dropdown">
 						<i class="fa fa-bell"></i>

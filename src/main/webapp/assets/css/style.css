@@ -574,7 +574,7 @@ border: 1px solid #f6504d;
 /* Userbox */
 .userbox {
 display: inline-block;
-margin: -3px 17px 0 0;
+margin: -3px -8px 0 0;
 position: relative;
 vertical-align: middle;
 }
@@ -595,7 +595,7 @@ width: 35px;
 color: transparent;
 }
 .userbox .profile-info {
-margin: 0 25px 0 10px;
+margin: 0 0px 0 10px;
 }
 .userbox .name,
 .userbox .role {

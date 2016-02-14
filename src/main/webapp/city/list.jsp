@@ -15,7 +15,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/table/list',
+				    url: '/c/city/list',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -35,6 +35,19 @@
 			            area: ['400px', '300px'],
 			            content: 'add.jsp'
 			        });
+			}
+			
+			function delCity(id){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/city/delete',
+				    data: {id : id},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	layer.msg("删除成功");
+				    	doSearch();
+				    }
+				  });
 			}
 		</script>
 	</head>
@@ -64,7 +77,7 @@
 							</ol>						
 						</div>
 						<div class="pull-right">
-							<h2>表空间信息</h2>
+							<h2>城市管理</h2>
 						</div>					
 					</div>
 					<!-- End Page Header -->
@@ -80,14 +93,18 @@
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>
 											<tr>
-												<th>编号</th>
-												<th>容量</th>
+												<th>名字</th>
+												<th>拼音</th>
+												<th>简拼</th>
+												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
-												<td>$[suffix]</td>
-												<td>$[size]</td>
+												<td>$[name]</td>
+												<td>$[pinyin]</td>
+												<td>$[pyShort]</td>
+												<td><a href="#" onclick="delCity($[id])">删除</a></td>
 											</tr>
 										</tbody>
 									</table>

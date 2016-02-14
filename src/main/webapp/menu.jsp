@@ -67,7 +67,7 @@
 						</a>
 					</li>
 					<li>
-						<a href="typography.html">
+						<a href="/city/list.jsp">
 							<i class="fa fa-font" aria-hidden="true"></i><span>城市配置</span>
 						</a>
 					</li>

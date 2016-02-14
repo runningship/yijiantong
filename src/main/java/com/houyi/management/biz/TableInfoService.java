@@ -3,6 +3,7 @@ package com.houyi.management.biz;
 import java.util.List;
 
 import org.bc.sdak.CommonDaoService;
+import org.bc.sdak.Page;
 import org.bc.sdak.Transactional;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
@@ -33,10 +34,10 @@ public class TableInfoService {
 	}
 	
 	@WebMethod
-	public ModelAndView list(){
+	public ModelAndView list(Page<TableInfo> page){
 		ModelAndView mv = new ModelAndView();
-		List<TableInfo> list = dao.listByParams(TableInfo.class, "from TableInfo");
-		mv.data.put("list", JSONHelper.toJSONArray(list));
+		page = dao.findPage(page,  "from TableInfo");
+		mv.data.put("page", JSONHelper.toJSON(page));
 		mv.data.put("result", 0);
 		return mv;
 	}
