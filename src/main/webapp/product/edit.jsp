@@ -1,5 +1,14 @@
+<%@page import="com.houyi.management.product.entity.Product"%>
+<%@page import="org.bc.sdak.TransactionalServiceHelper"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	String productId = request.getParameter("productId");
+	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
+	Product po = dao.get(Product.class, Integer.valueOf(productId));
+	request.setAttribute("product", po);
+%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,8 +50,10 @@
 	            ]
 	        ]
 	  });
-		
-		PNotify.prototype.options.styling = "fontawesome";
+	
+		ue.addListener( 'ready', function( editor ) {
+	        ue.setContent('${product.conts}');
+	    });
 	});
 	
 	function save(){
@@ -62,22 +73,9 @@
 		    url: '/c/product/save',
 		    data:a,
 		    mysuccess: function(data){
-		    	layer.msg('添加商品成功');
+		    	layer.msg('修改成功');
 		    }
 	    });
-	}
-	var stack_bar_top = {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0};
-	var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
-	function tishi(){
-		var notice = new PNotify({
-			title: '消息',
-			text: '商品添加成功.',
-			type: 'success',
-			addclass: 'stack-bar-top',
-			stack: stack_bar_top,
-			delay:1000,
-			width: "100%"
-		});
 	}
 	</script>
 	
@@ -91,7 +89,6 @@
 	<body>
 		
 		<!-- Start: Header -->
-			<jsp:include page="../top.jsp"></jsp:include>
 		<!-- End: Header -->
 		
 		<!-- Start: Content -->
@@ -99,51 +96,40 @@
 			<div class="row">
 			
 				<!-- Sidebar -->
-				<jsp:include page="../menu.jsp"></jsp:include>
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->
-				<div class="main sidebar-minified">			
+				<div class="sidebar-minified">			
 					<!-- Page Header -->
-					<div class="page-header">
-						<div class="pull-left">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">								
-								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
-								<li><a href="#"><i class="fa fa-table"></i>商品管理</a></li>
-							</ol>						
-						</div>
-						<div class="pull-right">
-							<h2>添加商品</h2>
-						</div>					
-					</div>
 					<!-- End Page Header -->
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
+								<input type="hidden"  name="id" value="${product.id }"/>
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<div class="form-group">
 											<label class="col-sm-2 control-label">商品名称 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="title" class="form-control" placeholder="" required/>
+												<input type="text" name="title" class="form-control" placeholder="" value="${product.title }" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">生产商 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="vender" class="form-control" placeholder="" required/>
+												<input type="text" name="vender" class="form-control" placeholder=""  value="${product.vender }" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">产地信息</label>
 											<div class="col-sm-9">
-												<input type="text" name="verderPlace" class="form-control" placeholder="" />
+												<input type="text" name="verderPlace" class="form-control" placeholder="" value="${product.verderPlace }" />
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">规格信息 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="spec" class="form-control" placeholder="" required/>
+												<input type="text" name="spec" class="form-control" placeholder=""  value="${product.spec }" required/>
 											</div>
 										</div>
 										<div class="form-group">
@@ -151,7 +137,7 @@
 											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
 													<span class="adTip">(如果开启广告，则显示在APP广告区)</span>
 													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  name="isAd">
+													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  <c:if test="${product.isAd==1 }">checked</c:if>  name="isAd">
 													  <span class="switch-label" data-on="On" data-off="Off"></span>
 													  <span class="switch-handle"></span>
 													</label>
@@ -188,9 +174,6 @@
 		
 		
 		<!-- Pages JS -->
-<!-- 		<script src="/assets/js/pages/form-validation.js"></script> -->
-		<script src="/assets/js/pages/ui-notifications.js"></script>
-		
 		<!-- end: JavaScript-->
 		
 	</body>

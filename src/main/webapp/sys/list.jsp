@@ -81,7 +81,7 @@
 										<thead>
 											<tr>
 												<th>编号</th>
-												<th>容量</th>
+												<th>使用量</th>
 											</tr>
 										</thead>
 										<tbody>

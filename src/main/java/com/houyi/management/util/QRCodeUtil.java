@@ -10,7 +10,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.OutputStream;
 import java.util.Hashtable;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 
@@ -30,13 +29,13 @@ public class QRCodeUtil {
 	private static final String CHARSET = "utf-8";
 	private static final String FORMAT_NAME = "PNG";
 	// 二维码尺寸
-	private static final int QRCODE_SIZE = 75;
+	public  int QRCODE_SIZE = 75;
 	// LOGO宽度
-	private static final int WIDTH =10;
+	public  int WIDTH =10;
 	// LOGO高度
-	private static final int HEIGHT = 10;
+	public  int HEIGHT = 10;
 
-	private static BufferedImage createImage(String content, String imgPath,
+	private BufferedImage createImage(String content, String imgPath,
 			boolean needCompress) throws Exception {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
 		hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.M);
@@ -58,7 +57,7 @@ public class QRCodeUtil {
 			return image;
 		}
 		// 插入图片
-		QRCodeUtil.insertImage(image, imgPath, needCompress);
+		insertImage(image, imgPath, needCompress);
 		//缩小图片到40%
 		
 //		int size = 60;
@@ -78,7 +77,7 @@ public class QRCodeUtil {
 	 *            是否压缩
 	 * @throws Exception
 	 */
-	private static void insertImage(BufferedImage source, String imgPath,
+	private void insertImage(BufferedImage source, String imgPath,
 			boolean needCompress) throws Exception {
 		File file = new File(imgPath);
 		if (!file.exists()) {
@@ -128,10 +127,9 @@ public class QRCodeUtil {
 	 *            是否压缩LOGO
 	 * @throws Exception
 	 */
-	public static void encode(String content, String imgPath, String destPath,
+	public void encode(String content, String imgPath, String destPath,
 			boolean needCompress) throws Exception {
-		BufferedImage image = QRCodeUtil.createImage(content, imgPath,
-				needCompress);
+		BufferedImage image = createImage(content, imgPath, needCompress);
 		mkdirs(destPath);
 		//String file = new Random().nextInt(99999999)+".jpg";
 		ImageIO.write(image, FORMAT_NAME, new File(destPath));
@@ -163,9 +161,9 @@ public class QRCodeUtil {
 	 *            存储地址
 	 * @throws Exception
 	 */
-	public static void encode(String content, String imgPath, String destPath)
+	public void encode(String content, String imgPath, String destPath)
 			throws Exception {
-		QRCodeUtil.encode(content, imgPath, destPath, false);
+		encode(content, imgPath, destPath, false);
 	}
 
 	/**
@@ -179,9 +177,9 @@ public class QRCodeUtil {
 	 *            是否压缩LOGO
 	 * @throws Exception
 	 */
-	public static void encode(String content, String destPath,
+	public void encode(String content, String destPath,
 			boolean needCompress) throws Exception {
-		QRCodeUtil.encode(content, null, destPath, needCompress);
+		encode(content, null, destPath, needCompress);
 	}
 
 	/**
@@ -193,8 +191,8 @@ public class QRCodeUtil {
 	 *            存储地址
 	 * @throws Exception
 	 */
-	public static void encode(String content, String destPath) throws Exception {
-		QRCodeUtil.encode(content, null, destPath, false);
+	public void encode(String content, String destPath) throws Exception {
+		encode(content, null, destPath, false);
 	}
 
 	/**
@@ -210,9 +208,9 @@ public class QRCodeUtil {
 	 *            是否压缩LOGO
 	 * @throws Exception
 	 */
-	public static BufferedImage encode(String content, String imgPath,
+	public BufferedImage encode(String content, String imgPath,
 			OutputStream output, boolean needCompress) throws Exception {
-		BufferedImage image = QRCodeUtil.createImage(content, imgPath,
+		BufferedImage image = createImage(content, imgPath,
 				needCompress);
 		return image;
 	}
@@ -226,9 +224,9 @@ public class QRCodeUtil {
 	 *            输出流
 	 * @throws Exception
 	 */
-	public static void encode(String content, OutputStream output)
+	public void encode(String content, OutputStream output)
 			throws Exception {
-		QRCodeUtil.encode(content, null, output, false);
+		encode(content, null, output, false);
 	}
 
 	/**
@@ -270,7 +268,6 @@ public class QRCodeUtil {
 
 	public static void main(String[] args) throws Exception {
 		String text = "http://kcloud.iflytek.com/p/v/14503241303791";
-		QRCodeUtil.encode(text, "c:/a/", true);
 	}
 
 }

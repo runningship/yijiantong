@@ -1,5 +1,16 @@
+<%@page import="com.houyi.management.product.entity.ProductBatch"%>
+<%@page import="org.bc.sdak.TransactionalServiceHelper"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+String productId = request.getParameter("productId");
+request.setAttribute("productId", productId);
+String batchId = request.getParameter("batchId");
+CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
+ProductBatch batch = dao.get(ProductBatch.class, Integer.valueOf(batchId));
+request.setAttribute("batch", batch);
+%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -14,7 +25,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/article/listItem',
+				    url: '/c/product/listItem',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -24,6 +35,9 @@
 				  });
 			}
 			
+			function viewQRCode(){
+				wind
+			}
 		</script>
 	</head>
 	
@@ -40,13 +54,15 @@
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->
-				<div class="main sidebar-minified">			
+				<div class="sidebar-minified">			
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="panel panel-default bk-bg-white">
 								<div class="panel-body">
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
+											<input type="hidden" name="productId" value="${productId}"/>
+											<input type="hidden" name="batchId" value="${batch.id}"/>
 											<div class="col-sm-6 col-md-6">
 												<div id="datatable-default_filter" class="dataTables_filter">
 													<input type="search" name="title" class="form-control" placeholder="二维码编号" aria-controls="datatable-default">
@@ -60,19 +76,21 @@
 										<thead>
 											<tr>
 												<th><a href="#">导出选中</a></th>
-												<th>标题</th>
-												<th>阅读</th>
-												<th>发布时间</th>
+												<th>二维码</th>
+												<th>校验码</th>
+												<th>奖券</th>
+												<th>是否兑奖</th>
 												<th>操作</th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
 												<td><input type="checkbox" /></td>
-												<td>$[title]</td>
-												<td>$[readCount]</td>
-												<td>$[addtime]</td>
-												<td><a href="#" onclick="openPici();">查看二维码</a></td>
+												<td>$[qrCode]</td>
+												<td>$[verifyCode]</td>
+												<td>$[lottery]</td>
+												<td>$[lotteryActive]</td>
+												<td><a href="genQR.jsp?code=$[qrCode]"  target="_blank">查看</a></td>
 											</tr>
 										</tbody>
 									</table>

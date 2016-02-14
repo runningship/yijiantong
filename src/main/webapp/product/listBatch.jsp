@@ -41,6 +41,19 @@
 			        });
 			}
 			
+			function deleteBatch(batchId){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/product/deleteBatch',
+				    data: {batchId : batchId},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	layer.msg('删除成功');
+				    	doSearch();
+				    }
+				  });
+			}
+			
 			function openItems(batchId){
 				 layer.open({
 			            type: 2,
@@ -48,9 +61,22 @@
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['400px', '460px'],
+			            area: ['600px', '560px'],
 			            content: 'itemList.jsp?productId=${productId}&batchId='+batchId
 			        });
+			}
+			
+			function generateQRCode(batchId){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/product/generateQRCode',
+				    data: {batchId : batchId},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	layer.msg('生成二维码成功');
+				    	doSearch();
+				    }
+				  });
 			}
 		</script>
 	</head>
@@ -96,7 +122,10 @@
 												<td>$[count]</td>
 												<td>$[lottery]</td>
 												<td>$[conts]</td>
-												<td><a href="#" onclick="openItems($[id]);">二维码</a> <a href="#" onclick="openPici();">编辑</a></td>
+												<td><a href="#"  show="$[active]==1" onclick="openItems($[id]);">二维码</a> 
+														<a href="#" show="$[active]!=1" onclick="deleteBatch($[id]);">删除</a>
+														<a href="#" show="$[active]!=1" onclick="generateQRCode($[id]);">生成二维码</a>
+												</td>
 											</tr>
 										</tbody>
 									</table>
