@@ -35,7 +35,7 @@
     	</init-param>
     	<init-param>
     		<param-name>userOfflineHandler</param-name>
-    		<param-value>com.houyi.management.NewHouseUserOfflineHandler</param-value>
+    		<param-value>com.houyi.management.YJTUserOfflineHandler</param-value>
     	</init-param>
     </filter>
     <filter-mapping>
@@ -43,5 +43,8 @@
     	<url-pattern>*.jsp</url-pattern>
     	<url-pattern>/c/*</url-pattern>
     </filter-mapping>
-    
+    <error-page>
+    	<error-code>404</error-code>
+    	<location>/page-404.html</location>
+    </error-page>
 </web-app>

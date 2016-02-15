@@ -59,6 +59,10 @@ window.onload=function(){
 	//document.getElementById('qrCode').innerText=qrCode;
 	//document.getElementById('lottery').innerText=lottery+'元';
 }
+
+function duijiang(){
+	
+}
 </script>
 </head>
 
@@ -82,7 +86,7 @@ window.onload=function(){
 			</div>
 			<div style="text-align:center;">
 				<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
-				<div class="btn-ok">立即领取</div>
+				<div class="btn-ok" onclick="duijiang();">立即领取</div>
 			</div>
 		</div>
 </div>

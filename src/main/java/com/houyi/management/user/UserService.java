@@ -25,6 +25,7 @@ import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.SysConstants;
+import com.houyi.management.ThreadSessionHelper;
 import com.houyi.management.user.entity.User;
 import com.houyi.management.util.DataHelper;
 import com.houyi.management.util.SecurityHelper;
@@ -242,6 +243,7 @@ public class UserService {
 		if(!po.pwd.equals(SecurityHelper.Md5(pwd)) && !po.pwd.equals(pwd) ){
 			throw new GException(PlatformExceptionType.BusinessException,"密码不正确");
 		}
+		ThreadSession.getHttpSession().setAttribute(SysConstants.Session_Attr_User, po);
 		mv.data.put("user", JSONHelper.toJSON(po));
 		mv.data.put("result", 0);
 		return mv;

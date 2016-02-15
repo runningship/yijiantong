@@ -1,10 +1,13 @@
+<%@page import="com.houyi.management.ThreadSessionHelper"%>
+<%@page import="com.houyi.management.SysConstants"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%	
 	
 	String path = request.getServletPath();
 	request.setAttribute("path", path);
-System.out.println();
+	request.setAttribute(SysConstants.Session_Attr_User, ThreadSessionHelper.getUser());
+	
 %>
 <div class="navbar" role="navigation">
 	<div class="container-fluid container-nav">				
@@ -78,7 +81,7 @@ System.out.println();
 			<div class="userbox">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 					<div class="profile-info">
-						<span class="name">欢迎您, 叶新舟</span>
+						<span class="name">欢迎您, ${session_user.name }</span>
 					</div>			
 					<i class="fa custom-caret"></i>
 				</a>

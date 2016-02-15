@@ -92,6 +92,9 @@ return (reg.test(location.search))? encodeURIComponent(decodeURIComponent(RegExp
 }
 
 window.blockAlert = window.alert;
+window.alert=function(msg){
+	layer.msg(msg);
+}
 YW={
     options:{
         beforeSend: function(XMLHttpRequest){

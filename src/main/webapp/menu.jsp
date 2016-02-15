@@ -23,11 +23,6 @@
 						</div>
 					</div>
 					<div class="divider2"></div>
-					<li class="">
-						<a href="/index.jsp">
-							<i class="fa fa-laptop" aria-hidden="true"></i><span>首页</span>
-						</a>
-					</li>
 					<li class="nav-parent">
 						<a>
 							<i class="fa fa-copy" aria-hidden="true"></i><span>信息管理</span>

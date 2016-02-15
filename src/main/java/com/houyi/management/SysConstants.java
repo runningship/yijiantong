@@ -8,5 +8,5 @@ public class SysConstants {
 	
 	public static final String Session_Auth_Urls = "session_auth_urls";
 	
-	public static final String Session_Attr_User = "user";
+	public static final String Session_Attr_User = "session_user";
 }

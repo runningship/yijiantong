@@ -24,6 +24,18 @@
 				  });
 			}
 			
+			function delArticle(id){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/article/delete',
+				    data: {id : id},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	alert('删除成功');
+				      	doSearch();
+				    }
+				  });
+			}
 		</script>
 	</head>
 	
@@ -63,7 +75,6 @@
 												<th>阅读</th>
 												<th>发布时间</th>
 												<th>操作</th>
-												<th></th>
 											</tr>
 										</thead>
 										<tbody>
@@ -71,7 +82,7 @@
 												<td>$[title]</td>
 												<td>$[readCount]</td>
 												<td>$[addtime]</td>
-												<td> <a href="#" onclick="openPici();">评论</a> <a href="#" onclick="openPici();">编辑</a> <a href="#" onclick="openPici();">删除</a> </td>
+												<td><a href="#" onclick="openEdit($[id]);">编辑</a> <a href="#" onclick="delArticle($[id]);">删除</a> </td>
 											</tr>
 										</tbody>
 									</table>

@@ -87,19 +87,6 @@
 		    }
 	    });
 	}
-	var stack_bar_top = {"dir1": "down", "dir2": "right", "push": "top", "spacing1": 0, "spacing2": 0};
-	var stack_bar_bottom = {"dir1": "up", "dir2": "right", "spacing1": 0, "spacing2": 0};
-	function tishi(){
-		var notice = new PNotify({
-			title: '消息',
-			text: '商品添加成功.',
-			type: 'success',
-			addclass: 'stack-bar-top',
-			stack: stack_bar_top,
-			delay:1000,
-			width: "100%"
-		});
-	}
 	
 	function setSelectImg(arr){
 		if(arr.length>0){

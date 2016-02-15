@@ -15,9 +15,9 @@ public class ThreadSessionHelper {
     	if(session==null){
     		return null;
     	}
-    	User u = (User)session.getAttribute("user");
+    	User u = (User)session.getAttribute(SysConstants.Session_Attr_User);
     	if(u==null){
-    		UserOfflineHandler handler = new NewHouseUserOfflineHandler();
+    		UserOfflineHandler handler = new YJTUserOfflineHandler();
     		handler.handle(ThreadSession.HttpServletRequest.get(), ThreadSession.getHttpservletresponse());
     	}
     	return u;
