@@ -25,16 +25,16 @@
 					<div class="divider2"></div>
 					<li class="nav-parent">
 						<a>
-							<i class="fa fa-copy" aria-hidden="true"></i><span>信息管理</span>
+							<i class="fa fa-list-alt" aria-hidden="true"></i><span>新闻管理</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="/article/add.jsp"><span class="text"> 发布文章</span></a></li>
-							<li><a href="/article/list.jsp"><span class="text"> 文章列表</span></a></li>										
+							<li><a href="/article/add.jsp"><span class="text"> 发布新闻</span></a></li>
+							<li><a href="/article/list.jsp"><span class="text"> 新闻列表</span></a></li>										
 						</ul>
 					</li>
 					<li class="nav-parent">
 						<a>
-							<i class="fa fa-list-alt" aria-hidden="true"></i><span>用户管理</span>
+							<i class="fa fa-user" aria-hidden="true"></i><span>用户管理</span>
 						</a>
 						<ul class="nav nav-children">
 							<li><a href="form-elements.html"><span class="text"> 商家列表</span></a></li>
@@ -44,7 +44,7 @@
 					</li>
 					<li class="nav-parent">
 						<a>
-							<i class="fa fa-list-alt" aria-hidden="true"></i><span>商品管理</span>
+							<i class="fa fa-glass" aria-hidden="true"></i><span>商品管理</span>
 						</a>
 						<ul class="nav nav-children">
 							<li><a href="/product/add.jsp"><span class="text"> 添加商品</span></a></li>
@@ -53,18 +53,18 @@
 					</li>
 					<li>
 						<a>
-							<i class="fa fa-random" aria-hidden="true"></i><span>兑奖统计</span>
+							<i class="fa fa-align-left" aria-hidden="true"></i><span>兑奖统计</span>
 						</a>
 					</li>
-					<li>
-						<a href="/sys/list.jsp">
-							<i class="fa fa-font" aria-hidden="true"></i><span>表空间管理</span>
+					
+					<li class="nav-parent">
+						<a>
+							<i class="fa fa-cog" aria-hidden="true"></i><span>系统设置</span>
 						</a>
-					</li>
-					<li>
-						<a href="/city/list.jsp">
-							<i class="fa fa-font" aria-hidden="true"></i><span>城市配置</span>
-						</a>
+						<ul class="nav nav-children">
+							<li><a href="/sys/list.jsp"><span class="text"> 表空间管理</span></a></li>
+							<li><a href="/city/list.jsp"><span class="text"> 城市配置</span></a></li>
+						</ul>
 					</li>
 				</ul>
 			</nav>

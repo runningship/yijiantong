@@ -1,0 +1,59 @@
+////所有格式为json格式///
+登录
+http://houyikeji.com:port/c/app/u/login
+参数
+	电话号码 : tel
+	密码 : password
+	
+注册
+http://houyikeji.com:port/c/app/u/reg
+参数
+	电话号码 : tel
+	密码 : password
+	短信验证码 : smsCode
+	
+发送手机验证码
+http://houyikeji.com:port/c/app/sendSMSCode
+参数
+	电话号码 : tel
+	
+初始化
+http://houyikeji.com:port/c/app/init
+行业咨询
+http://houyikeji.com:port/c/app/newsList
+查看新闻详情
+http://houyikeji.com:port/c/app/getNews
+参数
+	新闻编号 : id
+获取用户资料详情
+http://houyikeji.com:port/c/app/getUserProfile
+参数
+	用户ID : uid
+返回值 : 
+	
+保存用户资料详情
+http://houyikeji.com:port/c/app/updateUserProfile
+参数
+	用户ID : uid
+	昵称 : name
+	生日 : birth
+	性别 : gender
+	qq : qq
+	微信 : weixin
+	邮箱 : eamil
+	个性签名 : sign
+搜索产品
+http://houyikeji.com:port/c/app/searchProduct
+参数
+	搜索内容 : text
+返回值
+	
+查看商品详情
+http://houyikeji.com:port/c/app/getProduct
+参数
+	产品编号 : pid
+	
+获取兑奖记录
+http://houyikeji.com:port/c/app/getLotteryList
+参数
+	用户ID : uid

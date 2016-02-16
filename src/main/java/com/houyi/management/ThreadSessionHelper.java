@@ -15,6 +15,7 @@ public class ThreadSessionHelper {
     	if(session==null){
     		return null;
     	}
+    	System.out.println(session.getId());
     	User u = (User)session.getAttribute(SysConstants.Session_Attr_User);
     	if(u==null){
     		UserOfflineHandler handler = new YJTUserOfflineHandler();

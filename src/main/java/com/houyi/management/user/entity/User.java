@@ -31,4 +31,16 @@ public class User {
 	public Integer jifen;
 	//1买家 , 2卖家
 	public Integer type;
+	
+	public Date birth;
+	
+	public Integer gender;
+	
+	public String qq;
+	
+	public String weixin;
+	
+	public String email;
+	
+	public String sign;
 }
