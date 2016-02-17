@@ -12,6 +12,10 @@
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 String qrCode = request.getParameter("qrCode");
 if(StringUtils.isEmpty(qrCode)){
+	qrCode = (String)request.getAttribute("qrCode");
+}
+if(StringUtils.isEmpty(qrCode)){
+	qrCode = (String)request.getAttribute("qrCode");
 	out.println("没有找到商品信息");
 	return;
 }
@@ -28,6 +32,7 @@ ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
 request.setAttribute("batch", batch);
 Product product = dao.get(Product.class, item.productId);
 request.setAttribute("product", product);
+request.setAttribute("qrCode", qrCode);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -54,6 +59,10 @@ body{font-family: 微软雅黑; margin:1pt;}
 .tel{ line-height: 30pt;    width: 98%;    border-radius: 2pt;    border: 1px solid #ddd;    font-size: 12pt; font-weight:bold;height: 30pt;}
 .btn-ok{    height: 30pt;    background: #D94D3E;    line-height: 30pt;    width: 98%;    display: inline-block;    margin-top: 5pt;    border-radius: 4pt;    color: white;    font-weight: bold;    margin-bottom: 10pt;}
 </style>
+<script src="/assets/vendor/js/jquery-2.1.1.min.js"></script>
+<script src="/assets/js/houyi/buildHtml.js"></script>
+<script src="/assets/js/layer/layer.js"></script>
+
 <script type="text/javascript">
 window.onload=function(){
 	//document.getElementById('qrCode').innerText=qrCode;
@@ -61,7 +70,18 @@ window.onload=function(){
 }
 
 function duijiang(){
-	
+	var tel = $('.tel').val();
+	if(!isMobile(tel)){
+		return ;
+	}
+	YW.ajax({
+	    type: 'POST',
+	    url: '/c/admin/lottery/add',
+	    data:{qrCode : '${qrCode}' , tel : tel , verifyCode:'3123'},
+	    mysuccess: function(data){
+	    	layer.msg('兑奖成功');
+	    }
+    });
 }
 </script>
 </head>
@@ -82,10 +102,9 @@ function duijiang(){
 				<div class="lottery_value">10<span class="unit">元</span></div>
 				<div class="tips">(手机费或流量包)</div>
 				<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
-				
 			</div>
 			<div style="text-align:center;">
-				<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
+				<input class="tel"   placeholder="请输入你的手机号码" value="${tel }"/>
 				<div class="btn-ok" onclick="duijiang();">立即领取</div>
 			</div>
 		</div>

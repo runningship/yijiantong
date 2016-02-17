@@ -26,6 +26,15 @@
 <!-- 	    <url-pattern>/c/*</url-pattern> -->
 <!-- 	</servlet-mapping> -->
 	
+	<servlet>
+	 	<servlet-name>reset</servlet-name>
+	 	<servlet-class>com.houyi.management.RestServlet</servlet-class>
+	 </servlet>
+	 <servlet-mapping>
+	 	<servlet-name>reset</servlet-name>
+	 	<url-pattern>/p/*</url-pattern>
+	 </servlet-mapping>
+	 
 	<filter>
     	<filter-name>grandFilter</filter-name>
     	<filter-class>org.bc.web.GrandFilter</filter-class>

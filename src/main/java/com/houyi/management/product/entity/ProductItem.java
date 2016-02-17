@@ -37,4 +37,7 @@ public class ProductItem {
 	//批次号
 	public Integer batchId;
 	
+	// 兑奖时间
+	public Date activeTime;
+	
 }

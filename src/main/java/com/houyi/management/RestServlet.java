@@ -25,7 +25,7 @@ public class RestServlet extends HttpServlet{
 		}
 		String data = req.getPathInfo().replace("/", "");
 		req.setAttribute("qrCode", data);
-		RequestDispatcher rd = req.getRequestDispatcher("/public/itemView.jsp");
+		RequestDispatcher rd = req.getRequestDispatcher("/demo.jsp");
 		rd.forward(req, resp);
 	}
 

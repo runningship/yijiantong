@@ -57,3 +57,16 @@ http://houyikeji.com:port/c/app/getProduct
 http://houyikeji.com:port/c/app/getLotteryList
 参数
 	用户ID : uid
+	
+获取查真伪扫描记录
+http://houyikeji.com:port/c/scan/list
+	参数
+	用户ID : uid
+	类型 : type=1	
+获取查兑奖扫描记录
+http://houyikeji.com:port/c/scan/list
+	参数
+	用户ID : uid
+	类型 : type=2	
+	返回值 ：
+		{"list":[{"id":6,"productId":12,"img":"http://img/path", "productName":"测试商品","qrCode":"1454316150171.11","addtime":"2016-02-17 11:16:08","type":1}],"result":0}

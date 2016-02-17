@@ -7,8 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+//不做为兑奖记录
 @Entity
-public class Record {
+public class ScanRecord {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
@@ -20,13 +21,13 @@ public class Record {
 	
 	public String qrCode;
 	
-	//扫码地理位置
-	public Float lat;
-	
-	public Float lng;
-	
 	//扫描设备
 	public String device;
 	
 	public Date addtime;
+	
+	public String city;
+	
+	//1 查真伪，2 查兑奖
+	public Integer type;
 }
