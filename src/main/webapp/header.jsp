@@ -11,7 +11,7 @@
 <!--         <link href="http://fonts.useso.com/css?family=Open+Sans:300,400,600,700,800|Shadows+Into+Light" rel="stylesheet" type="text/css" /> -->
         
 		<!-- Favicon and touch icons -->
-		<link rel="shortcut icon" href="/assets/ico/favicon.ico" type="image/x-icon" />
+		<link rel="shortcut icon" href="/assets/ico/logo-16.png" type="image/x-icon" />
 		
 	    <!-- start: CSS file-->
 		

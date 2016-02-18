@@ -53,8 +53,8 @@ body{font-family: 微软雅黑; margin:1pt;}
  .field{    border: 1px solid #D09D98;    margin-bottom: 10pt;}
 .field p{margin:1pt;  font-size: 11pt;}
 .field .value{color:#7f7f7f;}
-.field .odd{background:#f2f2f2;width:73%; display: inline-block;padding: 5pt 0pt;margin-left:1%}
-.field .even{width:73%; display: inline-block;padding: 5pt 0pt;margin-left:1%}
+.field .odd{background:#f2f2f2;width:73%; display: inline-block;padding: 5pt 0pt;margin-left:3pt;}
+.field .even{width:73%; display: inline-block;padding: 5pt 0pt;margin-left:3pt;}
 .field .key{width: 23%;    display: inline-block;    color: #7f7f7f;    font-weight: bold;    background: #ebebeb;    padding: 5pt 0pt;padding-left:1.5%;   }
 .tel{ line-height: 30pt;    width: 98%;    border-radius: 2pt;    border: 1px solid #ddd;    font-size: 12pt; font-weight:bold;height: 30pt;}
 .btn-ok{    height: 30pt;    background: #D94D3E;    line-height: 30pt;    width: 98%;    display: inline-block;    margin-top: 5pt;    border-radius: 4pt;    color: white;    font-weight: bold;    margin-bottom: 10pt;}

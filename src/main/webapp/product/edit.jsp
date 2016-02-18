@@ -62,7 +62,7 @@
 	    	alert('内容不能为空');
 	    	return;
 	    };
-	    if($('#isAd').attr('checked')){
+	    if($('#isAd')[0].checked){
 	    	$('#isAd').val(1);
 	    }else{
 	    	$('#isAd').val(0);
@@ -137,7 +137,7 @@
 											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
 													<span class="adTip">(如果开启广告，则显示在APP广告区)</span>
 													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  <c:if test="${product.isAd==1 }">checked</c:if>  name="isAd">
+													  <input type="checkbox"  value="${product.isAd }"  id="isAd" class="switch-input"  <c:if test="${product.isAd==1 }">checked</c:if>  name="isAd">
 													  <span class="switch-label" data-on="On" data-off="Off"></span>
 													  <span class="switch-handle"></span>
 													</label>

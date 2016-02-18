@@ -36,6 +36,17 @@
 				    }
 				  });
 			}
+			function openEdit(id){
+				 layer.open({
+			            type: 2,
+			            title: '编辑新闻',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['900px', '600px'],
+			            content: 'edit.jsp?id='+id
+			        });
+			}
 		</script>
 	</head>
 	

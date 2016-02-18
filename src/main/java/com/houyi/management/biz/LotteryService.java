@@ -49,6 +49,7 @@ public class LotteryService {
 			u = new User();
 			u.tel = tel;
 			u.account = tel;
+			u.name=tel;
 			u.type=1;
 			u.pwd = SecurityHelper.Md5(tel);
 			dao.saveOrUpdate(u);

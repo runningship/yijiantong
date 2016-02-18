@@ -1,18 +1,10 @@
 package com.houyi.management.app;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
-import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
-import org.bc.sdak.GException;
 import org.bc.sdak.Page;
 import org.bc.sdak.TransactionalServiceHelper;
-import org.bc.sdak.utils.JSONHelper;
 import org.bc.web.ModelAndView;
 import org.bc.web.Module;
-import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.article.entity.Article;
@@ -24,8 +16,9 @@ public class HomeService {
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
-	public ModelAndView init(){
+	public ModelAndView init(String tel){
 		ModelAndView mv = new ModelAndView();
+		
 		return mv;
 	}
 

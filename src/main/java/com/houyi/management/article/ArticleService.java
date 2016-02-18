@@ -32,13 +32,22 @@ public class ArticleService {
 	}
 
 	@WebMethod
-	public ModelAndView update(Article Article){
+	public ModelAndView update(Article article){
 		ModelAndView mv = new ModelAndView();
-		if(StringUtils.isEmpty(Article.title)){
+		if(StringUtils.isEmpty(article.title)){
 			throw new GException(PlatformExceptionType.BusinessException,"标题不能为空");
 		}
-		Article.addtime = new Date();
-		dao.saveOrUpdate(Article);
+		Article po = dao.get(Article.class, article.id);
+		if(po!=null){
+			po.author = article.author;
+			po.conts = article.conts;
+			po.imgId = article.imgId;
+			po.isAd = article.isAd;
+			po.orderx = article.orderx;
+			po.title = article.title;
+			po.publishFlag = article.publishFlag;
+			dao.saveOrUpdate(po);
+		}
 		return mv;
 	}
 	

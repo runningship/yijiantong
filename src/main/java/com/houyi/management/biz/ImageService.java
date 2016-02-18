@@ -32,7 +32,7 @@ import com.houyi.management.util.ImageHelper;
 public class ImageService {
 
 	static final int MAX_SIZE = 1024000*100;
-	static final String BaseFileDir = ConfigCache.get("house_image_path", "");
+	static final String BaseFileDir = ConfigCache.get("article_image_path", "C:\\inetpub\\wwwroot\\article_image_path");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 
 	@WebMethod

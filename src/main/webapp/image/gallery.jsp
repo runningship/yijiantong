@@ -1,6 +1,10 @@
 <!DOCTYPE html>
+<%@page import="com.houyi.management.ThreadSessionHelper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%
+	request.setAttribute("user", ThreadSessionHelper.getUser());
+%>
 <html lang="en">
 
 	<head>
@@ -9,7 +13,7 @@
 		<style type="text/css">
 			.media-gallery .mg-files{padding:5px 20px}
 			.media-gallery .mg-files .thumbnail{padding:0px;margin-bottom:0px;}
-			.isotope-item{width:200px;padding:3px;}
+			.isotope-item{width:150px;padding:3px;display:inline-block;}
 			.media-gallery{margin-top:25px;margin-left:20px;}
 			.btn-ok{position: absolute;    top: 0px;    right: 30px;}
 		</style>
@@ -59,7 +63,7 @@
 			}
 			
 			setTimeout(function(){
-				initUploadHouseImage(1212);
+				initUploadHouseImage(${user.id});
 			},100);
 			
 			
@@ -105,7 +109,7 @@
 					}
 					arr.push(json);
 				}
-				top.setSelectImg(arr);
+				window.parent.setSelectImg(arr);
 
 				var index =parent.layer.getFrameIndex(window.name)
 				parent.layer.close(index);

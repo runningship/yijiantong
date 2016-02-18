@@ -29,6 +29,8 @@ public class Article {
 	
 	public Integer publishFlag;
 	
+	public Integer isAd;
+	
 	public String author;
 	
 	public Integer imgId;
