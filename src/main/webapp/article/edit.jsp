@@ -62,7 +62,7 @@
 	    });
 		var img=JSON.parse('{}');
 		img.path = 'http://127.0.0.1/article_image_path/${user.id}/${image.path}';
-		img.id = ${article.imgId};
+		img.id = '${article.imgId}';
 		var arr = [];
 		arr.push(img);
 		setSelectImg(arr);
