@@ -2,6 +2,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style type="text/css">
 .mm-panel{height:100%;}
+.avatar{width:100px;}
 </style>
 <!-- Sidebar -->
 <div class="sidebar">
@@ -16,7 +17,7 @@
 				<ul class="nav nav-sidebar">
 					<div class="panel-body text-center">								
 						<div class="bk-avatar">
-							<img src="/assets/img/avatar.jpg" class="img-circle bk-img-60" alt="" />
+							<img src="/assets/img/avatar.jpg" class="img-circle avatar bk-img-60" alt="" />
 						</div>
 						<div class="bk-padding-top-10">
 							<i class="fa fa-circle text-success"></i> <small>管理员</small>

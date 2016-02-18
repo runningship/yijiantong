@@ -55,15 +55,16 @@
 			}
 			
 			function openItems(batchId){
-				 layer.open({
-			            type: 2,
-			            title: '二维码信息',
-			            shadeClose: true,
-			            shade: false,
-			            maxmin: true, //开启最大化最小化按钮
-			            area: ['600px', '560px'],
-			            content: 'itemList.jsp?productId=${productId}&batchId='+batchId
-			        });
+// 				 layer.open({
+// 			            type: 2,
+// 			            title: '二维码信息',
+// 			            shadeClose: true,
+// 			            shade: false,
+// 			            maxmin: true, //开启最大化最小化按钮
+// 			            area: ['600px', '560px'],
+// 			            content: 'itemList.jsp?productId=${productId}&batchId='+batchId
+// 			        });
+				 window.location='itemList.jsp?productId=${productId}&batchId='+batchId;
 			}
 			
 			function generateQRCode(batchId){

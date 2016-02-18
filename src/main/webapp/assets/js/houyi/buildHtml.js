@@ -96,11 +96,14 @@ window.alert=function(msg){
 	layer.msg(msg);
 }
 YW={
+	index:-1,
     options:{
         beforeSend: function(XMLHttpRequest){
+        	YW.index = layer.load();
             // $(window.parent.document.body).append('<img src="/style/images/ajax-loading.gif" style="display:block;position:absolute;margin-left:auto;margin-right:auto;" id="loading" />');
         },
         complete: function(XMLHttpRequest, textStatus){
+        	layer.close(YW.index);
             // $('#loading').remove();
         },
         error: function(data){

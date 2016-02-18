@@ -12,8 +12,8 @@
 <%@page import="javax.imageio.ImageIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-//String url = "http://www.houyikeji.com/ewm/demo.html/";
-String url = "http://www.houyikeji.com/ewm/company.html/";
+String url = "http://houyikeji.com/demo.html";
+//String url = "http://houyikeji.com/company.html";
 //String url = "http://hy.tunnel.qydev.com/ewm/demo.html/";
 
 response.setContentType("text/html");

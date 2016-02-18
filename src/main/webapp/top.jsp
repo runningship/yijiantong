@@ -7,8 +7,12 @@
 	String path = request.getServletPath();
 	request.setAttribute("path", path);
 	request.setAttribute(SysConstants.Session_Attr_User, ThreadSessionHelper.getUser());
-	
 %>
+<script type="text/javascript">
+	function logout(){
+		window.location='/login.jsp';
+	}
+</script>
 <div class="navbar" role="navigation">
 	<div class="container-fluid container-nav">				
 		<!-- Navbar Action -->
@@ -94,7 +98,7 @@
 							<a href="#"><i class="fa fa-wrench"></i> 设置</a>
 						</li>
 						<li>
-							<a href="page-login.html"><i class="fa fa-power-off"></i> 退出</a>
+							<a href="#" onclick="logout();"><i class="fa fa-power-off"></i> 退出</a>
 						</li>
 					</ul>
 				</div>						

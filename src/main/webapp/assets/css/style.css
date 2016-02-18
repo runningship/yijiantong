@@ -1169,7 +1169,7 @@ background-color: transparent;
 .sidebar ul.nav.nav-sidebar {
 margin: 0;
 width: 240px;
-padding: 23px 0;
+padding: 0px 0;
 }
 .sidebar ul.nav.nav-sidebar .flag {
 position: relative;
@@ -1298,10 +1298,10 @@ padding: 9px 15px 9px 70px;
 background: none;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children li a {
-color: #C1ECE8;
+color: #45AAD2;
 }
 .sidebar ul.nav.nav-sidebar li .nav-children li.active > a {
-color: #ffffff;
+color: #FFFFFF;
 }
 .sidebar ul.nav.nav-sidebar li ul {
 display: none;

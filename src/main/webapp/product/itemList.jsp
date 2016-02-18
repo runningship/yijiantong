@@ -63,10 +63,11 @@ request.setAttribute("batch", batch);
 											<form name="form1" onsubmit="doSearch();return false;">
 											<input type="hidden" name="productId" value="${productId}"/>
 											<input type="hidden" name="batchId" value="${batch.id}"/>
-											<div class="col-sm-6 col-md-6">
+											<div class="col-sm-12col-md-6">
 												<div id="datatable-default_filter" class="dataTables_filter">
+													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="">导出所有二维码</button>
+													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="history.go(-1)">返回</button>
 													<input type="search" name="title" class="form-control" placeholder="二维码编号" aria-controls="datatable-default">
-													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="">导出二维码</button>
 													<label></label>
 												</div>
 											</div>

@@ -109,7 +109,8 @@ public class ProductService {
 			item.batchId = batch.id;
 			item.lottery=batch.lottery;
 			item.productId = batch.productId;
-			item.qrCode = System.currentTimeMillis()+"."+batch.tableOffset;
+			String str = System.currentTimeMillis()+""+count;
+			item.qrCode = str + "."+batch.tableOffset;
 			item.verifyCode = String.valueOf(r.nextInt(999999));
 			session.save(item);
 		}
@@ -160,8 +161,8 @@ public class ProductService {
 	@WebMethod
 	public ModelAndView listItem(Page<ProductItem> page , Integer productId , Integer batchId){
 		ModelAndView mv = new ModelAndView();
-		TableInfo table = dao.get(TableInfo.class, batchId);
-		MyInterceptor.getInstance().tableNameSuffix.set(table.suffix);
+		ProductBatch table = dao.get(ProductBatch.class, batchId);
+		MyInterceptor.getInstance().tableNameSuffix.set(table.tableOffset);
 		StringBuilder sql = new StringBuilder("from ProductItem where productId=? and batchId=? ");
 		List<Object> params = new ArrayList<Object>();
 		params.add(productId);
