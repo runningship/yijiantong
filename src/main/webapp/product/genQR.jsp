@@ -21,7 +21,9 @@ MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 request.setAttribute("pi" , item);
-String url = "http://192.168.1.222:8181/p/"+item.qrCode;
+String host = ConfigCache.get("host", "houyikeji.com");
+request.setAttribute("host" , host);
+String url = "http://"+host+":8181/p/"+item.qrCode;
 
 response.setContentType("text/html");
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
@@ -41,6 +43,6 @@ qrUtil.encode(url, realLogoPath , destPath , true);
 </head>
 <body>
 
-<img src="http://127.0.0.1/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
+<img src="http://${host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
 </body>
 </html>
