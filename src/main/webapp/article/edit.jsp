@@ -1,3 +1,4 @@
+<%@page import="com.houyi.management.cache.ConfigCache"%>
 <%@page import="com.houyi.management.ThreadSessionHelper"%>
 <%@page import="com.houyi.management.biz.entity.Image"%>
 <%@page import="com.houyi.management.article.entity.Article"%>
@@ -12,6 +13,7 @@
 	request.setAttribute("article", article);
 	Image image = dao.get(Image.class , article.imgId);
 	request.setAttribute("image", image);
+	request.setAttribute("imageHost", ConfigCache.get("image_host", "localhost"));
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,7 +62,7 @@
 	        ue.setContent('${article.conts}');
 	    });
 		var img=JSON.parse('{}');
-		img.path = 'http://127.0.0.1/article_image_path/${image.path}';
+		img.path = 'http://${imageHost}/article_image_path/${image.path}';
 		img.id = '${article.imgId}';
 		var arr = [];
 		arr.push(img);

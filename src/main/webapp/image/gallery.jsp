@@ -1,9 +1,11 @@
 <!DOCTYPE html>
+<%@page import="com.houyi.management.cache.ConfigCache"%>
 <%@page import="com.houyi.management.ThreadSessionHelper"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setAttribute("user", ThreadSessionHelper.getUser());
+	request.setAttribute("imageHost", ConfigCache.get("image_host", "localhost"));
 %>
 <html lang="en">
 
@@ -142,8 +144,8 @@
 								<div class="isotope-item image col-sm-6 col-md-4 col-lg-3  repeat">
 									<div class="thumbnail">
 										<div class="thumb-preview">
-											<a class="thumb-image" href="http://127.0.0.1/article_image_path//$[path]">
-												<img data-id="$[id]" src="http://127.0.0.1/article_image_path/$[path]" class="img-responsive" alt="Project">
+											<a class="thumb-image" href="http://${imageHost }/article_image_path//$[path]">
+												<img data-id="$[id]" src="http://${imageHost }/article_image_path/$[path]" class="img-responsive" alt="Project">
 											</a>
 											<div class="mg-thumb-options">
 												<div class="mg-toolbar">
