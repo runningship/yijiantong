@@ -27,7 +27,7 @@ public class HomeService {
 		//新闻
 		Page<Map> page = new Page<Map>();
 		page.setPageSize(2);
-		page = dao.findPage(page, "select art.title as title , art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId order by art.orderx ", true, new Object[]{});
+		page = dao.findPage(page, "select art.id as id, art.title as title , art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId order by art.orderx ", true, new Object[]{});
 		//make abstract
 		for(Map art : page.getResult()){
 			String conts = art.get("conts").toString();
@@ -39,9 +39,10 @@ public class HomeService {
 		}
 		mv.data.put("news", JSONHelper.toJSONArray(page.getResult()));
 		
-		page = dao.findPage(page, "select product.title as title , img.path as path from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
+		page = dao.findPage(page, "select product.id as id, product.title as title , img.path as img from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
 		mv.data.put("products", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("urlPrefix", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrlPrefix", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("detailUrlPrefix", "http://"+ConfigCache.get("image_host", "localhost")+"/product/view.jsp");
 		return mv;
 	}
 
