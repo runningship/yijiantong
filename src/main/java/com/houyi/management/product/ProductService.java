@@ -102,6 +102,7 @@ public class ProductService {
 		Transaction tran = session.beginTransaction();
 		session.setCacheMode(CacheMode.IGNORE);
 		Random r = new Random();
+		MyRandom myRan = new MyRandom();
 		for(int i=0;i<count;i++){
 			ProductItem item = new ProductItem();
 			item.addtime = new Date();
@@ -109,7 +110,8 @@ public class ProductService {
 			item.batchId = batch.id;
 			item.lottery=batch.lottery;
 			item.productId = batch.productId;
-			String str = System.currentTimeMillis()+""+count;
+			Long  mills = System.currentTimeMillis();
+			String str = Long.toString(mills, Character.MAX_RADIX)+myRan.getNextCode();
 			item.qrCode = str + "."+batch.tableOffset;
 			item.verifyCode = String.valueOf(r.nextInt(999999));
 			session.save(item);
@@ -139,7 +141,10 @@ public class ProductService {
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
 		}
+		page.order="desc";
+		page.orderBy = "addtime";
 		page = dao.findPage(page, sql.toString() , params.toArray());
+		
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;
 	}

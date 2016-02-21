@@ -44,6 +44,28 @@
 		
 	});
 	
+	function openImagePanel(){
+		layer.open({
+            type: 2,
+            title: '图片库',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['893px', '600px'],
+            content: '../image/gallery.jsp'
+        });
+	}
+	
+	function setSelectImg(arr){
+		if(arr.length>0){
+			var img = arr[0];
+			var html = '<img style="width:200px;" src="'+img.path+'" />';
+			$('#imgId').val(img.id);
+			$('#imgContainer').empty();
+			$('#imgContainer').append(html);
+		}
+	}
+	
 	function save(){
 		var conts = ue.getContent();
 	    if (conts==null||conts=='') {
@@ -55,6 +77,12 @@
 	    }else{
 	    	$('#isAd').val(0);
 	    }
+	    
+	    if(!$('#imgId').val()){
+	    	layer.msg('请先选择图片');
+	    	return;
+	    }
+	    
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
@@ -130,6 +158,14 @@
 											<label class="col-sm-2 control-label">规格信息 <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="spec" class="form-control" placeholder="" required/>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">图片 <span class="required">*</span></label>
+											<div class="col-sm-9" >
+												<input type="hidden" name="imgId"  id="imgId" class="form-control" placeholder="" required/>
+												<div id="imgContainer"></div>
+												<button type="button" class="btn btn-info btn-xs" onclick="openImagePanel()">图片库</button>
 											</div>
 										</div>
 										<div class="form-group">

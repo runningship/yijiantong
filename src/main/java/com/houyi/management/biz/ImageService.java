@@ -60,7 +60,7 @@ public class ImageService {
 				}else if(item.getSize()>=MAX_SIZE){
 						throw new RuntimeException("单个图片不能超过2M");
 				}else{
-					image.path = item.getName();
+					image.path = image.uid+"/"+item.getName();
 					String thumbName = item.getName();
 					thumbName =  item.getName()+".t.jpg";
 					String savePath = BaseFileDir+File.separator +image.uid+File.separator+item.getName();

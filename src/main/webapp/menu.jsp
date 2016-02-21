@@ -45,10 +45,10 @@
 					</li>
 					<li class="nav-parent">
 						<a>
-							<i class="fa fa-glass" aria-hidden="true"></i><span>商品管理</span>
+							<i class="fa fa-glass" aria-hidden="true"></i><span>产品管理</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="/product/add.jsp"><span class="text"> 添加商品</span></a></li>
+							<li><a href="/product/add.jsp"><span class="text"> 添加产品</span></a></li>
 							<li><a href="/product/list.jsp"><span class="text"> 商品列表</span></a></li>
 						</ul>
 					</li>

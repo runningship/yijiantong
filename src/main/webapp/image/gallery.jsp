@@ -142,8 +142,8 @@
 								<div class="isotope-item image col-sm-6 col-md-4 col-lg-3  repeat">
 									<div class="thumbnail">
 										<div class="thumb-preview">
-											<a class="thumb-image" href="http://127.0.0.1/article_image_path/$[uid]/$[path]">
-												<img data-id="$[id]" src="http://127.0.0.1/article_image_path/$[uid]/$[path]" class="img-responsive" alt="Project">
+											<a class="thumb-image" href="http://127.0.0.1/article_image_path//$[path]">
+												<img data-id="$[id]" src="http://127.0.0.1/article_image_path/$[path]" class="img-responsive" alt="Project">
 											</a>
 											<div class="mg-thumb-options">
 												<div class="mg-toolbar">

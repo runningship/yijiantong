@@ -27,6 +27,7 @@ import org.bc.web.WebMethod;
 import com.houyi.management.SysConstants;
 import com.houyi.management.ThreadSessionHelper;
 import com.houyi.management.user.entity.User;
+import com.houyi.management.user.entity.UserTrack;
 import com.houyi.management.util.DataHelper;
 import com.houyi.management.util.SecurityHelper;
 import com.houyi.management.util.ShortMessageHelper;
@@ -246,6 +247,14 @@ public class UserService {
 		ThreadSession.getHttpSession().setAttribute(SysConstants.Session_Attr_User, po);
 		mv.data.put("user", JSONHelper.toJSON(po));
 		mv.data.put("result", 0);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView updateLocation(UserTrack track){
+		ModelAndView mv = new ModelAndView();
+		track.addtime = new Date();
+		dao.saveOrUpdate(track);
 		return mv;
 	}
 }

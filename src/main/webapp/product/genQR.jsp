@@ -22,8 +22,8 @@ CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 request.setAttribute("pi" , item);
 String host = ConfigCache.get("host", "houyikeji.com");
-request.setAttribute("host" , host);
-String url = "http://"+host+":8181/p/"+item.qrCode;
+request.setAttribute("image_host" , host);
+String url = "http://"+host+"/p/"+item.qrCode;
 
 response.setContentType("text/html");
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");

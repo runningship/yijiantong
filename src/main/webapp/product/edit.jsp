@@ -1,3 +1,6 @@
+<%@page import="com.houyi.management.ThreadSessionHelper"%>
+<%@page import="com.houyi.management.cache.ConfigCache"%>
+<%@page import="com.houyi.management.biz.entity.Image"%>
 <%@page import="com.houyi.management.product.entity.Product"%>
 <%@page import="org.bc.sdak.TransactionalServiceHelper"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
@@ -8,6 +11,10 @@
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	Product po = dao.get(Product.class, Integer.valueOf(productId));
 	request.setAttribute("product", po);
+	Image image = dao.get(Image.class , po.imgId);
+	request.setAttribute("image", image);
+	String imageHost = ConfigCache.get("image_host", "localhost");
+	request.setAttribute("image_host", imageHost);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -54,14 +61,45 @@
 		ue.addListener( 'ready', function( editor ) {
 	        ue.setContent('${product.conts}');
 	    });
+		
+		var img=JSON.parse('{}');
+		img.path = 'http://${image_host}/article_image_path/${image.path}';
+		img.id = '${article.imgId}';
+		var arr = [];
+		arr.push(img);
+		setSelectImg(arr);
 	});
 	
+	function openImagePanel(){
+		layer.open({
+            type: 2,
+            title: '图片库',
+            shadeClose: true,
+            shade: false,
+            maxmin: true, //开启最大化最小化按钮
+            area: ['600px', '400px'],
+            content: '../image/gallery.jsp'
+        });
+	}
+	function setSelectImg(arr){
+		if(arr.length>0){
+			var img = arr[0];
+			var html = '<img style="width:200px;" src="'+img.path+'" />';
+			$('#imgId').val(img.id);
+			$('#imgContainer').empty();
+			$('#imgContainer').append(html);
+		}
+	}
 	function save(){
 		var conts = ue.getContent();
 	    if (conts==null||conts=='') {
 	    	alert('内容不能为空');
 	    	return;
 	    };
+	    if(!$('#imgId').val()){
+	    	layer.msg('请先选择图片');
+	    	return;
+	    }
 	    if($('#isAd')[0].checked){
 	    	$('#isAd').val(1);
 	    }else{
@@ -142,6 +180,14 @@
 													  <span class="switch-handle"></span>
 													</label>
 												</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">图片 <span class="required">*</span></label>
+											<div class="col-sm-9" >
+												<input type="hidden" name="imgId" value="${article.imgId }"  id="imgId" class="form-control" placeholder="" required/>
+												<div id="imgContainer"></div>
+												<button type="button" class="btn btn-info btn-xs" onclick="openImagePanel()">图片库</button>
+											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">商品详情</label>

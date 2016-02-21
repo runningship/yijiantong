@@ -44,6 +44,11 @@
 			    });
 			}
 		</script>
+		<style type="text/css">
+			.panel-title-login{    background: #435D78;    height: 70px;    line-height: 60px;    text-align: center;}
+			.btn-login{width:80px;}
+			.input-group input{height: 48px;    line-height: 48px;    font-size: 20px !important;}
+		</style>
 	</head>
 	<body>
 		<!-- Start: Content -->
@@ -52,13 +57,9 @@
 				<!-- Main Page -->
 				<div class="body-login">
 					<div class="center-login">
-						<a href="#" class="logo pull-left hidden-xs">
-							<img src="assets/img/logo.png" height="45" alt="NADHIF Admin" />
-						</a>
-
 						<div class="panel panel-login">
-							<div class="panel-title-login text-right">
-								<h2 class="title"><i class="fa fa-user"></i> Login</h2>
+							<div class="panel-title-login">
+								<img src="assets/img/houyi/login.png" />
 							</div>
 							<div class="panel-body">
 								<form id="form" class="form-horizontal"">
@@ -94,8 +95,7 @@
 											</div>
 										</div>
 										<div class="col-sm-4 text-right">
-											<button href="index.html" type="submit" class="btn btn-primary hidden-xs">登录</button>
-											<button href="index.html" type="submit" class="btn btn-primary btn-block btn-lg visible-xs bk-margin-top-10">登录</button>
+											<button href="#" type="submit" class="btn btn-primary hidden-xs btn-login">登录</button>
 										</div>
 									</div>
 									<br />

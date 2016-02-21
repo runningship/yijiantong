@@ -12,7 +12,6 @@
 	request.setAttribute("article", article);
 	Image image = dao.get(Image.class , article.imgId);
 	request.setAttribute("image", image);
-	request.setAttribute("user", ThreadSessionHelper.getUser());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +60,7 @@
 	        ue.setContent('${article.conts}');
 	    });
 		var img=JSON.parse('{}');
-		img.path = 'http://127.0.0.1/article_image_path/${user.id}/${image.path}';
+		img.path = 'http://127.0.0.1/article_image_path/${image.path}';
 		img.id = '${article.imgId}';
 		var arr = [];
 		arr.push(img);
@@ -79,7 +78,15 @@
             content: '../image/gallery.jsp'
         });
 	}
-	
+	function setSelectImg(arr){
+		if(arr.length>0){
+			var img = arr[0];
+			var html = '<img style="width:200px;" src="'+img.path+'" />';
+			$('#imgId').val(img.id);
+			$('#imgContainer').empty();
+			$('#imgContainer').append(html);
+		}
+	}
 	function save(){
 		var conts = ue.getContent();
 	    if (conts==null||conts=='') {
@@ -111,15 +118,7 @@
 	    });
 	}
 	
-	function setSelectImg(arr){
-		if(arr.length>0){
-			var img = arr[0];
-			var html = '<img style="width:200px;" src="'+img.path+'" />';
-			$('#imgId').val(img.id);
-			$('#imgContainer').empty();
-			$('#imgContainer').append(html);
-		}
-	}
+	
 	</script>
 	<style type="text/css">
 		.adTip{
