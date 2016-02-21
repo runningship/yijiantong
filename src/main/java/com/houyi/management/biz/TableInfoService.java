@@ -35,7 +35,18 @@ public class TableInfoService {
 		TableInfo table = new TableInfo();
 		table.size=0;
 		table.suffix = suffix;
-		String sql = "if not exists (select * from sysobjects where name='ProductItem_"+suffix+"' and xtype='U') CREATE TABLE  [dbo].[ProductItem_"+suffix+"] ([id] int NOT NULL IDENTITY(1,1) ,[qrCode] nvarchar(50) NOT NULL ,[verifyCode] nvarchar(50) NULL ,[productId] int NOT NULL,[batchId] int NOT NULL ,[lottery] int NULL ,[lotteryActive] int NULL ,[lotteryOwnerId] int NULL , [addtime] datetime NULL)";
+		String sql = "if not exists (select * from sysobjects where name='ProductItem_"+suffix+"' and xtype='U') CREATE TABLE  [dbo].[ProductItem_"+suffix+"] ([id] int NOT NULL IDENTITY(1,1) "
+				+ ",[qrCode] nvarchar(50) NOT NULL "
+				+ ",[verifyCode] nvarchar(50) NULL "
+				+ ",[productId] int NOT NULL"
+				+ ",[batchId] int NOT NULL "
+				+ ",[lottery] int NULL "
+				+ ",[lotteryActive] int NULL "
+				+",[activeAddr] nvarchar(100) NULL"
+				+"[activeLat] float NULL"
+				+"[activeLng] float NULL"
+				+ ",[lotteryOwnerId] int NULL "
+				+ ", [addtime] datetime NULL)";
 		dao.executeSQL(sql);
 		dao.saveOrUpdate(table);
 		return mv;

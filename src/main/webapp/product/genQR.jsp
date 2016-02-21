@@ -21,10 +21,11 @@ MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 request.setAttribute("pi" , item);
-String host = ConfigCache.get("host", "houyikeji.com");
-request.setAttribute("image_host" , host);
-String url = "http://"+host+"/p/"+item.qrCode;
-
+String imageHost = ConfigCache.get("image_host", "houyikeji.com");
+String appHost = ConfigCache.get("app_host", "h1y6.com");
+request.setAttribute("image_host" , imageHost);
+String url = "http://"+appHost+"/p/"+item.qrCode;
+request.setAttribute("url" , url);
 response.setContentType("text/html");
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
@@ -43,6 +44,7 @@ qrUtil.encode(url, realLogoPath , destPath , true);
 </head>
 <body>
 
-<img src="http://${host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
+<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
+${url}
 </body>
 </html>

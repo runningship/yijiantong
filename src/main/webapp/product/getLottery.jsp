@@ -99,6 +99,17 @@ function duijiang(){
 <!-- 			<p><span class="key">经销商</span><span class="value odd " >厚易黄山路总店</span></p> -->
 <%-- 			<p style="word-break: break-all;"><span class="key">产品编号</span><span class="value even " >${item.qrCode }</span></p> --%>
 		</div>
+		<c:if test="${item.lotteryActive}">
+			<div>
+				<div>
+					<div class="duijiang">
+						<div class="tips">已兑奖</div>
+						<div class=""><span>兑奖时间: </span><span>${item.activeTime }</span></div>
+						<div class=""><span>兑奖地点: </span></div>
+					</div>
+				</div>
+			</div>
+		</c:if>
 		<div>
 			<div class="duijiang">
 				<div class="lottery_value">10<span class="unit">元</span></div>

@@ -40,4 +40,10 @@ public class ProductItem {
 	// 兑奖时间
 	public Date activeTime;
 	
+	public String activeAddr;
+	
+	public Float activeLat;
+	
+	public Float activeLng;
+	
 }

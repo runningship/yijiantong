@@ -33,4 +33,7 @@ public class ProductBatch {
 	
 	//是否已生成二维码
 	public Integer active;
+	
+	//过期时间
+	public Date expireDate;
 }
