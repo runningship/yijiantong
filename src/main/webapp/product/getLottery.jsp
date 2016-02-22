@@ -10,6 +10,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+String client = request.getHeader("client");
+request.setAttribute("client", "kuaiyisao");
 String qrCode = request.getParameter("qrCode");
 if(StringUtils.isEmpty(qrCode)){
 	qrCode = (String)request.getAttribute("qrCode");
@@ -114,8 +116,9 @@ function duijiang(){
 			<div class="duijiang">
 				<div class="lottery_value">10<span class="unit">元</span></div>
 				<div class="tips">(手机费或流量包)</div>
-				<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
-				
+				<c:if test="${client ne 'kuaiyisao' }">
+					<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
+				</c:if>
 			</div>
 			<div style="text-align:center;">
 				<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
