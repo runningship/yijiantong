@@ -11,7 +11,7 @@
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 String client = request.getHeader("client");
-request.setAttribute("client", "kuaiyisao");
+request.setAttribute("client", client);
 String qrCode = request.getParameter("qrCode");
 if(StringUtils.isEmpty(qrCode)){
 	qrCode = (String)request.getAttribute("qrCode");
@@ -52,6 +52,17 @@ body{font-family: 微软雅黑; margin:1pt;}
 .duijiang .tips{    text-align: center;    color: #C95D5D;height: 23pt;    line-height: 23pt; font-size:11pt;}
 .duijiang .jingxi{    text-align: center; color: #BB0322;    font-weight: bold;position:relative;    font-size: 13pt;}
 .duijiang .download{    position: absolute;    margin-left: 3%;    color: white;    padding: 4pt 5pt;    background: #D94D3E;    font-size: 10pt;    border-radius: 3pt;    bottom: 0pt;}
+
+.yiduijiang{background:url('../assets/img/bj.png') ;  position:relative;   height: 110pt;     background-repeat: no-repeat;background-size: 100%;border-radius: 4pt;    margin-bottom: 10pt;    margin-left: 0.5%;    width: 99%;}
+.yiduijiang .info{margin-left:auto;margin-right:auto;}
+.yiduijiang .wrap{position: absolute;    left: 30%;    width: 100%}
+.yiduijiang .warn{position: absolute;   width: 45pt ; top:37pt; right:72%;}
+.yiduijiang .tips{ color: #c60000;    height: 23pt;    line-height: 23pt;    font-size: 15pt;    font-weight: bold;    padding-top: 32pt;}
+.yiduijiang .activeTime{color:#c60000}
+.yiduijiang .activeAddr{color:#c60000}
+.yiduijiang .jingxi{ margin-top:5pt;   text-align: center; color: #BB0322;    font-weight: bold;position:relative;    font-size: 13pt;}
+.yiduijiang .download{    position: absolute;    margin-left: 3%;    color: white;    padding: 4pt 5pt;    background: #D94D3E;    font-size: 10pt;    border-radius: 3pt;    bottom: 0pt;}
+
  .field{    border: 1px solid #D09D98;    margin-bottom: 10pt;}
 .field p{margin:1pt;  font-size: 11pt;}
 .field .value{color:#7f7f7f;}
@@ -101,29 +112,36 @@ function duijiang(){
 <!-- 			<p><span class="key">经销商</span><span class="value odd " >厚易黄山路总店</span></p> -->
 <%-- 			<p style="word-break: break-all;"><span class="key">产品编号</span><span class="value even " >${item.qrCode }</span></p> --%>
 		</div>
-		<c:if test="${item.lotteryActive}">
+		<c:if test="${item.lotteryActive eq 1}">
 			<div>
 				<div>
-					<div class="duijiang">
-						<div class="tips">已兑奖</div>
-						<div class=""><span>兑奖时间: </span><span>${item.activeTime }</span></div>
-						<div class=""><span>兑奖地点: </span></div>
+					<div class="yiduijiang">
+						<img class="warn" alt="" src="../assets/img/warn.png">
+						<div class="wrap">
+							<div class="tips">该二维码已兑奖</div>
+							<div class="info">
+								<div class="activeTime"><span>兑奖时间: </span><span><fmt:formatDate value="${item.activeTime }" pattern="yyyy-MM-dd HH:mm"/></span></div>
+								<div class="activeAddr"><span>兑奖地点: </span><span>${item.activeAddr }</span></div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</c:if>
-		<div>
-			<div class="duijiang">
-				<div class="lottery_value">10<span class="unit">元</span></div>
-				<div class="tips">(手机费或流量包)</div>
-				<c:if test="${client ne 'kuaiyisao' }">
-					<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
-				</c:if>
+		<c:if test="${item.lotteryActive ne 1}">
+			<div>
+				<div class="duijiang">
+					<div class="lottery_value">10<span class="unit">元</span></div>
+					<div class="tips">(手机费或流量包)</div>
+					<c:if test="${client ne 'kuaiyisao' }">
+						<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
+					</c:if>
+				</div>
+				<div style="text-align:center;">
+					<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
+					<div class="btn-ok" onclick="duijiang();">立即领取</div>
+				</div>
 			</div>
-			<div style="text-align:center;">
-				<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
-				<div class="btn-ok" onclick="duijiang();">立即领取</div>
-			</div>
-		</div>
+		</c:if>
 </div>
 </body></html>

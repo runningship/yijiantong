@@ -1,4 +1,4 @@
-<%@page import="com.houyi.management.article.entity.Article"%>
+<%@page import="com.houyi.management.product.entity.Product"%>
 <%@page import="org.bc.sdak.TransactionalServiceHelper"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -7,8 +7,8 @@
 <%
 	String id =request.getParameter("id");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
-	Article po = dao.get(Article.class, Integer.valueOf(id));
-	request.setAttribute("article", po);
+	Product po = dao.get(Product.class, Integer.valueOf(id));
+	request.setAttribute("product", po);
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,20 +19,20 @@
 	
 	</script>
 	<style type="text/css">
-		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 10pt 0; text-align:center;}
+		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 8pt 0; text-align:center;}
 		.desc{text-align:center;}
-		.desc .date{font-size: 12pt;    color: #888;}
+		.desc .date{font-size: 10pt;    color: #888;}
 		.conts img{width:100% !important;}
 	</style>
 	</head>
 	
 	<body>
-		<div class="title">${article.title }</div>
+		<div class="title">${product.title }</div>
 		<div class="desc">
-			<span class="date">时间: ${article.addtime }</span> <span class="src"></span>
+			<span class="date">时间: <fmt:formatDate value="${product.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="src"></span>
 		</div>
 		<div class="conts">
-			${article.conts }
+			${product.conts }
 		</div>
 	</body>
 	

@@ -49,7 +49,16 @@
 						</a>
 						<ul class="nav nav-children">
 							<li><a href="/product/add.jsp"><span class="text"> 添加产品</span></a></li>
-							<li><a href="/product/list.jsp"><span class="text"> 商品列表</span></a></li>
+							<li><a href="/product/list.jsp"><span class="text"> 产品列表</span></a></li>
+						</ul>
+					</li>
+					<li class="nav-parent">
+						<a>
+							<i class="fa fa-glass" aria-hidden="true"></i><span>易商城</span>
+						</a>
+						<ul class="nav nav-children">
+							<li><a href="/goods/add.jsp"><span class="text"> 添加商品</span></a></li>
+							<li><a href="/goods/list.jsp"><span class="text"> 商品列表</span></a></li>
 						</ul>
 					</li>
 					<li>

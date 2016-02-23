@@ -41,8 +41,9 @@ public class HomeService {
 		
 		page = dao.findPage(page, "select product.id as id, product.title as title , img.path as img from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
 		mv.data.put("products", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("imgUrlPrefix", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("detailUrlPrefix", "http://"+ConfigCache.get("image_host", "localhost")+"/product/view.jsp");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/product/view.jsp");
+		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
 
