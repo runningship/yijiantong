@@ -13,7 +13,7 @@
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
-				    type: 'get',
+				    type: 'post',
 				    url: '/c/article/list',
 				    data: a,
 				    dataType:'json',

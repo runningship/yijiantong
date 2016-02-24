@@ -14,7 +14,7 @@
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
-				    type: 'get',
+				    type: 'post',
 				    url: '/c/product/listProduct',
 				    data: a,
 				    dataType:'json',
