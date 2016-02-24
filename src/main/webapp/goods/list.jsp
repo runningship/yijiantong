@@ -25,18 +25,29 @@
 				  });
 			}
 			
-			function openPici(id){
+			function openEdit(id){
 				 layer.open({
 			            type: 2,
-			            title: '批次信息',
+			            title: '编辑',
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['900px', '800px'],
-			            content: 'listBatch.jsp?productId='+id
+			            area: ['793px', '600px'],
+			            content: 'edit.jsp?id='+id
 			        });
 			}
 			
+			function delGoods(id){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/goods/delete',
+				    data: {id : id},
+				    dataType:'json',
+				    mysuccess: function(json){
+				        doSearch();
+				    }
+				  });
+			}
 		</script>
 	</head>
 	
@@ -96,6 +107,7 @@
 												<td>$[spec]</td>
 												<td>
 														<a class="edit" href="#" onclick="openEdit($[id]);">编辑</a>
+														<a class="del" href="#" onclick="delGoods($[id]);">删除</a>
 												</td>
 											</tr>
 										</tbody>

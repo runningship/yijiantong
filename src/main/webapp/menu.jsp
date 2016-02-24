@@ -54,7 +54,7 @@
 					</li>
 					<li class="nav-parent">
 						<a>
-							<i class="fa fa-glass" aria-hidden="true"></i><span>易商城</span>
+							<i class="fa fa-shopping-cart" aria-hidden="true"></i><span>易商城</span>
 						</a>
 						<ul class="nav nav-children">
 							<li><a href="/goods/add.jsp"><span class="text"> 添加商品</span></a></li>

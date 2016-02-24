@@ -9,7 +9,7 @@
 	response.setHeader("Content-Type" , "text/html");
 	
 	String rootPath = application.getRealPath( "/" );
-	request.setAttribute("upload_path", ConfigCache.get("upload_path", ""));
+	request.setAttribute("ueditor_upload_path", ConfigCache.get("ueditor_upload_path", ""));
 	request.setAttribute("download_prefix", ConfigCache.get("download_prefix", ""));
 	//request.setAttribute("serverName", DataHelper.getServerName(request));
 	out.write( new ActionEnter( request, rootPath ).exec() );

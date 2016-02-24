@@ -16,8 +16,6 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.product.entity.Goods;
-import com.houyi.management.product.entity.Product;
-
 
 @Module(name="/goods")
 public class GoodsService {
@@ -46,7 +44,7 @@ public class GoodsService {
 	@WebMethod
 	public ModelAndView delete(int  id){
 		ModelAndView mv = new ModelAndView();
-		Product po = dao.get(Product.class, id);
+		Goods po = dao.get(Goods.class, id);
 		if(po!=null){
 			dao.delete(po);
 		}

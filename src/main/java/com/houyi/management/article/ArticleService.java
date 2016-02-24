@@ -70,6 +70,7 @@ public class ArticleService {
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
 		}
+		sql.append(" order by orderx desc , id desc");
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;

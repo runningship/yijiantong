@@ -40,7 +40,7 @@
 			function openEdit(id){
 				 layer.open({
 			            type: 2,
-			            title: '批次信息',
+			            title: '编辑',
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮

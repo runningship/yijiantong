@@ -64,7 +64,7 @@
 		
 		var img=JSON.parse('{}');
 		img.path = 'http://${image_host}/article_image_path/${image.path}';
-		img.id = '${article.imgId}';
+		img.id = '${product.imgId}';
 		var arr = [];
 		arr.push(img);
 		setSelectImg(arr);
@@ -85,7 +85,6 @@
 		if(arr.length>0){
 			var img = arr[0];
 			var html = '<img style="width:200px;" src="'+img.path+'" />';
-			$('#imgId').val(img.id);
 			$('#imgContainer').empty();
 			$('#imgContainer').append(html);
 		}
@@ -108,7 +107,7 @@
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/c/product/save',
+		    url: '/c/product/update',
 		    data:a,
 		    mysuccess: function(data){
 		    	layer.msg('修改成功');

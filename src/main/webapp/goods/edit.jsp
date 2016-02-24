@@ -1,16 +1,16 @@
+<%@page import="com.houyi.management.product.entity.Goods"%>
 <%@page import="com.houyi.management.ThreadSessionHelper"%>
 <%@page import="com.houyi.management.cache.ConfigCache"%>
 <%@page import="com.houyi.management.biz.entity.Image"%>
-<%@page import="com.houyi.management.product.entity.Product"%>
 <%@page import="org.bc.sdak.TransactionalServiceHelper"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	String productId = request.getParameter("productId");
+	String id = request.getParameter("id");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
-	Product po = dao.get(Product.class, Integer.valueOf(productId));
-	request.setAttribute("product", po);
+	Goods po = dao.get(Goods.class, Integer.valueOf(id));
+	request.setAttribute("goods", po);
 	Image image = dao.get(Image.class , po.imgId);
 	request.setAttribute("image", image);
 	String imageHost = ConfigCache.get("image_host", "localhost");
@@ -59,12 +59,12 @@
 	  });
 	
 		ue.addListener( 'ready', function( editor ) {
-	        ue.setContent('${product.conts}');
+	        ue.setContent('${goods.conts}');
 	    });
 		
 		var img=JSON.parse('{}');
 		img.path = 'http://${image_host}/article_image_path/${image.path}';
-		img.id = '${article.imgId}';
+		img.id = '${goods.imgId}';
 		var arr = [];
 		arr.push(img);
 		setSelectImg(arr);
@@ -85,7 +85,7 @@
 		if(arr.length>0){
 			var img = arr[0];
 			var html = '<img style="width:200px;" src="'+img.path+'" />';
-			$('#imgId').val(img.id);
+			//$('#imgId').val(img.id);
 			$('#imgContainer').empty();
 			$('#imgContainer').append(html);
 		}
@@ -108,7 +108,7 @@
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/c/goods/save',
+		    url: '/c/goods/update',
 		    data:a,
 		    mysuccess: function(data){
 		    	layer.msg('修改成功');
@@ -143,39 +143,38 @@
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
-								<input type="hidden"  name="id" value="${product.id }"/>
+								<input type="hidden"  name="id" value="${goods.id }"/>
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<div class="form-group">
 											<label class="col-sm-2 control-label">商品名称 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="title" class="form-control" placeholder="" value="${product.title }" required/>
+												<input type="text" name="title" class="form-control" placeholder="" value="${goods.title }" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">生产商 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="vender" class="form-control" placeholder=""  value="${product.vender }" required/>
+												<input type="text" name="vender" class="form-control" placeholder=""  value="${goods.vender }" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">产地信息</label>
 											<div class="col-sm-9">
-												<input type="text" name="verderPlace" class="form-control" placeholder="" value="${product.verderPlace }" />
+												<input type="text" name="verderPlace" class="form-control" placeholder="" value="${goods.verderPlace }" />
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">规格信息 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="spec" class="form-control" placeholder=""  value="${product.spec }" required/>
+												<input type="text" name="spec" class="form-control" placeholder=""  value="${goods.spec }" required/>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">是否广告</label>
+											<label class="col-sm-2 control-label">是否上架</label>
 											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-													<span class="adTip">(如果开启广告，则显示在APP广告区)</span>
 													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="${product.isAd }"  id="isAd" class="switch-input"  <c:if test="${product.isAd==1 }">checked</c:if>  name="isAd">
+													  <input type="checkbox"  value="${goods.isAd }"  id="isAd" class="switch-input"  <c:if test="${goods.isAd==1 }">checked</c:if>  name="isAd">
 													  <span class="switch-label" data-on="On" data-off="Off"></span>
 													  <span class="switch-handle"></span>
 													</label>
@@ -184,7 +183,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">图片 <span class="required">*</span></label>
 											<div class="col-sm-9" >
-												<input type="hidden" name="imgId" value="${article.imgId }"  id="imgId" class="form-control" placeholder="" required/>
+												<input type="hidden" name="imgId" value="${goods.imgId }"  id="imgId" class="form-control" placeholder="" required/>
 												<div id="imgContainer"></div>
 												<button type="button" class="btn btn-info btn-xs" onclick="openImagePanel()">图片库</button>
 											</div>

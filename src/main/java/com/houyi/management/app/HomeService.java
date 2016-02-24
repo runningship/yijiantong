@@ -27,7 +27,7 @@ public class HomeService {
 		//新闻
 		Page<Map> page = new Page<Map>();
 		page.setPageSize(2);
-		page = dao.findPage(page, "select art.id as id, art.title as title , art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId order by art.orderx ", true, new Object[]{});
+		page = dao.findPage(page, "select art.id as id, art.title as title , art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId order by art.orderx, art.id desc ", true, new Object[]{});
 		//make abstract
 		for(Map art : page.getResult()){
 			String conts = art.get("conts").toString();

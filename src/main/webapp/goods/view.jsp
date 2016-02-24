@@ -1,3 +1,4 @@
+<%@page import="com.houyi.management.product.entity.Goods"%>
 <%@page import="com.houyi.management.product.entity.Product"%>
 <%@page import="org.bc.sdak.TransactionalServiceHelper"%>
 <%@page import="org.bc.sdak.CommonDaoService"%>
@@ -7,7 +8,7 @@
 <%
 	String id =request.getParameter("id");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
-	Product po = dao.get(Product.class, Integer.valueOf(id));
+	Goods po = dao.get(Goods.class, Integer.valueOf(id));
 	request.setAttribute("product", po);
 %>
 <!DOCTYPE html>
@@ -27,12 +28,12 @@
 	</head>
 	
 	<body>
-		<div class="title">${product.title }</div>
+		<div class="title">${goods.title }</div>
 		<div class="desc">
-			<span class="date">时间: <fmt:formatDate value="${product.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="src"></span>
+			<span class="date">时间: <fmt:formatDate value="${goods.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="src"></span>
 		</div>
 		<div class="conts">
-			${product.conts }
+			${goods.conts }
 		</div>
 	</body>
 	

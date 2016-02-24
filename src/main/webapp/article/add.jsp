@@ -93,7 +93,7 @@
 		    url: '/c/article/save',
 		    data:a,
 		    mysuccess: function(data){
-		    	layer.msg('添加商品成功');
+		    	layer.msg('发布成功');
 		    }
 	    });
 	}
