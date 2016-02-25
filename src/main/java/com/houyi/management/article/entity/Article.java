@@ -34,4 +34,6 @@ public class Article {
 	public String author;
 	
 	public Integer imgId;
+	
+	public String leibie;
 }

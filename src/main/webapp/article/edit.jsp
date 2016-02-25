@@ -84,6 +84,7 @@
 		if(arr.length>0){
 			var img = arr[0];
 			var html = '<img style="width:200px;" src="'+img.path+'" />';
+			$('#imgId').val(img.id);
 			$('#imgContainer').empty();
 			$('#imgContainer').append(html);
 		}
@@ -160,6 +161,15 @@
 											<label class="col-sm-2 control-label">作者 <span class="required">*</span></label>
 											<div class="col-sm-9">
 												<input type="text" name="author"   value="${article.author }" class="form-control" placeholder="" required/>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">类别 <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<select class="form-control select" name="leibie" >
+													<option <c:if test="${article.leibie eq 'news' }">selected="selected" </c:if> value="news">行业新闻</option>
+													<option <c:if test="${article.leibie eq 'tips' }">selected="selected" </c:if> value="tips">生活小贴士</option>
+												</select>
 											</div>
 										</div>
 										<div class="form-group">

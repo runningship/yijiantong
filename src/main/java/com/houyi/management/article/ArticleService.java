@@ -46,6 +46,7 @@ public class ArticleService {
 			po.orderx = article.orderx;
 			po.title = article.title;
 			po.publishFlag = article.publishFlag;
+			po.leibie = article.leibie;
 			dao.saveOrUpdate(po);
 		}
 		return mv;

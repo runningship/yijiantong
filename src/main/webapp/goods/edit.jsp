@@ -85,7 +85,7 @@
 		if(arr.length>0){
 			var img = arr[0];
 			var html = '<img style="width:200px;" src="'+img.path+'" />';
-			//$('#imgId').val(img.id);
+			$('#imgId').val(img.id);
 			$('#imgContainer').empty();
 			$('#imgContainer').append(html);
 		}

@@ -47,6 +47,16 @@
 			            content: 'edit.jsp?id='+id
 			        });
 			}
+			
+			function getLebie(leibie){
+				if('news'==leibie){
+					return '行业新闻';
+				}else if('tips'==leibie){
+					return '生活小贴士';
+				}else{
+					return '';
+				}
+			}
 		</script>
 	</head>
 	
@@ -85,6 +95,7 @@
 												<th>标题</th>
 												<th>阅读</th>
 												<th>发布时间</th>
+												<th>类别</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -93,6 +104,7 @@
 												<td>$[title]</td>
 												<td>$[readCount]</td>
 												<td>$[addtime]</td>
+												<td runscript="true">getLebie('$[leibie]')</td>
 												<td><a href="#" onclick="openEdit($[id]);">编辑</a> <a href="#" onclick="delArticle($[id]);">删除</a> </td>
 											</tr>
 										</tbody>

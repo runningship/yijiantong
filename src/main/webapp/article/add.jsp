@@ -154,6 +154,15 @@
 											</div>
 										</div>
 										<div class="form-group">
+											<label class="col-sm-2 control-label">类别 <span class="required">*</span></label>
+											<div class="col-sm-9">
+												<select class="form-control select" name="leibie">
+													<option value="news">行业新闻</option>
+													<option value="tips">生活小贴士</option>
+												</select>
+											</div>
+										</div>
+										<div class="form-group">
 											<label class="col-sm-2 control-label">排序 </label>
 											<div class="col-sm-9">
 												<input type="text" name="orderx" class="form-control" placeholder="" />
