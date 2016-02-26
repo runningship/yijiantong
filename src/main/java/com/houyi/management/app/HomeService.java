@@ -43,9 +43,9 @@ public class HomeService {
 		page = dao.findPage(page, "select product.id as id, product.title as title , img.path as img from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
 		mv.data.put("products", JSONHelper.toJSONArray(page.getResult()));
 		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/product/view.jsp");
-		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/goods/view.jsp");
-		mv.data.put("newsDetailUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/news/view.jsp");
+		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
+		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
+		mv.data.put("newsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
 		return mv;
 	}
 
@@ -58,9 +58,9 @@ public class HomeService {
 	@WebMethod
 	public ModelAndView tips(Page<Map> page){
 		ModelAndView mv = new ModelAndView();
-		page.setPageSize(2);
-		page = dao.findPage(page, "select art.id as id, art.title as title , art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId"
-				+ " and leibie='tips' order by art.orderx, art.id desc ", true, new Object[]{});
+		page.setPageSize(3);
+		page = dao.findPage(page, "select art.id as id, art.title as title , art.isAd as isTop, art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId"
+				+ " and leibie='tips' order by art.isAd desc, art.id desc ", true, new Object[]{});
 		//make abstract
 		for(Map art : page.getResult()){
 			String conts = art.get("conts").toString();
@@ -71,6 +71,8 @@ public class HomeService {
 			art.put("conts", conts);
 		}
 		mv.data.put("tips", JSONHelper.toJSONArray(page.getResult()));
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("tipsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
 		return mv;
 	}
 	

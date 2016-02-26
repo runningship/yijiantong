@@ -22,7 +22,7 @@
 		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 10pt 0; text-align:center;}
 		.desc{text-align:center;}
 		.desc .date{font-size: 12pt;    color: #888;}
-		.conts img{width:100% !important;}
+		.conts img{width:100% !important; height: 100%;}
 	</style>
 	</head>
 	

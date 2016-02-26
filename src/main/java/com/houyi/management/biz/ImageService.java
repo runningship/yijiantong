@@ -3,6 +3,7 @@ package com.houyi.management.biz;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -60,14 +61,15 @@ public class ImageService {
 				}else if(item.getSize()>=MAX_SIZE){
 						throw new RuntimeException("单个图片不能超过2M");
 				}else{
-					image.path = image.uid+"/"+item.getName();
-					String thumbName = item.getName();
-					thumbName =  item.getName()+".t.jpg";
-					String savePath = BaseFileDir+File.separator +image.uid+File.separator+item.getName();
+					String imageName = UUID.randomUUID().toString()+".jpg";
+					image.path = image.uid+"/"+imageName;
+					String thumbName = imageName;
+					thumbName =  imageName+".t.jpg";
+					String savePath = BaseFileDir+File.separator +image.uid+File.separator+imageName;
 					String thumbPath = BaseFileDir+File.separator +image.uid+File.separator+thumbName;
 					FileUtils.copyInputStreamToFile(item.getInputStream(), new File(savePath));
 					ImageHelper.resize(savePath, 270, 270, thumbPath);
-					serverPathList+=item.getName()+";";
+					serverPathList+= imageName +";";
 				}
 			}
 			dao.saveOrUpdate(image);
