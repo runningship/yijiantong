@@ -22,6 +22,11 @@ public class Goods {
 	
 	public String verderPlace;
 	
+	public float price;
+	
+	//原价
+	public float originalPrice;
+	
 	//规格
 	public String spec;
 	//
