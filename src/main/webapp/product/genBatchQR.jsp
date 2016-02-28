@@ -66,6 +66,7 @@ for(ProductItem item : items){
 String imageHost = ConfigCache.get("image_host", "houyikeji.com");
 request.setAttribute("image_host" , imageHost);
 request.setAttribute("items", items);
+request.setAttribute("batchId", batchId);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -74,7 +75,7 @@ request.setAttribute("items", items);
 <title>打包下载二维码</title>
 </head>
 <body>
-<a href="#">打包下载</a>
+<a href="packAndDownload.jsp?batchId=${batchId }">打包下载</a>
 <c:forEach items="${items }" var="pi">
 	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
 </c:forEach>

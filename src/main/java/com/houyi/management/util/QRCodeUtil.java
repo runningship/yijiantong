@@ -35,6 +35,8 @@ public class QRCodeUtil {
 	// LOGO高度
 	public  int HEIGHT = 10;
 
+	public int color = 0xFF000000;
+	
 	private BufferedImage createImage(String content, String imgPath,
 			boolean needCompress) throws Exception {
 		Hashtable<EncodeHintType, Object> hints = new Hashtable<EncodeHintType, Object>();
@@ -45,8 +47,7 @@ public class QRCodeUtil {
 				BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE, hints);
 		int width = bitMatrix.getWidth();
 		int height = bitMatrix.getHeight();
-		BufferedImage image = new BufferedImage(width, height,
-				BufferedImage.TYPE_INT_RGB);
+		BufferedImage image = new BufferedImage(width, height,	BufferedImage.TYPE_INT_RGB);
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
 				image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000

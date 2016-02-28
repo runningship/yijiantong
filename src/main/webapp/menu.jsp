@@ -72,8 +72,8 @@
 							<i class="fa fa-cog" aria-hidden="true"></i><span>系统设置</span>
 						</a>
 						<ul class="nav nav-children">
-							<li><a href="/sys/list.jsp"><span class="text"> 表空间管理</span></a></li>
-							<li><a href="/city/list.jsp"><span class="text"> 城市配置</span></a></li>
+							<li><a href="/sys/table/list.jsp"><span class="text"> 表空间管理</span></a></li>
+							<li><a href="/sys/conf/list.jsp"><span class="text"> 参数配置</span></a></li>
 						</ul>
 					</li>
 				</ul>

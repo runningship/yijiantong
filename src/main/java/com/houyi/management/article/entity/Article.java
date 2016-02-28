@@ -29,6 +29,7 @@ public class Article {
 	
 	public Integer publishFlag;
 	
+	// 当作是否置顶 
 	public Integer isAd;
 	
 	public String author;

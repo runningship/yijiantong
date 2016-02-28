@@ -63,6 +63,21 @@ public class ArticleService {
 	}
 	
 	@WebMethod
+	public ModelAndView togglePublishFlag(int  id){
+		ModelAndView mv = new ModelAndView();
+		Article po = dao.get(Article.class, id);
+		if(po!=null){
+			if(po.publishFlag==null || po.publishFlag!=1){
+				po.publishFlag = 1;
+			}else{
+				po.publishFlag = 0;
+			}
+			dao.saveOrUpdate(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView list(Page<Article> page , String title){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sql = new StringBuilder("from Article where 1=1 ");
@@ -71,7 +86,7 @@ public class ArticleService {
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
 		}
-		sql.append(" order by orderx desc , id desc");
+		sql.append(" order by isAd desc , id desc");
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;

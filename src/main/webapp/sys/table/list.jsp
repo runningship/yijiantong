@@ -4,7 +4,7 @@
 <html lang="en">
 
 	<head>
-		<jsp:include page="../header.jsp"></jsp:include>
+		<jsp:include page="../../header.jsp"></jsp:include>
 		<script type="text/javascript">
 			$(function(){
 				Page.Init();
@@ -42,7 +42,7 @@
 	<body>
 	
 		<!-- Start: Header -->
-			<jsp:include page="../top.jsp"></jsp:include>
+			<jsp:include page="../../top.jsp"></jsp:include>
 		<!-- End: Header -->
 		
 		<!-- Start: Content -->
@@ -50,7 +50,7 @@
 			<div class="row">
 			
 				<!-- Sidebar -->
-				<jsp:include page="../menu.jsp"></jsp:include>
+				<jsp:include page="../../menu.jsp"></jsp:include>
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->

@@ -65,7 +65,8 @@ request.setAttribute("batch", batch);
 											<input type="hidden" name="batchId" value="${batch.id}"/>
 											<div class="col-sm-12col-md-6">
 												<div id="datatable-default_filter" class="dataTables_filter">
-													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="">导出所有二维码</button>
+													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="packAndDownload.jsp?batchId=${batch.id }"  target="_blank">导出所有二维码</a>
+													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="genBatchQR.jsp?batchId=${batch.id }"  target="_blank">重新生成所有二维码图片</a>
 													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="history.go(-1)">返回</button>
 													<input type="search" name="title" class="form-control" placeholder="二维码编号" aria-controls="datatable-default">
 													<label></label>
@@ -76,7 +77,7 @@ request.setAttribute("batch", batch);
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>
 											<tr>
-												<th><a href="#">导出选中</a></th>
+<!-- 												<th><a href="#">导出选中</a></th> -->
 												<th>二维码</th>
 												<th>校验码</th>
 												<th>奖券</th>
@@ -86,7 +87,7 @@ request.setAttribute("batch", batch);
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
-												<td><input type="checkbox" /></td>
+<!-- 												<td><input type="checkbox" /></td> -->
 												<td>$[qrCode]</td>
 												<td>$[verifyCode]</td>
 												<td>$[lottery]</td>

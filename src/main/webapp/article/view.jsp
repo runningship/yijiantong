@@ -8,6 +8,12 @@
 	String id =request.getParameter("id");
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	Article po = dao.get(Article.class, Integer.valueOf(id));
+	if(po.readCount==null){
+		po.readCount=1;
+	}else{
+		po.readCount+=1;
+	}
+	dao.saveOrUpdate(po);
 	request.setAttribute("article", po);
 %>
 <!DOCTYPE html>
