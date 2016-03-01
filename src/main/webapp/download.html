@@ -1,0 +1,19 @@
+<html>
+<head>
+<script type="text/javascript">
+		function isWeixin() {
+		    var ua = navigator.userAgent.toLowerCase();
+		    if (ua.match(/MicroMessenger/i) == "micromessenger") {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+	    if(!isWeixin()){
+	    	window.location="http://kcloud.iflytek.com/download/kuaiyisao.apk";
+		}
+	</script>
+</head>
+<body style="background:url('yanshi/wizard.jpg'); background-size: cover;">
+</body>
+</html>
