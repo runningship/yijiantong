@@ -55,11 +55,13 @@ body{font-family: 微软雅黑; margin:1pt;}
 
 .yiduijiang{background:url('../assets/img/bj.png') ;  position:relative;   height: 110pt;     background-repeat: no-repeat;background-size: 100%;border-radius: 4pt;    margin-bottom: 10pt;    margin-left: 0.5%;    width: 99%;}
 .yiduijiang .info{margin-left:auto;margin-right:auto;}
-.yiduijiang .wrap{position: absolute;    left: 30%;    width: 100%}
+.yiduijiang .wrap{position: absolute;    left: 30%;}
 .yiduijiang .warn{position: absolute;   width: 45pt ; top:37pt; right:72%;}
 .yiduijiang .tips{ color: #c60000;    height: 23pt;    line-height: 23pt;    font-size: 15pt;    font-weight: bold;    padding-top: 32pt;}
 .yiduijiang .activeTime{color:#c60000}
-.yiduijiang .activeAddr{color:#c60000}
+.yiduijiang .activeAddr{color:#c60000 ; margin-top:3pt;}
+.yiduijiang .addrLabel{float:left;}
+.yiduijiang .addrConts{    width: 69%;    display: inline-block;}
 .yiduijiang .jingxi{ margin-top:5pt;   text-align: center; color: #BB0322;    font-weight: bold;position:relative;    font-size: 13pt;}
 .yiduijiang .download{    position: absolute;    margin-left: 3%;    color: white;    padding: 4pt 5pt;    background: #D94D3E;    font-size: 10pt;    border-radius: 3pt;    bottom: 0pt;}
 
@@ -121,7 +123,7 @@ function duijiang(){
 							<div class="tips">该二维码已兑奖</div>
 							<div class="info">
 								<div class="activeTime"><span>兑奖时间: </span><span><fmt:formatDate value="${item.activeTime }" pattern="yyyy-MM-dd HH:mm"/></span></div>
-								<div class="activeAddr"><span>兑奖地点: </span><span>${item.activeAddr }</span></div>
+								<div class="activeAddr"><span class="addrLabel">兑奖地点: </span><span class="addrConts">${item.activeAddr }</span></div>
 							</div>
 						</div>
 					</div>

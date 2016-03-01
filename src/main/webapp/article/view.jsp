@@ -25,9 +25,11 @@
 	
 	</script>
 	<style type="text/css">
+		body{margin:0px;}
 		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 10pt 0; text-align:center;}
 		.desc{text-align:center;}
-		.desc .date{font-size: 12pt;    color: #888;}
+		.desc {font-size: 12pt;    color: #888;}
+		.desc .read{float:right;}
 		.conts img{width:100% !important; height: 100%;}
 	</style>
 	</head>
@@ -35,7 +37,7 @@
 	<body>
 		<div class="title">${article.title }</div>
 		<div class="desc">
-			<span class="date">时间: ${article.addtime }</span> <span class="src"></span>
+			<span class="date">发布: <fmt:formatDate value="${article.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="read">阅读: ${article.readCount }</span>
 		</div>
 		<div class="conts">
 			${article.conts }

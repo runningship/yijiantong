@@ -19,6 +19,7 @@
 	
 	</script>
 	<style type="text/css">
+		body{margin:0px;}
 		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 8pt 0; text-align:center;}
 		.desc{text-align:center;}
 		.desc .date{font-size: 10pt;    color: #888;}
@@ -29,7 +30,7 @@
 	<body>
 		<div class="title">${product.title }</div>
 		<div class="desc">
-			<span class="date">时间: <fmt:formatDate value="${product.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="src"></span>
+			<span class="date">发布: <fmt:formatDate value="${product.addtime }" pattern="yyyy-MM-dd HH:mm"/></span> <span class="src"></span>
 		</div>
 		<div class="conts">
 			${product.conts }
