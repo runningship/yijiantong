@@ -1,7 +1,11 @@
 package com.houyi.management.app;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.Page;
 import org.bc.sdak.TransactionalServiceHelper;
@@ -10,8 +14,12 @@ import org.bc.web.ModelAndView;
 import org.bc.web.Module;
 import org.bc.web.WebMethod;
 
+import com.houyi.management.MyInterceptor;
 import com.houyi.management.article.entity.Article;
+import com.houyi.management.biz.entity.ScanRecord;
+import com.houyi.management.biz.entity.SearchHistory;
 import com.houyi.management.cache.ConfigCache;
+import com.houyi.management.product.entity.ProductItem;
 import com.houyi.management.util.HTMLSpirithHelper;
 
 
@@ -77,20 +85,67 @@ public class HomeService {
 	}
 	
 	@WebMethod
-	public ModelAndView searchProduct(Page<Article> page , String title){
-		ModelAndView mv = new ModelAndView();
-		return mv;
-	}
-	
-	@WebMethod
 	public ModelAndView getProduct(int  pid){
 		ModelAndView mv = new ModelAndView();
 		return mv;
 	}
 	
 	@WebMethod
+	public ModelAndView addScanRecord(ScanRecord record){
+		//test url http://localhost:8181/c/app/addScanRecord?uid=12&qrCode=1454316150171.11&type=1
+		ModelAndView mv = new ModelAndView();
+		String[] arr = record.qrCode.split("\\.");
+		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
+		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode" , record.qrCode);
+		record.productId = item.productId;
+		record.addtime = new Date();
+		ScanRecord po = dao.getUniqueByParams(ScanRecord.class, new String[]{"uid" , "productId" , "type"}, new Object[]{record.uid , record.productId , record.type});
+		if(po==null){
+			dao.saveOrUpdate(record);
+		}
+		mv.data.put("result", 0);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type){
+		ModelAndView mv = new ModelAndView();
+		page = dao.findPage(page , "select p.title as title ,record.addtime as addtime , img.path as img from Product p, "
+				+ "ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id and record.uid=? and record.type=?", true , new Object[]{uid , type} );
+		mv.data.put("page", JSONHelper.toJSON(page));
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView sendSMSCode(String tel){
 		ModelAndView mv = new ModelAndView();
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView searchGoods(Page<Map> page , String name , Integer uid){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.imgId=img.id ");
+		List<Object> params = new ArrayList<Object>();
+		if(StringUtils.isNotEmpty(name)){
+			sql.append(" and title like ?");
+			params.add("%"+name+"%");
+		}
+		page.order="desc";
+		page.orderBy = "addtime";
+		page.setPageSize(10);
+		page = dao.findPage(page, sql.toString() , true , params.toArray());
+		
+		if(StringUtils.isNotEmpty(name)){
+			SearchHistory search = new SearchHistory();
+			search.uid = uid;
+			search.text = name;
+			dao.saveOrUpdate(search);
+		}
+		
+		mv.data.put("page", JSONHelper.toJSON(page));
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		return mv;
 	}
 }

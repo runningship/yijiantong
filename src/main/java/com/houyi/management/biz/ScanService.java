@@ -21,23 +21,6 @@ public class ScanService {
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 
 	@WebMethod
-	public ModelAndView add(ScanRecord record){
-		//test url http://localhost:8181/c/scan/add?uid=12&qrCode=1454316150171.11&type=1
-		ModelAndView mv = new ModelAndView();
-		String[] arr = record.qrCode.split("\\.");
-		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
-		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode" , record.qrCode);
-		record.productId = item.productId;
-		record.addtime = new Date();
-		ScanRecord po = dao.getUniqueByParams(ScanRecord.class, new String[]{"uid" , "productId"}, new Object[]{record.uid , record.productId});
-		if(po==null){
-			dao.saveOrUpdate(record);
-		}
-		mv.data.put("result", 0);
-		return mv;
-	}
-	
-	@WebMethod
 	public ModelAndView delete(Integer id){
 		ModelAndView mv = new ModelAndView();
 		ScanRecord po = dao.get(ScanRecord.class, id);

@@ -54,21 +54,6 @@ public class LotteryService {
 			u.pwd = SecurityHelper.Md5(tel);
 			dao.saveOrUpdate(u);
 		}
-		ScanRecord record = new ScanRecord();
-		record.addtime = new Date();
-		record.device = device;
-		record.uid = u.id;
-		record.qrCode = qrCode;
-		record.productId = item.productId;
-		dao.saveOrUpdate(record);
-		
-		item.lotteryOwnerId = u.id;
-		item.lotteryActive = 1;
-		item.activeTime = new Date();
-		item.activeAddr = activeAddr;
-//		item.activeLat = activeLat;
-//		item.activeLng = activeLng;
-		dao.saveOrUpdate(item);
 		
 		//充话费
 		mv.data.put("result", 0);

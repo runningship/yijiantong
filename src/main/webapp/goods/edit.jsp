@@ -155,13 +155,13 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">价格 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="price"  value="${goods.price }" class="form-control" placeholder="" required/>
+												<input type="text" name="price"  value="${goods.price }" class="form-control"  desc="价格" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">原价 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="orginalPrice"  value="${goods.price }" class="form-control" placeholder="" required/>
+												<input type="text" name="originalPrice"  value="${goods.originalPrice }" desc="原价" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
