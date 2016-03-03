@@ -1,3 +1,4 @@
+<%@page import="org.bc.sdak.utils.LogUtil"%>
 <%@page import="com.houyi.management.product.entity.ProductBatch"%>
 <%@page import="com.houyi.management.MyInterceptor"%>
 <%@page import="com.houyi.management.product.entity.Product"%>
@@ -12,6 +13,7 @@
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 String client = request.getHeader("client");
 request.setAttribute("client", client);
+LogUtil.info("client="+client);
 String qrCode = request.getParameter("qrCode");
 if(StringUtils.isEmpty(qrCode)){
 	qrCode = (String)request.getAttribute("qrCode");
@@ -96,7 +98,7 @@ function duijiang(){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
 	    		window.location="/success.jsp";
-	    	}, 1500);
+	    	}, 1000);
 	    }
     });
 }
