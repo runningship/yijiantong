@@ -16,6 +16,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.GException;
+import org.bc.sdak.Page;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
 import org.bc.web.ModelAndView;
@@ -62,8 +63,7 @@ public class UserService {
 		return mv;
 	}
 
-	@WebMethod
-	public ModelAndView adminLogin(User user){
+	private ModelAndView adminLogin(User user){
 		ModelAndView mv = new ModelAndView();
 		String pwd = SecurityHelper.Md5(user.pwd);
 		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "pwd"}, new Object[]{user.account  , pwd});
@@ -101,8 +101,7 @@ public class UserService {
 		return mv;
 	}
 	
-	@WebMethod
-	public ModelAndView adminLogout(){
+	private ModelAndView adminLogout(){
 		ModelAndView mv = new ModelAndView();
 		ThreadSession.getHttpSession().removeAttribute("user");
 		ThreadSession.getHttpSession().removeAttribute(SysConstants.Session_Auth_List);
@@ -119,26 +118,16 @@ public class UserService {
 		User po = dao.get(User.class, user.id);
 		po.account = user.account;
 		po.name = user.name;
-//		String pwd = user.pwd.replace("*", "");
 		if(StringUtils.isNotEmpty(user.pwd)){
 			po.pwd = SecurityHelper.Md5(user.pwd);
 		}
 		po.tel = user.tel;
+		po.qq = user.qq;
+		po.birth = user.birth;
+		po.weixin = user.weixin;
+		po.gender = user.gender;
 		dao.saveOrUpdate(po);
 		ThreadSession.getHttpSession().setAttribute(SysConstants.Session_Attr_User, po);
-//		if(roleIds!=null && roleIds.length() != 0){
-//			String[] Ids = roleIds.split(",");
-//			dao.execute("delete from UserRole where uid=?", user.id);
-//			for(int i=0;i<Ids.length ;i++){
-//				if(StringUtils.isEmpty(Ids[i])){
-//					continue;
-//				}
-//				UserRole rg = new UserRole();
-//				rg.roleId = Integer.valueOf(Ids[i]);
-//				rg.uid = user.id;
-//				dao.saveOrUpdate(rg);
-//			}
-//		}
 		return mv;
 	}
 
@@ -255,6 +244,23 @@ public class UserService {
 		ModelAndView mv = new ModelAndView();
 		track.addtime = new Date();
 		dao.saveOrUpdate(track);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView listSysUser(Page<User> page , String search){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder hql = new StringBuilder("from User where type=? ");
+		List<Object> params = new ArrayList<Object>();
+		params.add(3);
+		if(StringUtils.isNotEmpty(search)){
+			hql.append(" and (name like ? or tel like ? or account like ?)");
+			params.add("%"+search+"%");
+			params.add("%"+search+"%");
+			params.add("%"+search+"%");
+		}
+		page = dao.findPage(page, hql.toString() , params.toArray());
+		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;
 	}
 }

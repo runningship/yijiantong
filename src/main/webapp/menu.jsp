@@ -40,6 +40,7 @@
 						<ul class="nav nav-children">
 							<li><a href="form-elements.html"><span class="text"> 商家列表</span></a></li>
 							<li><a href="form-wizard.html"><span class="text"> 买家列表</span></a></li>
+							<li><a href="/user/sys/list.jsp"><span class="text"> 系统用户</span></a></li>
 							<li><a href="form-dropzone.html"><span class="text">个人信息</span></a></li>
 						</ul>
 					</li>

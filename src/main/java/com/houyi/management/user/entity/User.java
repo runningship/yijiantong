@@ -29,7 +29,7 @@ public class User {
 	public Date lasttime;
 	
 	public Integer jifen;
-	//1买家 , 2卖家
+	//1买家 , 2卖家 , 3系统管理员(厚易系统账号)
 	public Integer type;
 	
 	public Date birth;
