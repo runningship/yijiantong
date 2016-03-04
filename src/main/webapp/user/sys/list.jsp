@@ -24,6 +24,18 @@
 				  });
 			}
 			
+			function openAdd(id){
+				 layer.open({
+			            type: 2,
+			            title: '新增系统用户',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['800px', '530px'],//宽高
+			            content: 'add.jsp'
+			        });
+			}
+			
 			function openEdit(id){
 				 layer.open({
 			            type: 2,
@@ -54,11 +66,27 @@
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->
-				<div class="main sidebar-minified">			
+				<div class="main sidebar-minified">
+					<div class="page-header">
+						<div class="pull-left">
+							<ol class="breadcrumb visible-sm visible-md visible-lg">								
+								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
+								<li><a href="#"><i class="fa fa-table"></i>用户管理</a></li>
+							</ol>						
+						</div>
+						<div class="pull-right">
+							<h2>系统用户</h2>
+						</div>					
+					</div>		
 					<div class="row">
 						<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<div class="panel panel-default bk-bg-white">
 								<div class="panel-body">
+									<div class="row">
+											<div class="col-sm-12 col-md-6">
+												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="openAdd()">添加</button>
+											</div>
+									</div>
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
 											<div class="col-sm-12 col-md-6">

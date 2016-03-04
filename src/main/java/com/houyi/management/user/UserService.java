@@ -44,7 +44,7 @@ public class UserService {
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
 	@WebMethod
-	public ModelAndView save(User user  , Integer groupId , String roleIds){
+	public ModelAndView save(User user  ,  String roleIds){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.account)){
 			throw new GException(PlatformExceptionType.BusinessException,"用户账号不能为空");
@@ -55,10 +55,13 @@ public class UserService {
 		if(StringUtils.isEmpty(user.pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先设置密码");
 		}
+		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "type"}, new Object[]{ user.account , 3});
+		if(po!=null){
+			throw new GException(PlatformExceptionType.BusinessException,"账号已经存在");
+		}
 		user.addtime = new Date();
 		user.pwd = SecurityHelper.Md5(user.pwd);
-		user.type = 2;
-		//TODO
+		user.type = 3;
 		dao.saveOrUpdate(user);
 		return mv;
 	}

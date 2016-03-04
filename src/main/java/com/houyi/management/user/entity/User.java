@@ -34,6 +34,7 @@ public class User {
 	
 	public Date birth;
 	
+	// 1男 2女
 	public Integer gender;
 	
 	public String qq;

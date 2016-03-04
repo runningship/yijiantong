@@ -1,15 +1,16 @@
+<%@page import="com.houyi.management.user.entity.User"%>
+<%@page import="com.houyi.management.cache.ConfigCache"%>
+<%@page import="com.houyi.management.ThreadSessionHelper"%>
+<%@page import="org.bc.sdak.TransactionalServiceHelper"%>
+<%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 	<head>
-	<jsp:include page="../header.jsp"></jsp:include>
+	<jsp:include page="../../header.jsp"></jsp:include>
 	
-	
-	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.config.js"></script>
-	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
-	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
 	
 	<script type="text/javascript">
 	var ue;
@@ -36,170 +37,109 @@
 			}
 		});
 		
-		ue = UE.getEditor('editor',{
-	        toolbars: [
-	            ['forecolor','source', 'simpleupload','emotion','spechars', 'attachment', '|', 'fontfamily', 'fontsize', 'bold','insertvideo','map',
-	             'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'formatmatch', 'pasteplain', '|', 'backcolor', 'insertorderedlist', 'insertunorderedlist', '|','justifyleft', 'justifycenter', 'justifyright', 'justifyjustify', 'indent', 'rowspacingtop', 'rowspacingbottom', 'lineheight',
-	            ]
-	        ]
-	  });
 	});
 	
-	function openImagePanel(){
-		layer.open({
-            type: 2,
-            title: '图片库',
-            shadeClose: true,
-            shade: false,
-            maxmin: true, //开启最大化最小化按钮
-            area: ['893px', '600px'],
-            content: '../image/gallery.jsp'
-        });
-	}
-	
-	function setSelectImg(arr){
-		if(arr.length>0){
-			var img = arr[0];
-			var html = '<img style="width:200px;" src="'+img.path+'" />';
-			$('#imgId').val(img.id);
-			$('#imgContainer').empty();
-			$('#imgContainer').append(html);
-		}
-	}
-	
 	function save(){
-		var conts = ue.getContent();
-	    if (conts==null||conts=='') {
-	    	layer.msg('内容不能为空');
-	    	return;
-	    };
-	    if(!$('#imgId').val()){
-	    	layer.msg('请先选择图片');
-	    	return;
-	    }
-	    if($('#publishFlag').attr('checked')){
-	    	$('#publishFlag').val(1);
-	    }else{
-	    	$('#publishFlag').val(0);
-	    }
-	    if($('#isAd').attr('checked')){
-	    	$('#isAd').val(1);
-	    }else{
-	    	$('#isAd').val(0);
-	    }
 		var a=$('#form').serialize();
 		YW.ajax({
 		    type: 'POST',
-		    url: '/c/article/save',
+		    url: '/c/admin/user/save',
 		    data:a,
 		    mysuccess: function(data){
-		    	layer.msg('发布成功');
+		    	layer.msg('保存成功');
 		    }
 	    });
 	}
 	
 	
 	</script>
+	<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+	<link href="/assets/plugins/bootstrap-datepicker/css/datepicker-theme.css" rel="stylesheet" />
 	<style type="text/css">
-		.adTip{
-			position: absolute;    top: 6px;    left: 83px;    color: #aaa;
-		}
+		.form-group .radio-custom.radio-inline{margin-left:14px;}
 	</style>
 	</head>
 	
 	<body>
 		
 		<!-- Start: Header -->
-			<jsp:include page="../top.jsp"></jsp:include>
 		<!-- End: Header -->
 		
 		<!-- Start: Content -->
 		<div class="container-fluid content">	
 			<div class="row">
-			
-				<!-- Sidebar -->
-				<jsp:include page="../menu.jsp"></jsp:include>
-				<!-- End Sidebar -->
-						
 				<!-- Main Page -->
-				<div class="main sidebar-minified">			
-					<!-- Page Header -->
-					<div class="page-header">
-						<div class="pull-left">
-							<ol class="breadcrumb visible-sm visible-md visible-lg">								
-								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
-								<li><a href="#"><i class="fa fa-table"></i>信息管理</a></li>
-							</ol>						
-						</div>
-						<div class="pull-right">
-							<h2>发布新闻</h2>
-						</div>					
-					</div>
-					<!-- End Page Header -->
+				<div class="sidebar-minified">			
 					<div class="row">
 							<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 							<form id="form"  class="form-horizontal">
 								<div class="panel panel-default">
 									<div class="panel-body">
 										<div class="form-group">
-											<label class="col-sm-2 control-label">标题 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">账号 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="title" class="form-control" placeholder="" required/>
+												<input type="text" name="account" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">作者 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">密码 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="author" value="快易扫" class="form-control" placeholder="" required/>
+												<input type="password" name="pwd" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">类别 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label"> 姓名 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<select class="form-control select" name="leibie">
-													<option value="news">行业新闻</option>
-													<option value="tips">生活小贴士</option>
-												</select>
+												<input type="text" name="name"  class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">排序 </label>
+											<label class="col-sm-2 control-label"> 手机号码 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="orderx" class="form-control" placeholder="" />
+												<input type="tel" name="tel"   class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">是否发布</label>
-											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="1"  id="publishFlag" class="switch-input"  name="publishFlag" checked="">
-													  <span class="switch-label" data-on="On" data-off="Off"></span>
-													  <span class="switch-handle"></span>
-													</label>
+											<label class="col-sm-2 control-label"> QQ </label>
+											<div class="col-sm-9">
+												<input type="text" name="qq"   class="form-control" placeholder="" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"> 邮箱 </label>
+											<div class="col-sm-9">
+												<input type="email" name="email"   class="form-control" placeholder="" />
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"> 生日</label>
+											<div class="col-sm-5">
+												<div class="input-daterange input-group" data-date-format="yyyy-mm-dd" data-plugin-datepicker="">
+													<span class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													</span>
+													<input type="text" class="form-control" name="birth">
 												</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">置顶</label>
-											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
-													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  name="isAd">
-													  <span class="switch-label" data-on="On" data-off="Off"></span>
-													  <span class="switch-handle"></span>
-													</label>
-												</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">图片 <span class="required">*</span></label>
-											<div class="col-sm-9" >
-												<input type="hidden" name="imgId"  id="imgId" class="form-control" placeholder="" required/>
-												<div id="imgContainer"></div>
-												<button type="button" class="btn btn-info btn-xs" onclick="openImagePanel()">图片库</button>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">文章内容</label>
+											<label class="col-sm-2 control-label"> 性别 </label>
+											<div class="col-md-9">
+												<div class="radio-custom radio-inline">
+													<input type="radio" name="gender" value="1"> 
+													<label for="inline-radio1"> 男</label>
+												</div>
+												<div class="radio-custom radio-inline">
+													<input type="radio"  name="gender" value="2"> 
+													<label for="inline-radio2"> 女</label>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label"> 微信 </label>
 											<div class="col-sm-9">
-												<span id="editor" type="text/plain" name="conts" style="height:250px;width:100%;"></span>
+												<input type="text" name="weixin"   class="form-control" placeholder="" />
 											</div>
 										</div>
 										<div class="row">
@@ -229,7 +169,7 @@
 		<!-- Pages JS -->
 <!-- 		<script src="/assets/js/pages/form-validation.js"></script> -->
 <!-- 		<script src="/assets/js/pages/ui-notifications.js"></script> -->
-		<script src="/assets/js/pages/ui-elements.js"></script>
+		<script src="/assets/js/pages/form-elements.js"></script>
 		
 		<!-- end: JavaScript-->
 		

@@ -5,6 +5,7 @@
 <%@page import="org.bc.sdak.CommonDaoService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	String id = request.getParameter("id");
@@ -19,7 +20,6 @@
 	
 	
 	<script type="text/javascript">
-	var ue;
 	$(function(){
 		$("#form").validate({
 			highlight: function( label ) {
@@ -43,6 +43,7 @@
 			}
 		});
 		
+		$('#gender_radio_${user.gender}').prop('checked' , 'checked');
 	});
 	
 	function save(){
@@ -57,9 +58,12 @@
 	    });
 	}
 	
-	
 	</script>
+	<script src="/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+	<link href="/assets/plugins/bootstrap-datepicker/css/datepicker3.css" rel="stylesheet" />
+	<link href="/assets/plugins/bootstrap-datepicker/css/datepicker-theme.css" rel="stylesheet" />
 	<style type="text/css">
+		.form-group .radio-custom.radio-inline{margin-left:14px;}
 	</style>
 	</head>
 	
@@ -110,15 +114,27 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label"> 生日 </label>
-											<div class="col-sm-9">
-												<input type="text" name="birth"   value="${user.birth }" class="form-control" placeholder="" />
+											<label class="col-sm-2 control-label"> 生日</label>
+											<div class="col-sm-5">
+												<div class="input-daterange input-group" data-date-format="yyyy-mm-dd" data-plugin-datepicker="">
+													<span class="input-group-addon">
+														<i class="fa fa-calendar"></i>
+													</span>
+													<input type="text" class="form-control"  value='<fmt:formatDate value="${user.birth }" pattern="yyyy-MM-dd"/>'  name="birth">
+												</div>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label"> 性别 </label>
-											<div class="col-sm-9">
-												<input type="text" name="gender"   value="${user.gender }" class="form-control" placeholder="" />
+											<div class="col-md-9">
+												<div class="radio-custom radio-inline">
+													<input type="radio" id="gender_radio_1" name="gender" value="1"> 
+													<label for="inline-radio1"> 男</label>
+												</div>
+												<div class="radio-custom radio-inline">
+													<input type="radio" id="gender_radio_2" name="gender" value="2"> 
+													<label for="inline-radio2"> 女</label>
+												</div>
 											</div>
 										</div>
 										<div class="form-group">
@@ -154,7 +170,7 @@
 		<!-- Pages JS -->
 <!-- 		<script src="/assets/js/pages/form-validation.js"></script> -->
 <!-- 		<script src="/assets/js/pages/ui-notifications.js"></script> -->
-		<script src="/assets/js/pages/ui-elements.js"></script>
+		<script src="/assets/js/pages/form-elements.js"></script>
 		
 		<!-- end: JavaScript-->
 		

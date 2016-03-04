@@ -138,7 +138,7 @@ function duijiang(){
 					<div class="lottery_value">10<span class="unit">元</span></div>
 					<div class="tips">(手机费或流量包)</div>
 					<c:if test="${client ne 'kuaiyisao' }">
-						<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
+						<div class="jingxi"><span>下载快易扫更多惊喜</span><span onclick="window.location='http://42.159.235.110:8181/download.html'" class="download">下载APP</span></div>
 					</c:if>
 				</div>
 				<div style="text-align:center;">
