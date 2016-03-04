@@ -27,7 +27,7 @@ public class LotteryService {
 
 	@WebMethod
 	@Transactional
-	public ModelAndView add(String qrCode ,String tel, String smsCode, String device ,  String activeAddr){
+	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr){
 		ModelAndView mv = new ModelAndView();
 		String[] arr = qrCode.split("\\.");
 		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
@@ -51,9 +51,16 @@ public class LotteryService {
 			u.account = tel;
 			u.name=tel;
 			u.type=1;
+			u.addtime = new Date();
 			u.pwd = SecurityHelper.Md5(tel);
 			dao.saveOrUpdate(u);
 		}
+		
+		item.lotteryOwnerId = u.id;
+		item.lotteryActive = 1;
+		item.activeTime = new Date();
+		item.activeAddr = activeAddr;
+		dao.saveOrUpdate(item);
 		
 		//充话费
 		mv.data.put("result", 0);

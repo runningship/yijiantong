@@ -1,3 +1,8 @@
+<%@page import="java.net.URLDecoder"%>
+<%@page import="java.net.URLEncoder"%>
+<%@page import="java.util.Date"%>
+<%@page import="com.houyi.management.biz.entity.ScanRecord"%>
+<%@page import="com.houyi.management.biz.ScanService"%>
 <%@page import="org.bc.sdak.utils.LogUtil"%>
 <%@page import="com.houyi.management.product.entity.ProductBatch"%>
 <%@page import="com.houyi.management.MyInterceptor"%>
@@ -11,7 +16,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+ScanService scanService = new ScanService();
 String client = request.getHeader("client");
+String scanType = request.getHeader("type");
+String uidStr = request.getHeader("uid");
+String device = request.getHeader("device");
+String tel = request.getHeader("tel");
+request.setCharacterEncoding("utf8");
+String address = request.getHeader("address");
+address = URLDecoder.decode(address, "utf8");
+request.setAttribute("address", address);
+LogUtil.info("address="+address);
 request.setAttribute("client", client);
 LogUtil.info("client="+client);
 String qrCode = request.getParameter("qrCode");
@@ -30,6 +45,26 @@ if(item==null){
 	//404
 	out.println("没有找到商品信息");
 	return;
+}
+
+try{
+	ScanRecord record = new ScanRecord();
+	record.productId = item.productId;
+	record.addtime = new Date();
+	record.type = Integer.valueOf(scanType);
+	record.qrCode = qrCode;
+	record.device = device;
+	if(StringUtils.isNotEmpty(uidStr)){
+		record.uid = Integer.valueOf(uidStr);	
+	}
+	if(StringUtils.isNotEmpty(record.device) || record.uid!=null){
+		ScanRecord po = dao.getUniqueByParams(ScanRecord.class, new String[]{"device" , "productId" , "type"}, new Object[]{record.device , record.productId , record.type});
+		if(po==null){
+			dao.saveOrUpdate(record);
+		}	
+	}
+}catch(Exception ex){
+	LogUtil.info("添加扫描记录失败,qrCode="+qrCode);
 }
 request.setAttribute("item", item);
 ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
@@ -93,11 +128,11 @@ function duijiang(){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/add',
-	    data:{qrCode : '${qrCode}' , tel : tel , verifyCode:'3123'},
+	    data:{qrCode : '${qrCode}' , tel : tel , verifyCode:'3123' , activeAddr:'${address}'},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
-	    		window.location="/success.jsp";
+	    		window.location="/success.jsp?client=${client}";
 	    	}, 1000);
 	    }
     });
@@ -138,7 +173,10 @@ function duijiang(){
 					<div class="lottery_value">10<span class="unit">元</span></div>
 					<div class="tips">(手机费或流量包)</div>
 					<c:if test="${client ne 'kuaiyisao' }">
-						<div class="jingxi"><span>下载快易扫更多惊喜</span><span onclick="window.location='http://42.159.235.110:8181/download.html'" class="download">下载APP</span></div>
+						<div class="jingxi"><span>下载快易扫更多惊喜</span><span onclick="window.location='http://www.zhongjiebao.com/download.html'" class="download">下载APP</span></div>
+					</c:if>
+					<c:if test="${client eq 'kuaiyisao' }">
+						<div class="jingxi"><span>天天快易扫，天天有红包</span></div>
 					</c:if>
 				</div>
 				<div style="text-align:center;">

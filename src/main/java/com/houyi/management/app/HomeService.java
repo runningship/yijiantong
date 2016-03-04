@@ -90,7 +90,7 @@ public class HomeService {
 		return mv;
 	}
 	
-	@WebMethod
+//	@WebMethod
 	public ModelAndView addScanRecord(ScanRecord record){
 		//test url http://localhost:8181/c/app/addScanRecord?uid=12&qrCode=1454316150171.11&type=1
 		ModelAndView mv = new ModelAndView();
@@ -108,11 +108,21 @@ public class HomeService {
 	}
 	
 	@WebMethod
-	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type){
+	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type , String device){
 		ModelAndView mv = new ModelAndView();
-		page = dao.findPage(page , "select p.title as title ,record.addtime as addtime , img.path as img from Product p, "
-				+ "ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id and record.uid=? and record.type=?", true , new Object[]{uid , type} );
+		StringBuilder hql = new StringBuilder("select p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
+		hql.append(" and device=? ");
+		List<Object> params =new ArrayList<Object>();
+		params.add(device);
+		hql.append(" and type=? ");
+		params.add(type);
+		if(uid!=null){
+			hql.append(" or uid=? ");
+			params.add(uid);
+		}
+		page = dao.findPage(page , hql.toString(), true , params.toArray() );
 		mv.data.put("page", JSONHelper.toJSON(page));
+		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
 		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		return mv;
 	}

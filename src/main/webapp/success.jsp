@@ -11,23 +11,8 @@
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 String qrCode = request.getParameter("qrCode");
-// if(StringUtils.isEmpty(qrCode)){
-// 	out.println("没有找到商品信息");
-// 	return;
-// }
-// String tableSuffix = qrCode.split("\\.")[1];
-// MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
-// ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
-// if(item==null){
-// 	//404
-// 	out.println("没有找到商品信息");
-// 	return;
-// }
-//request.setAttribute("item", item);
-// ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
-// request.setAttribute("batch", batch);
-// Product product = dao.get(Product.class, item.productId);
-// request.setAttribute("product", product);
+String client = request.getParameter("client");
+request.setAttribute("client", client);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -60,8 +45,12 @@ window.onload=function(){
 		<div>
 			<div class="duijiang">
 				<div class="lottery_value">兑奖成功</div>
-				<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
-				
+				<c:if test="${client ne 'kuaiyisao' }">
+					<div class="jingxi"><span>下载快易扫更多惊喜</span><span class="download">下载APP</span></div>
+				</c:if>
+				<c:if test="${client eq 'kuaiyisao' }">
+					<div class="jingxi"><span>天天快易扫，天天有红包</span></div>
+				</c:if>
 			</div>
 			<div class="content">
 				<div class="title"  id="title">金种子酒</div>
