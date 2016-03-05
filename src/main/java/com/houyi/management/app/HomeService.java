@@ -110,7 +110,7 @@ public class HomeService {
 	@WebMethod
 	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type , String device){
 		ModelAndView mv = new ModelAndView();
-		StringBuilder hql = new StringBuilder("select p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
+		StringBuilder hql = new StringBuilder("select p.id as id, p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
 		hql.append(" and device=? ");
 		List<Object> params =new ArrayList<Object>();
 		params.add(device);
@@ -156,6 +156,7 @@ public class HomeService {
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
 		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
 }

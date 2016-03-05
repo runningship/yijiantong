@@ -31,9 +31,9 @@ public class QRCodeUtil {
 	// 二维码尺寸
 	public  int QRCODE_SIZE = 75;
 	// LOGO宽度
-	public  int WIDTH =10;
+	public  int LOGO_WIDTH =10;
 	// LOGO高度
-	public  int HEIGHT = 10;
+	public  int LOGO_HEIGHT = 10;
 
 	public int color = 0xFF000000;
 	
@@ -89,11 +89,11 @@ public class QRCodeUtil {
 		int width = src.getWidth(null);
 		int height = src.getHeight(null);
 		if (needCompress) { // 压缩LOGO
-			if (width > WIDTH) {
-				width = WIDTH;
+			if (width > LOGO_WIDTH) {
+				width = LOGO_WIDTH;
 			}
-			if (height > HEIGHT) {
-				height = HEIGHT;
+			if (height > LOGO_HEIGHT) {
+				height = LOGO_HEIGHT;
 			}
 			Image image = src.getScaledInstance(width, height,
 					Image.SCALE_SMOOTH);

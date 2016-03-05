@@ -25,7 +25,6 @@
 	
 	</script>
 	<style type="text/css">
-		body{margin:0px;}
 		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 10pt 0; text-align:center;}
 		.desc{text-align:center;}
 		.desc {font-size: 12pt;    color: #888;}

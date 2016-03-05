@@ -14,9 +14,7 @@
 <%@page import="net.glxn.qrgen.javase.QRCode"%>
 <%@page import="javax.imageio.ImageIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%!
-
-public boolean doGenerate(HttpServletRequest request , String qrCode){
+<%!public boolean doGenerate(HttpServletRequest request , String qrCode){
 	String tableSuffix = qrCode.split("\\.")[1];
 	MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -32,8 +30,8 @@ public boolean doGenerate(HttpServletRequest request , String qrCode){
 	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
 	QRCodeUtil qrUtil = new QRCodeUtil();
 	qrUtil.QRCODE_SIZE=150;
-	qrUtil.HEIGHT = 25;
-	qrUtil.WIDTH = 25;
+	qrUtil.LOGO_HEIGHT = 25;
+	qrUtil.LOGO_WIDTH = 25;
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
 	}catch(Exception ex){
@@ -41,6 +39,4 @@ public boolean doGenerate(HttpServletRequest request , String qrCode){
 		return false;
 	}
 	return true;
-}
-
-%>
+}%>

@@ -38,8 +38,8 @@ public class QRCodeService {
 		String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
 		QRCodeUtil qrUtil = new QRCodeUtil();
 		qrUtil.QRCODE_SIZE=150;
-		qrUtil.HEIGHT = 25;
-		qrUtil.WIDTH = 25;
+		qrUtil.LOGO_HEIGHT = 25;
+		qrUtil.LOGO_WIDTH = 25;
 		try {
 			qrUtil.encode(url, realLogoPath , destPath , true);
 		} catch (Exception ex) {

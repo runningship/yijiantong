@@ -24,7 +24,9 @@ String device = request.getHeader("device");
 String tel = request.getHeader("tel");
 request.setCharacterEncoding("utf8");
 String address = request.getHeader("address");
-address = URLDecoder.decode(address, "utf8");
+if(StringUtils.isNotEmpty(address)){
+	address = URLDecoder.decode(address, "utf8");	
+}
 request.setAttribute("address", address);
 LogUtil.info("address="+address);
 request.setAttribute("client", client);

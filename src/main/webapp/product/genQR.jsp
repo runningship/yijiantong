@@ -15,7 +15,7 @@
 <%@page import="javax.imageio.ImageIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-String qrCode = request.getParameter("code");
+	String qrCode = request.getParameter("code");
 String tableSuffix = qrCode.split("\\.")[1];
 MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -31,9 +31,9 @@ String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
 String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
 QRCodeUtil qrUtil = new QRCodeUtil();
-qrUtil.QRCODE_SIZE=150;
-qrUtil.HEIGHT = 25;
-qrUtil.WIDTH = 25;
+qrUtil.QRCODE_SIZE=100;
+qrUtil.LOGO_HEIGHT = 20;
+qrUtil.LOGO_WIDTH = 20;
 qrUtil.encode(url, realLogoPath , destPath , true);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

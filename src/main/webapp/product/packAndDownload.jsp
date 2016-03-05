@@ -35,14 +35,19 @@ if(batch==null){
 	out.println("缺少批次信息");
 	return;
 }
-response.resetBuffer();
-response.setContentType("application/x-download");
-response.setHeader("Content-disposition","attachment;filename=pici"+batch.no+".zip");
-ZipOutputStream zos = new ZipOutputStream(response.getOutputStream());  
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
 String destPath = qrCodeDir+"\\"+batch.productId+"\\"+batch.id;
 File dir = new File(destPath);
 File[] files = dir.listFiles();
+if(files==null || files.length<batch.count){
+	out.println("请先生成二维码图片");
+	return;
+}
+response.resetBuffer();
+response.setContentType("application/x-download");
+response.setHeader("Content-disposition","attachment;filename=pici"+batch.no+".zip");
+ZipOutputStream zos = new ZipOutputStream(response.getOutputStream());  
+
 ZipUtils zipUtil = new ZipUtils();  
 zipUtil.zipFile(files,"", zos);
 zos.flush();

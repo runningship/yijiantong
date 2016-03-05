@@ -19,7 +19,6 @@
 	
 	</script>
 	<style type="text/css">
-		body{margin:0px;}
 		.title{font-size: 14pt;    color: #666;    font-weight: bold;    margin: 8pt 0; text-align:center;}
 		.desc{text-align:center;}
 		.desc .date{font-size: 10pt;    color: #888;}

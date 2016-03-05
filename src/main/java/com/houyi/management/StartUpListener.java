@@ -39,6 +39,7 @@ public class StartUpListener implements ServletContextListener{
 //		settings.put(AvailableSettings.USER, "root");
 //		settings.put(AvailableSettings.PASS, "");
 		settings.put(AvailableSettings.SHOW_SQL, "false");
+		settings.put(AvailableSettings.GENERATE_STATISTICS, "true");
 		settings.put(AvailableSettings.DRIVER, "com.microsoft.sqlserver.jdbc.SQLServerDriver");
 //		settings.put(AvailableSettings.DIALECT, "org.hibernate.dialect.SQLServer2008Dialect");
 		settings.put(AvailableSettings.DIALECT, SQL2008Dialect.class.getName());
