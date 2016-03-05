@@ -33,10 +33,11 @@ body{font-family: 微软雅黑; margin:1pt;}
 .content p{    text-indent: 25pt;color:gray;}
 </style>
 <script type="text/javascript">
-window.onload=function(){
-	//document.getElementById('qrCode').innerText=qrCode;
-	//document.getElementById('lottery').innerText=lottery+'元';
-}
+$(function(){
+	if(window.navigator.appVersion.indexOf('SM-G9198')>-1){
+		$('.lottery_value').css('font-size','26pt');
+	}
+});
 </script>
 </head>
 

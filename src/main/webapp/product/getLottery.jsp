@@ -16,6 +16,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+String agent = request.getHeader("User-Agent");
+if(agent.contains("MicroMessenger")){
+	request.setAttribute("weixin", true);
+}
+LogUtil.info("agent="+agent);
 ScanService scanService = new ScanService();
 String client = request.getHeader("client");
 String scanType = request.getHeader("type");
@@ -117,10 +122,17 @@ body{font-family: 微软雅黑; margin:1pt;}
 <script src="/assets/js/houyi/buildHtml.js"></script>
 <script src="/assets/js/layer/layer.js"></script>
 <script type="text/javascript">
-window.onload=function(){
-	//document.getElementById('qrCode').innerText=qrCode;
-	//document.getElementById('lottery').innerText=lottery+'元';
-}
+$(function(){
+	if(window.navigator.appVersion.indexOf('SM-G9198')>-1){
+		$('.title').css('height','42pt');
+		$('.btn-ok').css('height','40pt');
+		$('.tel').css('height','40pt');
+		$('.lottery_value').css('font-size','60pt');
+		$('.duijiang .jingxi').css('margin-top','8pt');
+	}
+	
+	//微信和快易扫可以兑奖
+});
 
 function duijiang(){
 	var tel = $('.tel').val();
@@ -181,10 +193,13 @@ function duijiang(){
 						<div class="jingxi"><span>天天快易扫，天天有红包</span></div>
 					</c:if>
 				</div>
-				<div style="text-align:center;">
-					<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
-					<div class="btn-ok" onclick="duijiang();">立即领取</div>
-				</div>
+				<c:if test="${(client eq 'kuaiyisao' || weixin) && scanType==2}">
+					<div id="btn-area" style="text-align:center;">
+						<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
+						<div class="btn-ok" onclick="duijiang();">立即领取</div>
+					</div>
+				</c:if>
+				
 			</div>
 		</c:if>
 </div>

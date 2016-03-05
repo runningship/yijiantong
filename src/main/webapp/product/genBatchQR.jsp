@@ -30,9 +30,9 @@
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
 	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
 	QRCodeUtil qrUtil = new QRCodeUtil();
-	qrUtil.QRCODE_SIZE=100;
-	qrUtil.LOGO_HEIGHT = 20;
-	qrUtil.LOGO_WIDTH = 20;
+	qrUtil.QRCODE_SIZE=80;
+	qrUtil.LOGO_HEIGHT = 12;
+	qrUtil.LOGO_WIDTH = 12;
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
 	}catch(Exception ex){
