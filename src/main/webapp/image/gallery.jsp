@@ -145,7 +145,7 @@
 									<div class="thumbnail">
 										<div class="thumb-preview">
 											<a class="thumb-image" href="http://${imageHost }/article_image_path//$[path]">
-												<img data-id="$[id]" src="http://${imageHost }/article_image_path/$[path]" class="img-responsive" alt="Project">
+												<img data-id="$[id]" src="http://${imageHost }/article_image_path/$[path]" class="img-responsive" style="">
 											</a>
 											<div class="mg-thumb-options">
 												<div class="mg-toolbar">

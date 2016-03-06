@@ -292,7 +292,7 @@ Released under the MIT License <http://www.opensource.org/licenses/mit-license.p
 					if (settings.onInit) settings.onInit.call($this, swfuploadify);
 
 				} else {
-
+					blockAlert('请先安装最新版本的flash插件;http://w.x.baidu.com/alading/anquan_soft_down_ub/17153');
 					// Call the fallback function
 					if (settings.onFallback) settings.onFallback.call($this);
 

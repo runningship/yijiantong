@@ -24,6 +24,7 @@ LogUtil.info("agent="+agent);
 ScanService scanService = new ScanService();
 String client = request.getHeader("client");
 String scanType = request.getHeader("type");
+request.setAttribute("scanType", scanType);
 String uidStr = request.getHeader("uid");
 String device = request.getHeader("device");
 String tel = request.getHeader("tel");
@@ -193,7 +194,7 @@ function duijiang(){
 						<div class="jingxi"><span>天天快易扫，天天有红包</span></div>
 					</c:if>
 				</div>
-				<c:if test="${(client eq 'kuaiyisao' || weixin) && scanType==2}">
+				<c:if test="${(client eq 'kuaiyisao' || weixin) && (scanType eq '2') }">
 					<div id="btn-area" style="text-align:center;">
 						<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
 						<div class="btn-ok" onclick="duijiang();">立即领取</div>

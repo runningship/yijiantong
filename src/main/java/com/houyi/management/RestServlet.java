@@ -8,6 +8,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.bc.sdak.CommonDaoService;
+import org.bc.sdak.SimpDaoTool;
+
+import com.google.zxing.common.GlobalHistogramBinarizer;
+import com.houyi.management.product.entity.ProductItem;
+
 public class RestServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
@@ -25,8 +31,24 @@ public class RestServlet extends HttpServlet{
 		}
 		String data = req.getPathInfo().replace("/", "");
 		req.setAttribute("qrCode", data);
-		RequestDispatcher rd = req.getRequestDispatcher("/product/getLottery.jsp");
-		rd.forward(req, resp);
+		try{
+			CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
+			String tableSuffix = data.split("\\.")[1];
+			MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
+			ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", data);
+			
+			if(item==null){
+				RequestDispatcher rd = req.getRequestDispatcher("/product/invalidCode.jsp");
+				rd.forward(req, resp);
+			}else{
+				RequestDispatcher rd = req.getRequestDispatcher("/product/getLottery.jsp");
+				rd.forward(req, resp);
+			}
+		}catch(Exception ex){
+			RequestDispatcher rd = req.getRequestDispatcher("/product/invalidCode.jsp");
+			rd.forward(req, resp);
+		}
+		
 	}
 
 	@Override
