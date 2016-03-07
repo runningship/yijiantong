@@ -66,6 +66,18 @@ public class ProductService {
 	}
 	
 	@WebMethod
+	public ModelAndView updateBatch(ProductBatch batch){
+		ModelAndView mv = new ModelAndView();
+		ProductBatch po = dao.get(ProductBatch.class, batch.id);
+		if(po!=null){
+			po.qrCodeWidth = batch.qrCodeWidth;
+			po.conts = batch.conts;
+			dao.saveOrUpdate(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
 	@Transactional
 	public ModelAndView deleteBatch(Integer batchId){
 		ModelAndView mv = new ModelAndView();

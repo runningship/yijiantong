@@ -212,7 +212,6 @@ public class UserService {
 		dao.saveOrUpdate(user);
 		tvc.verifyTime = new Date();
 		dao.saveOrUpdate(tvc);
-		
 		mv.data.put("result", 0);
 		return mv;
 	}

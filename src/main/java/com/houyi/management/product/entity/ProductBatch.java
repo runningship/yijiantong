@@ -36,4 +36,7 @@ public class ProductBatch {
 	
 	//过期时间
 	public Date expireDate;
+	
+	public Integer qrCodeWidth;
+	
 }

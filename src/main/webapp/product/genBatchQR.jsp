@@ -18,7 +18,7 @@
 <%@page import="javax.imageio.ImageIO"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%!public boolean doGenerate(HttpServletRequest request , String qrCode){
+<%!public boolean doGenerate(HttpServletRequest request , ProductBatch batch , String qrCode){
 	String tableSuffix = qrCode.split("\\.")[1];
 	MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
@@ -30,9 +30,16 @@
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
 	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
 	QRCodeUtil qrUtil = new QRCodeUtil();
-	qrUtil.QRCODE_SIZE=80;
-	qrUtil.LOGO_HEIGHT = 12;
-	qrUtil.LOGO_WIDTH = 12;
+	if(batch.qrCodeWidth!=null){
+		qrUtil.QRCODE_SIZE=batch.qrCodeWidth;
+		qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.19);
+		qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.19);
+	}else{
+		qrUtil.QRCODE_SIZE=60;
+		qrUtil.LOGO_HEIGHT = 13;
+		qrUtil.LOGO_WIDTH = 13;	
+	}
+	
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
 	}catch(Exception ex){
@@ -57,7 +64,7 @@ MyInterceptor.getInstance().tableNameSuffix.set(batch.tableOffset);
 StringBuilder sql = new StringBuilder("from ProductItem where productId=? and batchId=? ");
 List<ProductItem> items = dao.listByParams(ProductItem.class, sql.toString(), batch.productId , batch.id);
 for(ProductItem item : items){
-	doGenerate(request , item.qrCode);
+	doGenerate(request ,batch ,  item.qrCode);
 }
 
 String imageHost = ConfigCache.get("image_host", "houyikeji.com");

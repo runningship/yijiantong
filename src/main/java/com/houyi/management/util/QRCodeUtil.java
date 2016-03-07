@@ -21,6 +21,7 @@ import com.google.zxing.MultiFormatReader;
 import com.google.zxing.MultiFormatWriter;
 import com.google.zxing.Result;
 import com.google.zxing.client.j2se.BufferedImageLuminanceSource;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.common.HybridBinarizer;
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
@@ -47,13 +48,19 @@ public class QRCodeUtil {
 				BarcodeFormat.QR_CODE, QRCODE_SIZE, QRCODE_SIZE, hints);
 		int width = bitMatrix.getWidth();
 		int height = bitMatrix.getHeight();
-		BufferedImage image = new BufferedImage(width, height,	BufferedImage.TYPE_INT_RGB);
-		for (int x = 0; x < width; x++) {
-			for (int y = 0; y < height; y++) {
-				image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000
-						: 0xFFFFFFFF);
-			}
-		}
+		
+		bitMatrix = updateBit(bitMatrix, 0);
+		
+		BufferedImage bi =  MatrixToImageWriter.toBufferedImage(bitMatrix);
+		BufferedImage image = zoomInImage(bi,QRCODE_SIZE,QRCODE_SIZE);
+		
+//		BufferedImage image = new BufferedImage(width, height,	BufferedImage.TYPE_INT_RGB);
+//		for (int x = 0; x < width; x++) {
+//			for (int y = 0; y < height; y++) {
+//				image.setRGB(x, y, bitMatrix.get(x, y) ? 0xFF000000
+//						: 0xFFFFFFFF);
+//			}
+//		}
 		if (imgPath == null || "".equals(imgPath)) {
 			return image;
 		}
@@ -265,6 +272,37 @@ public class QRCodeUtil {
 	 */
 	public static String decode(String path) throws Exception {
 		return QRCodeUtil.decode(new File(path));
+	}
+	
+	//该方法生成自定义白边框后的bitMatrix；
+
+	private BitMatrix updateBit(BitMatrix matrix, int margin){
+		int tempM = margin*2;
+		int[] rec = matrix.getEnclosingRectangle();   //获取二维码图案的属性
+		int resWidth = rec[2] + tempM;
+		int resHeight = rec[3] + tempM;
+		BitMatrix resMatrix = new BitMatrix(resWidth, resHeight); // 按照自定义边框生成新的BitMatrix
+		resMatrix.clear();
+		for(int i= margin; i < resWidth- margin; i++){   //循环，将二维码图案绘制到新的bitMatrix中
+			for(int j=margin; j < resHeight-margin; j++){
+				if(matrix.get(i-margin + rec[0], j-margin + rec[1])){
+					resMatrix.set(i,j);
+				}
+			}
+		}
+		return resMatrix;
+	}
+	
+	/**
+	* 图片放大缩小
+	*/
+
+	public static BufferedImage  zoomInImage(BufferedImage  originalImage, int width, int height){
+		BufferedImage newImage = new BufferedImage(width,height,BufferedImage.TYPE_INT_RGB);
+		Graphics g = newImage.getGraphics();
+		g.drawImage(originalImage, 0,0,width,height,null);
+		g.dispose();
+		return newImage;
 	}
 
 	public static void main(String[] args) throws Exception {

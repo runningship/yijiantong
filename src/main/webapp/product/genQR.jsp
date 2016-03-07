@@ -1,3 +1,4 @@
+<%@page import="com.houyi.management.product.entity.ProductBatch"%>
 <%@page import="com.houyi.management.MyInterceptor"%>
 <%@page import="com.houyi.management.product.entity.ProductItem"%>
 <%@page import="com.houyi.management.cache.ConfigCache"%>
@@ -30,10 +31,20 @@ response.setContentType("text/html");
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
 String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
+
+ProductBatch batch = dao.get(ProductBatch.class, Integer.valueOf(item.batchId));
+
 QRCodeUtil qrUtil = new QRCodeUtil();
-qrUtil.QRCODE_SIZE=100;
-qrUtil.LOGO_HEIGHT = 20;
-qrUtil.LOGO_WIDTH = 20;
+if(batch.qrCodeWidth!=null){
+	qrUtil.QRCODE_SIZE= batch.qrCodeWidth;
+	qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.19);
+	qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.19);
+}else{
+	qrUtil.QRCODE_SIZE=60;
+	qrUtil.LOGO_HEIGHT = 13;
+	qrUtil.LOGO_WIDTH = 13;	
+}
+
 qrUtil.encode(url, realLogoPath , destPath , true);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">

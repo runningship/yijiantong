@@ -41,6 +41,18 @@
 			        });
 			}
 			
+			function editBatch(id){
+				 layer.open({
+			            type: 2,
+			            title: '编辑批次',
+			            shadeClose: true,
+			            shade: false,
+			            maxmin: true, //开启最大化最小化按钮
+			            area: ['600px', '460px'],
+			            content: 'editBatch.jsp?id='+id
+			        });
+			}
+			
 			function deleteBatch(batchId){
 				YW.ajax({
 				    type: 'get',
@@ -55,15 +67,6 @@
 			}
 			
 			function openItems(batchId){
-// 				 layer.open({
-// 			            type: 2,
-// 			            title: '二维码信息',
-// 			            shadeClose: true,
-// 			            shade: false,
-// 			            maxmin: true, //开启最大化最小化按钮
-// 			            area: ['600px', '560px'],
-// 			            content: 'itemList.jsp?productId=${productId}&batchId='+batchId
-// 			        });
 				 window.location='itemList.jsp?productId=${productId}&batchId='+batchId;
 			}
 			
@@ -79,6 +82,7 @@
 				    }
 				  });
 			}
+			
 		</script>
 	</head>
 	
@@ -124,6 +128,7 @@
 												<td>$[lottery]</td>
 												<td>$[conts]</td>
 												<td><a href="#"  show="$[active]==1" onclick="openItems($[id]);">二维码</a> 
+														<a href="#"  onclick="editBatch($[id]);">编辑</a>
 														<a href="#" show="$[active]!=1" onclick="deleteBatch($[id]);">删除</a>
 														<a href="#" show="$[active]!=1" onclick="generateQRCode($[id]);">生成二维码</a>
 												</td>
