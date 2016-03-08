@@ -225,7 +225,7 @@ public class UserService {
 		if(StringUtils.isEmpty(pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
 		}
-		User po = dao.getUniqueByKeyValue(User.class, "account", account);
+		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "type"},  new Object[]{account , 3});
 		if(po==null){
 			throw new GException(PlatformExceptionType.BusinessException,"账号不存在");
 		}
