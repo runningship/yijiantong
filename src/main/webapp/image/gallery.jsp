@@ -129,7 +129,7 @@
 				<!-- Main Page -->
 				<div class="">
 					<div class="media-gallery">
-					
+						<form name="form1" onsubmit="doSearch();return false;"></form>
 						<div class="row">
 								<div class="col-sm-12 col-md-6">
 									<div id="datatable-default_filter" class="dataTables_filter">
