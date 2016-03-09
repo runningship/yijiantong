@@ -158,4 +158,31 @@ public class HomeService {
 		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
+	
+	@WebMethod
+	public ModelAndView listGoods(Page<Map> page , String name , Integer uid){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.imgId=img.id ");
+		List<Object> params = new ArrayList<Object>();
+		if(StringUtils.isNotEmpty(name)){
+			sql.append(" and title like ?");
+			params.add("%"+name+"%");
+		}
+		page.order="desc";
+		page.orderBy = "addtime";
+		page.setPageSize(10);
+		page = dao.findPage(page, sql.toString() , true , params.toArray());
+		
+		if(StringUtils.isNotEmpty(name)){
+			SearchHistory search = new SearchHistory();
+			search.uid = uid;
+			search.text = name;
+			dao.saveOrUpdate(search);
+		}
+		
+		mv.data.put("page", JSONHelper.toJSON(page));
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
+		return mv;
+	}
 }

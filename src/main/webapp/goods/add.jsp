@@ -41,7 +41,6 @@
 	            ]
 	        ]
 	  });
-		
 	});
 	
 	function openImagePanel(){
@@ -151,7 +150,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">原价 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="orginalPrice" class="form-control" placeholder="" required/>
+												<input type="text" name="originalPrice" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
@@ -184,7 +183,7 @@
 											<label class="col-sm-2 control-label">是否上架</label>
 											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">
 													<label class="switch switch-success bk-margin-top-5">
-													  <input type="checkbox"  value="0"  id="isAd" class="switch-input"  name="isAd">
+													  <input type="checkbox"  value="1"  id="isAd" class="switch-input"  checked="checked" name="isAd">
 													  <span class="switch-label" data-on="On" data-off="Off"></span>
 													  <span class="switch-handle"></span>
 													</label>
