@@ -14504,7 +14504,6 @@ UE.plugins['paste'] = function () {
             domUtils.getXY(bk.start).y + 'px';
 
         range.selectNodeContents(pastebin).select(true);
-
         setTimeout(function () {
             if (browser.webkit) {
                 for (var i = 0, pastebins = doc.querySelectorAll('#baidu_pastebin'), pi; pi = pastebins[i++];) {
@@ -14522,6 +14521,9 @@ UE.plugins['paste'] = function () {
             }
             range.moveToBookmark(bk).select(true);
             callback(pastebin);
+            if(domUtils.isEmptyNode(pastebin)){
+            	alert('浏览器不支持改操作，请使用键盘 ctrl+v 代替 ');
+            }
         }, 0);
     }
 
@@ -14767,7 +14769,7 @@ UE.plugins['paste'] = function () {
         	getClipboardData.call(me, function (div) {
                 filter(div);
             });
-            me.document.execCommand('paste');
+            //me.document.execCommand('paste');
 //            if (browser.ie) {
 //                getClipboardData.call(me, function (div) {
 //                    filter(div);
