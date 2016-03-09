@@ -77,7 +77,7 @@
             shadeClose: true,
             shade: false,
             maxmin: true, //开启最大化最小化按钮
-            area: ['600px', '400px'],
+            area: ['800px', '500px'],
             content: '../image/gallery.jsp'
         });
 	}

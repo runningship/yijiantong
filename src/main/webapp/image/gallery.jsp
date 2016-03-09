@@ -30,7 +30,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/image/list',
+				    url: '/c/image/list?'+new Date().getTime(),
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){

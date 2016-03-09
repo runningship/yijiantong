@@ -15,7 +15,6 @@ import org.bc.web.Module;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.MyInterceptor;
-import com.houyi.management.article.entity.Article;
 import com.houyi.management.biz.entity.ScanRecord;
 import com.houyi.management.biz.entity.SearchHistory;
 import com.houyi.management.cache.ConfigCache;

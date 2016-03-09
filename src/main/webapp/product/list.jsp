@@ -44,7 +44,7 @@
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['793px', '600px'],
+			            area: ['800px', '600px'],
 			            content: 'edit.jsp?productId='+id
 			        });
 			}
