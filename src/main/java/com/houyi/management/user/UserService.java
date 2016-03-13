@@ -204,7 +204,7 @@ public class UserService {
 		}
 		User user = new User();
 		user.type = 1;
-		user.tel = tel;
+		user.tel = account;
 		user.pwd =	SecurityHelper.Md5(pwd);
 		user.addtime = new Date();
 		user.account = account;

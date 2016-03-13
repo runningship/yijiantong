@@ -74,9 +74,11 @@ public class UserService {
 		user.pwd = SecurityHelper.Md5(user.pwd);
 		user.type = 1;
 		user.name = user.account;
+		user.tel = user.account;
 		user.addtime = new Date();
 		dao.saveOrUpdate(user);
 		mv.data.put("result", "success");
+		mv.data.put("uid", user.id);
 		return mv;
 	}
 	

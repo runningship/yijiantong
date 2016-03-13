@@ -1,3 +1,4 @@
+<%@page import="com.houyi.management.user.entity.User"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
 <%@page import="java.util.Date"%>
@@ -63,7 +64,10 @@ try{
 	record.qrCode = qrCode;
 	record.device = device;
 	if(StringUtils.isNotEmpty(uidStr)){
-		record.uid = Integer.valueOf(uidStr);	
+		record.uid = Integer.valueOf(uidStr);
+		User user = dao.get(User.class, Integer.valueOf(uidStr));
+		request.setAttribute("tel", user.tel);
+		request.setAttribute("uid", uidStr);
 	}
 	if(StringUtils.isNotEmpty(record.device) || record.uid!=null){
 		ScanRecord po = dao.getUniqueByParams(ScanRecord.class, new String[]{"device" , "productId" , "type"}, new Object[]{record.device , record.productId , record.type});
@@ -106,7 +110,7 @@ body{font-family: 微软雅黑; margin:1pt;}
 .yiduijiang .activeTime{color:#c60000}
 .yiduijiang .activeAddr{color:#c60000 ; margin-top:3pt;}
 .yiduijiang .addrLabel{float:left;}
-.yiduijiang .addrConts{    width: 69%;    display: inline-block;}
+.yiduijiang .addrConts{    width: 69%;    display: inline}
 .yiduijiang .jingxi{ margin-top:5pt;   text-align: center; color: #BB0322;    font-weight: bold;position:relative;    font-size: 13pt;}
 .yiduijiang .download{    position: absolute;    margin-left: 3%;    color: white;    padding: 4pt 5pt;    background: #D94D3E;    font-size: 10pt;    border-radius: 3pt;    bottom: 0pt;}
 
@@ -196,8 +200,13 @@ function duijiang(){
 				</div>
 				<c:if test="${(client eq 'kuaiyisao' || weixin) && (scanType eq '2') }">
 					<div id="btn-area" style="text-align:center;">
-						<input class="tel" placeholder="请输入你的手机号码" value="${tel }"/>
-						<div class="btn-ok" onclick="duijiang();">立即领取</div>
+						<c:if test="${not empty uid }">
+							<input class="tel" readonly="readonly" placeholder="请输入你的手机号码" value="${tel }"/>
+							<div class="btn-ok" onclick="duijiang();">立即领取</div>
+						</c:if>
+						<c:if test="${empty uid }">
+							<div class="btn-ok" onclick="alert('请先登录')">登录后领奖</div>
+						</c:if>
 					</div>
 				</c:if>
 				
