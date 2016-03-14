@@ -59,7 +59,8 @@
 	  });
 	
 		ue.addListener( 'ready', function( editor ) {
-	        ue.setContent('${product.conts}');
+			var conts = $('#conts').html();
+	        ue.setContent(conts);
 	    });
 		
 		var img=JSON.parse('{}');
@@ -214,7 +215,7 @@
 		<!--/container-->
 		
 		<div class="clearfix"></div>		
-		
+		<div id="conts" style="display:none;">${article.conts}</div>
 		
 		<!-- start: JavaScript-->
 		

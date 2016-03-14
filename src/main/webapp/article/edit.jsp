@@ -59,7 +59,8 @@
 	        ]
 	  	});
 		ue.addListener( 'ready', function( editor ) {
-	        ue.setContent('${article.conts}');
+			var conts = $('#conts').html();
+	        ue.setContent(conts);
 	    });
 		var img=JSON.parse('{}');
 		img.path = 'http://${imageHost}/article_image_path/${image.path}';
@@ -231,8 +232,7 @@
 		<!--/container-->
 		
 		<div class="clearfix"></div>		
-		
-		
+		<div id="conts" style="display:none;">${article.conts}</div>
 		<!-- start: JavaScript-->
 		
 		
