@@ -19,7 +19,7 @@
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/product/listBatch',
+				    url: '/c/product/listBatch?'+new Date().getTime(),
 				    data: {productId: ${productId}},
 				    dataType:'json',
 				    mysuccess: function(json){
