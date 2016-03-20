@@ -52,7 +52,7 @@ public class LotteryService {
 			u.name=tel;
 			u.type=1;
 			u.addtime = new Date();
-			u.pwd = SecurityHelper.Md5(tel);
+			u.pwd = SecurityHelper.Md5(smsCode);
 			dao.saveOrUpdate(u);
 		}
 		
