@@ -27,6 +27,8 @@ import com.houyi.management.biz.entity.TableInfo;
 import com.houyi.management.product.entity.Product;
 import com.houyi.management.product.entity.ProductBatch;
 import com.houyi.management.product.entity.ProductItem;
+import com.houyi.management.user.entity.User;
+import com.houyi.management.util.DataHelper;
 
 
 @Module(name="/product")
@@ -126,7 +128,8 @@ public class ProductService {
 			Long  mills = System.currentTimeMillis();
 			String str = Long.toString(mills, Character.MAX_RADIX)+myRan.getNextCode();
 			item.qrCode = str + "."+batch.tableOffset;
-			item.verifyCode = String.valueOf(r.nextInt(999999));
+			//item.verifyCode = String.valueOf(r.nextInt(999999));
+			item.verifyCode = myRan.getNextCode() + Long.toString(mills, Character.MAX_RADIX) + "."+batch.tableOffset;
 			session.save(item);
 		}
 		//将剩余的提交
@@ -201,6 +204,24 @@ public class ProductService {
 
 		Product product = dao.get(Product.class, item.productId);
 		mv.data.put("product", JSONHelper.toJSON(product));
+		mv.data.put("result", 0);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView getLotteryInfo(String qrCode){
+		ModelAndView mv = new ModelAndView();
+		String tableSuffix = qrCode.split("\\.")[1];
+		MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
+		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
+		if(item==null){
+			throw new GException(PlatformExceptionType.BusinessException,"没有找到商品信息");
+		}
+		mv.data.put("activeTime", DataHelper.sdf.format(item.activeTime));
+		mv.data.put("activeAddr" , item.activeAddr);
+		User owner = dao.get(User.class, item.lotteryOwnerId);
+		mv.data.put("activeTel" , owner.tel);
+		
 		mv.data.put("result", 0);
 		return mv;
 	}

@@ -38,8 +38,14 @@ public class RestServlet extends HttpServlet{
 			ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", data);
 			
 			if(item==null){
-				RequestDispatcher rd = req.getRequestDispatcher("/product/invalidCode.jsp");
-				rd.forward(req, resp);
+				item = dao.getUniqueByKeyValue(ProductItem.class, "verifyCode", data);
+				if(item==null){
+					RequestDispatcher rd = req.getRequestDispatcher("/product/invalidCode.jsp");
+					rd.forward(req, resp);
+				}else{
+					RequestDispatcher rd = req.getRequestDispatcher("/product/verifyLottery.jsp");
+					rd.forward(req, resp);
+				}
 			}else{
 				RequestDispatcher rd = req.getRequestDispatcher("/product/getLottery.jsp");
 				rd.forward(req, resp);

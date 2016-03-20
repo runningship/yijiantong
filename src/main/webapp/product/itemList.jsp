@@ -35,10 +35,46 @@ request.setAttribute("batch", batch);
 				  });
 			}
 			
-			function viewQRCode(){
-				wind
+			function getLotteryActiveText(status , qrCode){
+				if(status==0){
+					return "未兑奖";
+				}else{
+					return '<a onclick="getLotteryInfo(\''+qrCode+'\')" href="javascript:void(0)" >已兑奖</a>'
+				}
+			}
+			
+			function getLotteryInfo(qrCode){
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/product/getLotteryInfo',
+				    data: {qrCode : qrCode},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	console.log(1);
+				    	$('#lotteryInfo .tel').text(json.activeTel);
+				    	$('#lotteryInfo .addr').text(json.activeAddr);
+				    	$('#lotteryInfo .time').text(json.activeTime);
+				    	showLotterInfo();
+				    }
+				  });
+			}
+			
+			function showLotterInfo(){
+				layer.open({
+					  type: 1,
+					  shade: false,
+					  title: false, //不显示标题
+					  content: $('#lotteryInfo'), //捕获的元素
+					  cancel: function(index){
+					    layer.close(index);
+					  }
+					});
 			}
 		</script>
+		
+		<style type="text/css">
+			#lotteryInfo div{height: 30px;    line-height: 30px;    font-size: 14px; }
+		</style>
 	</head>
 	
 	<body>
@@ -78,7 +114,7 @@ request.setAttribute("batch", batch);
 										<thead>
 											<tr>
 <!-- 												<th><a href="#">导出选中</a></th> -->
-												<th>二维码</th>
+												<th>兑奖码</th>
 												<th>校验码</th>
 												<th>奖券</th>
 												<th>是否兑奖</th>
@@ -91,7 +127,7 @@ request.setAttribute("batch", batch);
 												<td>$[qrCode]</td>
 												<td>$[verifyCode]</td>
 												<td>$[lottery]</td>
-												<td>$[lotteryActive]</td>
+												<td runscript="true">getLotteryActiveText($[lotteryActive] , '$[qrCode]')</td>
 												<td><a href="genQR.jsp?code=$[qrCode]"  target="_blank">查看</a></td>
 											</tr>
 										</tbody>
@@ -115,6 +151,11 @@ request.setAttribute("batch", batch);
 		
 		<div class="clearfix"></div>		
 		
+		<div id="lotteryInfo" style="width: 250px;background: lightblue; display:none;">
+			<div>兑奖时间: <span class="time"></span></div>
+			<div>兑奖地址: <span class="addr"></span></div>
+			<div>兑奖号码: <span class="tel"></span></div>
+		</div>
 		
 		<!-- start: JavaScript-->
 		

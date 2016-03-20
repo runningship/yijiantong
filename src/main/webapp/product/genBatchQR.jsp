@@ -28,7 +28,8 @@
 	request.setAttribute("url" , url);
 	String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
-	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
+	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"duijiang.png";
+	String verifyDestPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"jiaoyan.png";
 	QRCodeUtil qrUtil = new QRCodeUtil();
 	if(batch.qrCodeWidth!=null){
 		qrUtil.QRCODE_SIZE=batch.qrCodeWidth;
@@ -42,6 +43,7 @@
 	
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
+		qrUtil.encode(url, realLogoPath , verifyDestPath , true);
 	}catch(Exception ex){
 		ex.printStackTrace();
 		return false;
@@ -60,6 +62,9 @@ if(batch==null){
 	out.println("缺少批次信息");
 	return;
 }
+String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
+String destPath = qrCodeDir+"\\"+batch.productId+"\\"+batch.id;
+FileUtils.deleteDirectory(new File(destPath));
 MyInterceptor.getInstance().tableNameSuffix.set(batch.tableOffset);
 StringBuilder sql = new StringBuilder("from ProductItem where productId=? and batchId=? ");
 List<ProductItem> items = dao.listByParams(ProductItem.class, sql.toString(), batch.productId , batch.id);
@@ -81,7 +86,8 @@ request.setAttribute("batchId", batchId);
 <body>
 <a href="packAndDownload.jsp?batchId=${batchId }">打包下载</a>
 <c:forEach items="${items }" var="pi">
-	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}duijiang.png"/>
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}jiaoyan.png"/>
 </c:forEach>
 </body>
 </html>

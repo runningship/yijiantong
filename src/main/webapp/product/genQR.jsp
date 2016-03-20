@@ -26,12 +26,15 @@ String imageHost = ConfigCache.get("image_host", "houyikeji.com");
 String appHost = ConfigCache.get("app_host", "h1y6.com");
 request.setAttribute("image_host" , imageHost);
 String url = "http://"+appHost+"/p/"+item.qrCode;
+String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
 request.setAttribute("url" , url);
+request.setAttribute("verifyUrl" , verifyUrl);
+
 response.setContentType("text/html");
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
-String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.qrCode+".png";
-
+String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"duijiang.png";
+String verifyDestPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"jiaoyan.png";
 ProductBatch batch = dao.get(ProductBatch.class, Integer.valueOf(item.batchId));
 
 QRCodeUtil qrUtil = new QRCodeUtil();
@@ -46,6 +49,7 @@ if(batch.qrCodeWidth!=null){
 }
 
 qrUtil.encode(url, realLogoPath , destPath , true);
+qrUtil.encode(verifyUrl , realLogoPath , verifyDestPath , true);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -54,8 +58,12 @@ qrUtil.encode(url, realLogoPath , destPath , true);
 <title>生成二维码</title>
 </head>
 <body>
-
-<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.qrCode}.png"/>
+兑奖码
+<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}duijiang.png"/>
 ${url}
+<br/>
+校验码
+<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}jiaoyan.png"/>
+${verifyUrl }
 </body>
 </html>
