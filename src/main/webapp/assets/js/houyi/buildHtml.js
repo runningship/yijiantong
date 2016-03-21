@@ -108,6 +108,7 @@ YW={
         },
         error: function(data){
         },
+        cache:false,
         success:function(data){
         	if(data.responseText!=undefined && data.responseText.indexOf('relogin')!=-1){
         		window.parent.location='/login/index.html';

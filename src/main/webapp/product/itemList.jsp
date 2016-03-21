@@ -25,7 +25,7 @@ request.setAttribute("batch", batch);
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/product/listItem',
+				    url: '/c/product/listItem?'+new Date().getTime(),
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -46,7 +46,8 @@ request.setAttribute("batch", batch);
 			function getLotteryInfo(qrCode){
 				YW.ajax({
 				    type: 'get',
-				    url: '/c/product/getLotteryInfo',
+				    url: '/c/product/getLotteryInfo?'+new Date().getTime(),
+				    cache:false,
 				    data: {qrCode : qrCode},
 				    dataType:'json',
 				    mysuccess: function(json){
