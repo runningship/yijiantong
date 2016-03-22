@@ -87,6 +87,9 @@ request.setAttribute("batch", batch);
 Product product = dao.get(Product.class, item.productId);
 request.setAttribute("product", product);
 request.setAttribute("qrCode", qrCode);
+
+//request.setAttribute("client", "kuaiyisao");
+//request.setAttribute("tel", "15856985122");
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -126,7 +129,7 @@ body{font-family: 微软雅黑; margin:1pt;}
 .tel{ line-height: 30pt;    width: 98%;    border-radius: 2pt;    border: 1px solid #ddd;    font-size: 12pt; font-weight:bold;height: 30pt;}
 .btn-ok{    height: 30pt;    background: #D94D3E;    line-height: 30pt;    width: 98%;    display: inline-block;    margin-top: 5pt;    border-radius: 4pt;    color: white;    font-weight: bold;    margin-bottom: 10pt;}
 .yzm{    width: 200px;    float: left;    margin-left: 0.5%;margin-top:3pt;}
-.getYzm{    float: right;    height: 33pt;    margin-right: 2pt; margin-top:3pt;border: none;    color: white;    background: purple;}
+.getYzm{    float: right;    height: 33pt;    margin-right: 2pt; margin-top:3pt;border: none;    color: white;    background: purple;    width: 60pt;}
 </style>
 <script src="/assets/vendor/js/jquery-2.1.1.min.js"></script>
 <script src="/assets/js/houyi/buildHtml.js"></script>
@@ -161,6 +164,42 @@ function duijiang(){
 	    	}, 1000);
 	    }
     });
+}
+
+function sendSMSCode(){
+	var tel = $('.tel').val();
+	if(!isMobile(tel)){
+		return ;
+	}
+	YW.ajax({
+	    type: 'POST',
+	    url: '/c/admin/user/sendVerifyCode',
+	    data:{tel : tel},
+	    mysuccess: function(data){
+	    	layer.msg('验证码已发送');
+	    }
+    });
+}
+var timer=0;
+function getYzm(){
+	if(timer>0){
+		return;
+	}
+	//send sms code
+	sendSMSCode();
+	timer=60;
+	tickDown();
+}
+function tickDown(){
+	if(timer<=0){
+		$('.getYzm').text('获取验证码');
+		return;
+	}
+	$('.getYzm').text(timer+'( 秒 )');
+	setTimeout(function(){
+		timer--;
+		tickDown();
+	} , 1000);
 }
 </script>
 </head>
@@ -212,7 +251,7 @@ function duijiang(){
 						</c:if>
 						<c:if test="${empty uid }">
 							<input class="tel"  placeholder="请输入你的手机号码"  />
-							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm">获取验证码</button>
+							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
 							<div class="btn-ok" onclick="duijiang();">一键领取</div>
 <!-- 							<div class="btn-ok" onclick="alert('请先登录')">登录后领奖</div> -->
 						</c:if>

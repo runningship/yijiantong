@@ -6,7 +6,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.ThreadSession;
 
 import com.houyi.management.SysConstants;
-import com.houyi.management.user.TelVerifyCode;
+import com.houyi.management.user.entity.TelVerifyCode;
 
 public class VerifyCodeHelper {
 

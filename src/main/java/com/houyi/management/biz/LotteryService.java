@@ -21,8 +21,10 @@ import com.houyi.management.MyInterceptor;
 import com.houyi.management.biz.entity.LotteryVerify;
 import com.houyi.management.biz.entity.ScanRecord;
 import com.houyi.management.product.entity.ProductItem;
+import com.houyi.management.user.entity.TelVerifyCode;
 import com.houyi.management.user.entity.User;
 import com.houyi.management.util.SecurityHelper;
+import com.houyi.management.util.VerifyCodeHelper;
 
 
 @Module(name="/admin/lottery")
@@ -46,9 +48,7 @@ public class LotteryService {
 //		if(StringUtils.isEmpty(verifyCode)){
 //			throw new GException(PlatformExceptionType.BusinessException,"请先输入兑奖码");
 //		}
-//		if(!verifyCode.equals(item.verifyCode)){
-//			throw new GException(PlatformExceptionType.BusinessException,"兑奖码不正确，请检查后重新输入");
-//		}
+		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
 		User u = dao.getUniqueByKeyValue(User.class, "tel", tel);
 		if(u==null){
 			u = new User();
@@ -67,6 +67,8 @@ public class LotteryService {
 		item.activeAddr = activeAddr;
 		dao.saveOrUpdate(item);
 		
+		tvc.verifyTime = new Date();
+		dao.saveOrUpdate(tvc);
 		//充话费
 		mv.data.put("result", 0);
 		return mv;

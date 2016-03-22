@@ -133,7 +133,7 @@ $(function(){
 
 function jiaoyan(){
 	var tel = '${tel}';
-	var tel='15856985558';
+	//var tel='15856985558';
 	if(!tel){
 		alert('请先登录');
 		return;
@@ -141,7 +141,7 @@ function jiaoyan(){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/addVerify',
-	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${activeAddr}' , productId: ${product.id}},
+	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id}},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
@@ -180,7 +180,7 @@ function jiaoyan(){
 				</div>
 			</c:if>
 		</div>
-		<c:if test="${lv eq null }">
+		<c:if test="${lv eq null && item.lotteryActive==0}">
 			<div id="btn-area" style="text-align:center;">
 				<div class="btn-ok" onclick="jiaoyan();">提交校验</div>
 			</div>

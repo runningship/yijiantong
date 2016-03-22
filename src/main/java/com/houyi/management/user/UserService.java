@@ -27,8 +27,10 @@ import org.bc.web.WebMethod;
 
 import com.houyi.management.SysConstants;
 import com.houyi.management.ThreadSessionHelper;
+import com.houyi.management.user.entity.TelVerifyCode;
 import com.houyi.management.user.entity.User;
 import com.houyi.management.user.entity.UserTrack;
+import com.houyi.management.util.BcloudSMSSender;
 import com.houyi.management.util.DataHelper;
 import com.houyi.management.util.SecurityHelper;
 import com.houyi.management.util.ShortMessageHelper;
@@ -38,8 +40,6 @@ import com.houyi.management.util.VerifyCodeHelper;
 //import com.sun.image.codec.jpeg.JPEGImageEncoder;
 @Module(name="/admin/user")
 public class UserService {
-	
-	public static Map<String,Integer> onlineUserCountMap = new HashMap<String , Integer>();
 	
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
@@ -178,10 +178,8 @@ public class UserService {
         String code = String.valueOf(s);
         tvc.code = code ;
       //send code to tel
-        boolean result = ShortMessageHelper.sendRongLianMsg(tel, tvc.code);
-        if(!result){
-        	throw new GException(PlatformExceptionType.BusinessException,"发送短信失败，请稍后重试");
-        }
+        String result = BcloudSMSSender.doSendVerifyCode(tel, tvc.code);
+//    	throw new GException(PlatformExceptionType.BusinessException,"发送短信失败，请稍后重试");
         tvc.sendtime =  new Date();
 		dao.saveOrUpdate(tvc);
 		mv.data.put("result", 0);

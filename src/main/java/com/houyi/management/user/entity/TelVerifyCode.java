@@ -1,4 +1,4 @@
-package com.houyi.management.user;
+package com.houyi.management.user.entity;
 
 import java.util.Date;
 
