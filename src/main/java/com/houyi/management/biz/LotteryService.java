@@ -1,10 +1,14 @@
 package com.houyi.management.biz;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.GException;
+import org.bc.sdak.Page;
 import org.bc.sdak.Transactional;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
@@ -14,6 +18,7 @@ import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.MyInterceptor;
+import com.houyi.management.biz.entity.LotteryVerify;
 import com.houyi.management.biz.entity.ScanRecord;
 import com.houyi.management.product.entity.ProductItem;
 import com.houyi.management.user.entity.User;
@@ -67,6 +72,55 @@ public class LotteryService {
 		return mv;
 	}
 	
+	@WebMethod
+	public ModelAndView addVerify(String verifyCode , String tel , Integer uid , String activeAddr , Integer productId){
+		ModelAndView mv = new ModelAndView();
+		LotteryVerify lv = new LotteryVerify();
+		lv.activeAddr = activeAddr;
+		lv.productId = productId;
+		lv.activeUid = uid;
+		lv.tel = tel;
+		lv.verifyCode = verifyCode;
+		lv.addtime = new Date();
+		lv.status = 0;
+		dao.saveOrUpdate(lv);
+		mv.data.put("result", 0);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView listVerify(Page<Map> page , String code){
+		ModelAndView mv = new ModelAndView();
+		StringBuilder hql = new StringBuilder("select lv.id as id , lv.status as status, pro.title as title , pro.spec as spec, lv.tel as tel , lv.activeAddr as activeAddr, lv.verifyCode as verifyCode, lv.addtime as addtime from LotteryVerify lv , Product pro  where lv.productId=pro.id");
+		List<Object> params = new ArrayList<Object>();
+		if(StringUtils.isNotEmpty(code)){
+			hql.append(" and lv.verifyCode like ? ");
+			params.add("%"+code+"%");
+		}
+		page = dao.findPage(page, hql.toString() ,true , params.toArray());
+		mv.data.put("page",JSONHelper.toJSON(page));
+		mv.data.put("result", 0);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView setStatus(Integer id , Integer status){
+		ModelAndView mv = new ModelAndView();
+		LotteryVerify po = dao.get(LotteryVerify.class, id);
+		if(po!=null){
+			po.status = status;
+			if(status==1){
+				//自动兑奖
+				String[] arr = po.verifyCode.split("\\.");
+				MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
+				ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "verifyCode" , po.verifyCode);
+				add(item.qrCode , po.tel , "" , po.activeAddr);
+			}
+			dao.saveOrUpdate(po);
+		}
+		mv.data.put("result", 0);
+		return mv;
+	}
 	
 	@WebMethod
 	public ModelAndView list(Integer uid){

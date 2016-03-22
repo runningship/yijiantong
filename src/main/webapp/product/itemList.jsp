@@ -45,7 +45,7 @@ request.setAttribute("batch", batch);
 			
 			function getLotteryInfo(qrCode){
 				YW.ajax({
-				    type: 'get',
+				    type: 'post',
 				    url: '/c/product/getLotteryInfo?'+new Date().getTime(),
 				    cache:false,
 				    data: {qrCode : qrCode},
@@ -162,7 +162,7 @@ request.setAttribute("batch", batch);
 		
 		<!-- Pages JS -->
 		<!-- end: JavaScript-->
-		
+		<div>如果看到这个说明不是缓存页面</div>
 	</body>
 	
 </html>

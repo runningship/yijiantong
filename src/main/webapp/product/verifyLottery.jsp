@@ -1,3 +1,4 @@
+<%@page import="com.houyi.management.biz.entity.LotteryVerify"%>
 <%@page import="com.houyi.management.user.entity.User"%>
 <%@page import="java.net.URLDecoder"%>
 <%@page import="java.net.URLEncoder"%>
@@ -83,7 +84,12 @@ ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
 request.setAttribute("batch", batch);
 Product product = dao.get(Product.class, item.productId);
 request.setAttribute("product", product);
-request.setAttribute("qrCode", qrCode);
+request.setAttribute("verifyCode", qrCode);
+
+LotteryVerify lv = dao.getUniqueByKeyValue(LotteryVerify.class, "verifyCode", qrCode);
+if(lv!=null){
+	request.setAttribute("lv", lv);
+}
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -125,15 +131,17 @@ $(function(){
 	//微信和快易扫可以兑奖
 });
 
-function duijiang(){
-	var tel = $('.tel').val();
-	if(!isMobile(tel)){
-		return ;
+function jiaoyan(){
+	var tel = '${tel}';
+	var tel='15856985558';
+	if(!tel){
+		alert('请先登录');
+		return;
 	}
 	YW.ajax({
 	    type: 'POST',
-	    url: '/c/admin/lottery/add',
-	    data:{qrCode : '${qrCode}' , tel : tel , verifyCode:'3123' , activeAddr:'${address}'},
+	    url: '/c/admin/lottery/addVerify',
+	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${activeAddr}' , productId: ${product.id}},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
@@ -156,6 +164,27 @@ function duijiang(){
 		</div>
 		<div class="yiduijiang">
 			<div class="tips">校验码 : ${item.verifyCode }</div>
+			<c:if test="${lv ne null && lv.status==0 }">
+				<div style="text-align:center;">
+					<div >审核中</div>
+				</div>
+			</c:if>
+			<c:if test="${item.lotteryActive ==1}">
+				<div style="text-align:center;">
+					<div >已兑奖</div>
+				</div>
+			</c:if>
+			<c:if test="${lv ne null && lv.status==2 }">
+				<div style="text-align:center;">
+					<div >无效码</div>
+				</div>
+			</c:if>
 		</div>
+		<c:if test="${lv eq null }">
+			<div id="btn-area" style="text-align:center;">
+				<div class="btn-ok" onclick="jiaoyan();">提交校验</div>
+			</div>
+		</c:if>
+		
 </div>
 </body></html>

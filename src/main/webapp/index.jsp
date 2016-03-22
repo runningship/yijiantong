@@ -22,7 +22,7 @@
 					<div class="page-header">
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">								
-								<li><a href="index.html"><i class="icon fa fa-home"></i>首页</a></li>
+								<li><a href="#"><i class="icon fa fa-home"></i>首页</a></li>
 							</ol>						
 						</div>
 						<div class="pull-right">

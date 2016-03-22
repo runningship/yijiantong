@@ -4,7 +4,7 @@
 <html lang="en">
 
 	<head>
-		<jsp:include page="../../header.jsp"></jsp:include>
+		<jsp:include page="../header.jsp"></jsp:include>
 		<script type="text/javascript">
 			$(function(){
 				Page.Init();
@@ -14,8 +14,8 @@
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
-				    type: 'get',
-				    url: '/c/table/list',
+				    type: 'post',
+				    url: '/c/admin/lottery/listVerify',
 				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
@@ -25,16 +25,27 @@
 				  });
 			}
 			
-			function add(id){
-				 layer.open({
-			            type: 2,
-			            title: '批次信息',
-			            shadeClose: true,
-			            shade: false,
-			            maxmin: true, //开启最大化最小化按钮
-			            area: ['400px', '300px'],
-			            content: 'add.jsp'
-			        });
+			function setStatus(id , status){
+				YW.ajax({
+				    type: 'post',
+				    url: '/c/admin/lottery/setStatus',
+				    data: {id:id , status : status},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	layer.msg('设置成功');
+				        doSearch();
+				    }
+				  });
+			}
+			
+			function getStatuText(status){
+				if(status==0){
+					return "待审核";
+				}else if(status==1){
+					return "已兑奖";
+				}else if(status==2){
+					return "无效码";
+				}
 			}
 		</script>
 	</head>
@@ -42,7 +53,7 @@
 	<body>
 	
 		<!-- Start: Header -->
-			<jsp:include page="../../top.jsp"></jsp:include>
+			<jsp:include page="../top.jsp"></jsp:include>
 		<!-- End: Header -->
 		
 		<!-- Start: Content -->
@@ -50,7 +61,7 @@
 			<div class="row">
 			
 				<!-- Sidebar -->
-				<jsp:include page="../../menu.jsp"></jsp:include>
+				<jsp:include page="../menu.jsp"></jsp:include>
 				<!-- End Sidebar -->
 						
 				<!-- Main Page -->
@@ -60,11 +71,11 @@
 						<div class="pull-left">
 							<ol class="breadcrumb visible-sm visible-md visible-lg">								
 								<li><a href="#"><i class="icon fa fa-home"></i>首页</a></li>
-								<li><a href="#"><i class="fa fa-table"></i>设置</a></li>
+								<li><a href="#"><i class="fa fa-table"></i>产品管理</a></li>
 							</ol>						
 						</div>
 						<div class="pull-right">
-							<h2>表空间信息</h2>
+							<h2>校验列表</h2>
 						</div>					
 					</div>
 					<!-- End Page Header -->
@@ -73,21 +84,41 @@
 							<div class="panel panel-default bk-bg-white">
 								<div class="panel-body">
 									<div class="row">
+											<form name="form1" onsubmit="doSearch();return false;">
 											<div class="col-sm-12 col-md-6">
-												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="add()">添加</button>
+												<div id="datatable-default_filter" class="dataTables_filter">
+													<input type="search" name="code" class="form-control" placeholder="校验码" aria-controls="datatable-default"><label></label>
+												</div>
 											</div>
+											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>
 											<tr>
-												<th>编号</th>
-												<th>使用量</th>
+												<th>产品名称</th>
+												<th>产品规格</th>
+												<th>兑奖号码</th>
+												<th>兑奖地址</th>
+												<th>校验码</th>
+												<th>提交时间</th>
+												<th></th>
 											</tr>
 										</thead>
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
-												<td>$[suffix]</td>
-												<td>$[size]</td>
+												<td>$[title]</td>
+												<td>$[spec]</td>
+												<td>$[tel]</td>
+												<td>$[activeAddr]</td>
+												<td>$[verifyCode]</td>
+												<td>$[addtime]</td>
+												<td>
+													<span show="$[status]==0">
+														<a class="batch" href="#" onclick="setStatus($[id] , 1)">通过</a>
+														<a class="batch" href="#" onclick="setStatus($[id] , 2)">无效</a>
+													</span>
+													<span show="$[status]!=0" runscript="true">getStatuText($[status])</span>
+												</td>
 											</tr>
 										</tbody>
 									</table>
