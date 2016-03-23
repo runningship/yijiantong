@@ -156,7 +156,7 @@ function duijiang(){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/add',
-	    data:{qrCode : '${qrCode}' , tel : tel , smsCode: smsCode , activeAddr:'${address}'},
+	    data:{qrCode : '${qrCode}' , tel : tel , smsCode: smsCode , activeAddr:'${address}' , uid : '${uid}'},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){

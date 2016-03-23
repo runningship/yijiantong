@@ -74,6 +74,8 @@ public class ProductService {
 		if(po!=null){
 			po.qrCodeWidth = batch.qrCodeWidth;
 			po.conts = batch.conts;
+			po.autoCashLottery = batch.autoCashLottery;
+			po.autoVerifyLottery = batch.autoVerifyLottery;
 			dao.saveOrUpdate(po);
 		}
 		return mv;

@@ -34,7 +34,7 @@ public class LotteryService {
 
 	@WebMethod
 	@Transactional
-	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr){
+	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr , String uid){
 		ModelAndView mv = new ModelAndView();
 		String[] arr = qrCode.split("\\.");
 		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
@@ -48,7 +48,11 @@ public class LotteryService {
 //		if(StringUtils.isEmpty(verifyCode)){
 //			throw new GException(PlatformExceptionType.BusinessException,"请先输入兑奖码");
 //		}
-		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
+		if(StringUtils.isEmpty(uid)){
+			TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
+			tvc.verifyTime = new Date();
+			dao.saveOrUpdate(tvc);
+		}
 		User u = dao.getUniqueByKeyValue(User.class, "tel", tel);
 		if(u==null){
 			u = new User();
@@ -67,15 +71,13 @@ public class LotteryService {
 		item.activeAddr = activeAddr;
 		dao.saveOrUpdate(item);
 		
-		tvc.verifyTime = new Date();
-		dao.saveOrUpdate(tvc);
 		//充话费
 		mv.data.put("result", 0);
 		return mv;
 	}
 	
 	@WebMethod
-	public ModelAndView addVerify(String verifyCode , String tel , Integer uid , String activeAddr , Integer productId){
+	public ModelAndView addVerify(String qrCode , String verifyCode , String tel , Integer uid , String activeAddr , Integer productId){
 		ModelAndView mv = new ModelAndView();
 		LotteryVerify lv = new LotteryVerify();
 		lv.activeAddr = activeAddr;
@@ -84,6 +86,7 @@ public class LotteryService {
 		lv.tel = tel;
 		lv.verifyCode = verifyCode;
 		lv.addtime = new Date();
+		lv.qrCode = qrCode;
 		lv.status = 0;
 		dao.saveOrUpdate(lv);
 		mv.data.put("result", 0);
@@ -91,13 +94,23 @@ public class LotteryService {
 	}
 	
 	@WebMethod
-	public ModelAndView listVerify(Page<Map> page , String code){
+	public ModelAndView listVerify(Page<Map> page , String code , String tel , Integer status){
 		ModelAndView mv = new ModelAndView();
-		StringBuilder hql = new StringBuilder("select lv.id as id , lv.status as status, pro.title as title , pro.spec as spec, lv.tel as tel , lv.activeAddr as activeAddr, lv.verifyCode as verifyCode, lv.addtime as addtime from LotteryVerify lv , Product pro  where lv.productId=pro.id");
+		StringBuilder hql = new StringBuilder("select lv.id as id , lv.status as status, pro.title as title , pro.spec as spec, lv.tel as tel , lv.activeAddr as activeAddr, "
+				+ "lv.verifyCode as verifyCode,lv.qrCode as qrCode, lv.addtime as addtime from LotteryVerify lv , Product pro  where lv.productId=pro.id");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(code)){
 			hql.append(" and lv.verifyCode like ? ");
 			params.add("%"+code+"%");
+		}
+		
+		if(StringUtils.isNotEmpty(tel)){
+			hql.append(" and lv.tel like ? ");
+			params.add("%"+tel+"%");
+		}
+		if(status!=null){
+			hql.append(" and status=? ");
+			params.add(status);
 		}
 		page = dao.findPage(page, hql.toString() ,true , params.toArray());
 		mv.data.put("page",JSONHelper.toJSON(page));
@@ -116,7 +129,7 @@ public class LotteryService {
 				String[] arr = po.verifyCode.split("\\.");
 				MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
 				ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "verifyCode" , po.verifyCode);
-				add(item.qrCode , po.tel , "" , po.activeAddr);
+				add(item.qrCode , po.tel , "" , po.activeAddr , po.activeUid==null ? null : po.activeUid.toString());
 			}
 			dao.saveOrUpdate(po);
 		}

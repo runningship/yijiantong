@@ -39,4 +39,9 @@ public class ProductBatch {
 	
 	public Integer qrCodeWidth;
 	
+	//是否自动兑奖 0,不自动兑奖 1,自动兑奖
+	public Integer autoCashLottery;
+	
+	// 是否自动校验  0,不自动校验 1,自动校验
+	public Integer autoVerifyLottery;
 }

@@ -51,7 +51,7 @@
 						<ul class="nav nav-children">
 							<li><a href="/product/add.jsp"><span class="text"> 添加产品</span></a></li>
 							<li><a href="/product/list.jsp"><span class="text"> 产品列表</span></a></li>
-							<li><a href="/product/verifyList.jsp"><span class="text"> 校验审核列表</span></a></li>
+							<li><a href="/product/verifyList.jsp"><span class="text"> 审核列表</span></a></li>
 						</ul>
 					</li>
 					<li class="nav-parent">

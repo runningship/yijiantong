@@ -83,6 +83,13 @@
 				  });
 			}
 			
+			function getStatusText(code){
+				if(code==0){
+					return '否';
+				}else{
+					return '是';
+				}
+			}
 		</script>
 	</head>
 	
@@ -117,6 +124,8 @@
 												<th>编号</th>
 												<th>数量</th>
 												<th>奖券</th>
+												<th>是否自动兑奖</th>
+												<th>是否自动校验</th>
 												<th>描述</th>
 												<th>操作</th>
 											</tr>
@@ -126,6 +135,8 @@
 												<td>$[no]</td>
 												<td>$[count]</td>
 												<td>$[lottery]</td>
+												<td runscript="true" >getStatusText($[autoCashLottery])</td>
+												<td runscript="true" >getStatusText($[autoVerifyLottery])</td>
 												<td>$[conts]</td>
 												<td><a href="#"  show="$[active]==1" onclick="openItems($[id]);">二维码</a> 
 														<a href="#"  onclick="editBatch($[id]);">编辑</a>

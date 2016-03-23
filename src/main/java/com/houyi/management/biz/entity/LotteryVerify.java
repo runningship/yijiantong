@@ -22,9 +22,12 @@ public class LotteryVerify {
 	
 	public Integer activeUid;
 	
+	public String qrCode;
+	
 	public String verifyCode;
 	
 	public Date addtime;
 	
+	//0 待审核，1已兑奖 2，无效码
 	public Integer status;
 }

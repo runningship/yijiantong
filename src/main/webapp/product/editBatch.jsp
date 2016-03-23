@@ -92,6 +92,20 @@
 											</div>
 										</div>
 										<div class="form-group">
+											<label class="col-sm-2 control-label">是否自动兑奖 </label>
+											<select class="form-control select search" name="autoCashLottery">
+												<option <c:if test="${batch.autoCashLottery ==1 }">selected="selected"</c:if> value="1">是</option>
+												<option <c:if test="${batch.autoCashLottery !=1 }">selected="selected"</c:if> value="0">否</option>
+											</select>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-2 control-label">是否自动校验 </label>
+											<select class="form-control select search" name="autoVerifyLottery">
+												<option <c:if test="${batch.autoVerifyLottery ==1 }">selected="selected"</c:if>  value="1">是</option>
+												<option <c:if test="${batch.autoVerifyLottery !=1 }">selected="selected"</c:if> value="0">否</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="col-sm-2 control-label">二维码大小 </label>
 											<div class="col-sm-6">
 												<input type="text"  value="${batch.qrCodeWidth }" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px

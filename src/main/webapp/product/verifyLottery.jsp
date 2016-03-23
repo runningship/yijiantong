@@ -141,7 +141,7 @@ function jiaoyan(){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/addVerify',
-	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id}},
+	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id} , qrCode:'${item.qrCode}'},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){

@@ -48,6 +48,10 @@
 				}
 			}
 		</script>
+		
+		<style type="text/css">
+			.search{    width: 300px;    display: inline-block;}
+		</style>
 	</head>
 	
 	<body>
@@ -85,11 +89,18 @@
 								<div class="panel-body">
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
-											<div class="col-sm-12 col-md-6">
-												<div id="datatable-default_filter" class="dataTables_filter">
-													<input type="search" name="code" class="form-control" placeholder="校验码" aria-controls="datatable-default"><label></label>
-												</div>
+											<div style="margin-bottom: 10px; margin-left: 15px;">
+												<input type="search" name="code" class="form-control search" placeholder="校验码" aria-controls="datatable-default">
+												<input type="search" name="tel" class="form-control search" placeholder="手机号码" aria-controls="datatable-default">
+												<select class="form-control select search" name="status">
+													<option value="">所有</option>
+													<option value="0">待审核</option>
+													<option value="1">已兑奖</option>
+													<option value="2">无效码</option>
+												</select>
+												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="doSearch()">搜索</button>
 											</div>
+											
 											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
@@ -99,6 +110,7 @@
 												<th>产品规格</th>
 												<th>兑奖号码</th>
 												<th>兑奖地址</th>
+												<th>兑奖码</th>
 												<th>校验码</th>
 												<th>提交时间</th>
 												<th></th>
@@ -110,6 +122,7 @@
 												<td>$[spec]</td>
 												<td>$[tel]</td>
 												<td>$[activeAddr]</td>
+												<td>$[qrCode]</td>
 												<td>$[verifyCode]</td>
 												<td>$[addtime]</td>
 												<td>
