@@ -166,11 +166,7 @@ function duijiang(){
     });
 }
 
-function sendSMSCode(){
-	var tel = $('.tel').val();
-	if(!isMobile(tel)){
-		return ;
-	}
+function sendSMSCode(tel){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/user/sendVerifyCode',
@@ -184,6 +180,10 @@ var timer=0;
 function getYzm(){
 	if(timer>0){
 		return;
+	}
+	var tel = $('.tel').val();
+	if(!isMobile(tel)){
+		return ;
 	}
 	//send sms code
 	sendSMSCode();
