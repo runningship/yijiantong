@@ -143,9 +143,9 @@ function jiaoyan(){
 	    url: '/c/admin/lottery/addVerify',
 	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id} , qrCode:'${item.qrCode}'},
 	    mysuccess: function(data){
-	    	layer.msg('兑奖成功');
+	    	layer.msg('提交验证成功');
 	    	setTimeout(function(){
-	    		window.location="/success.jsp?client=${client}";
+	    		window.location.reload();
 	    	}, 1000);
 	    }
     });

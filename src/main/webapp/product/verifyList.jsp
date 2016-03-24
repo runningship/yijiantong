@@ -32,7 +32,7 @@
 				    data: {id:id , status : status},
 				    dataType:'json',
 				    mysuccess: function(json){
-				    	layer.msg('设置成功');
+				    	layer.msg('兑奖审核成功');
 				        doSearch();
 				    }
 				  });
@@ -90,9 +90,9 @@
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
 											<div style="margin-bottom: 10px; margin-left: 15px;">
-												<input type="search" name="code" class="form-control search" placeholder="校验码" aria-controls="datatable-default">
-												<input type="search" name="tel" class="form-control search" placeholder="手机号码" aria-controls="datatable-default">
-												<select class="form-control select search" name="status">
+												校验码 <input type="search" name="code" class="form-control search"  aria-controls="datatable-default">
+												手机号码 <input type="search" name="tel" class="form-control search"  aria-controls="datatable-default">
+												状态 <select class="form-control select search" name="status">
 													<option value="">所有</option>
 													<option value="0">待审核</option>
 													<option value="1">已兑奖</option>

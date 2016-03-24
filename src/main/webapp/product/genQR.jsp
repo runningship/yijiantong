@@ -48,6 +48,10 @@ if(batch.qrCodeWidth!=null){
 	qrUtil.LOGO_WIDTH = 13;	
 }
 
+//qrUtil.QRCODE_SIZE= (int)(qrUtil.QRCODE_SIZE*1.5);
+//qrUtil.LOGO_HEIGHT= (int)(qrUtil.LOGO_HEIGHT*1.5);
+//qrUtil.LOGO_WIDTH= (int)(qrUtil.LOGO_WIDTH*1.5);
+qrUtil.scal = 1.8f;
 qrUtil.encode(url, realLogoPath , destPath , true);
 qrUtil.encode(verifyUrl , realLogoPath , verifyDestPath , true);
 %>

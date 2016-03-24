@@ -20,7 +20,7 @@
 				YW.ajax({
 				    type: 'get',
 				    url: '/c/product/listBatch?'+new Date().getTime(),
-				    data: {productId: ${productId}},
+				    data: a,
 				    dataType:'json',
 				    mysuccess: function(json){
 				        buildHtmlWithJsonArray("repeat",json.page.data);
@@ -91,6 +91,9 @@
 				}
 			}
 		</script>
+		<style type="text/css">
+			.search{    width: 300px;    display: inline-block;}
+		</style>
 	</head>
 	
 	<body>
@@ -114,9 +117,15 @@
 							<div class="panel panel-default bk-bg-white" style="height:100%;">
 								<div class="panel-body">
 									<div class="row">
-											<div class="col-sm-12 col-md-6">
-												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="addBatch()">添加</button>
-											</div>
+											<form name="form1" onsubmit="doSearch();return false;">
+												<input type="hidden"  name="productId" value="${productId }"/>
+												<div style="margin-bottom: 10px; margin-left: 15px;">
+													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="addBatch()">添加批次</button>
+												批次号 <input type="search" name="no" class="form-control search" placeholder="" aria-controls="datatable-default">
+												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="doSearch()">搜索</button>
+												
+												</div>
+											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
 										<thead>

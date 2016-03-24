@@ -40,7 +40,7 @@
 		qrUtil.LOGO_HEIGHT = 13;
 		qrUtil.LOGO_WIDTH = 13;	
 	}
-	
+	qrUtil.scal = 1.8f;
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
 		qrUtil.encode(url, realLogoPath , verifyDestPath , true);

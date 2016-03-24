@@ -168,11 +168,15 @@ public class ProductService {
 	}
 	
 	@WebMethod
-	public ModelAndView listBatch(Page<ProductBatch> page , Integer productId){
+	public ModelAndView listBatch(Page<ProductBatch> page , Integer productId , String no){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sql = new StringBuilder("from ProductBatch where productId=? ");
 		List<Object> params = new ArrayList<Object>();
 		params.add(productId);
+		if(StringUtils.isNotEmpty(no)){
+			sql.append(" and no like ?");
+			params.add("%"+no+"%");
+		}
 		page.pageSize=10;
 		page.order="desc";
 		page.orderBy="addtime";

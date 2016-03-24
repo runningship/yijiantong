@@ -71,6 +71,11 @@ public class LotteryService {
 		item.activeAddr = activeAddr;
 		dao.saveOrUpdate(item);
 		
+		LotteryVerify lv = dao.getUniqueByKeyValue(LotteryVerify.class, "qrCode", qrCode);
+		if(lv!=null){
+			lv.status = 1;
+			dao.saveOrUpdate(lv);
+		}
 		//充话费
 		mv.data.put("result", 0);
 		return mv;
