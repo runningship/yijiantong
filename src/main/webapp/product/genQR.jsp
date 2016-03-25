@@ -65,7 +65,7 @@ qrUtil.encode(verifyUrl , realLogoPath , verifyDestPath , true);
 兑奖码
 <img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}duijiang.png"/>
 ${url}
-<br/>
+<br/><br/><br/><br/><br/>
 校验码
 <img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}jiaoyan.png"/>
 ${verifyUrl }

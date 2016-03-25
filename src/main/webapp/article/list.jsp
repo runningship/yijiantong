@@ -25,16 +25,22 @@
 			}
 			
 			function delArticle(id){
-				YW.ajax({
-				    type: 'post',
-				    url: '/c/article/delete',
-				    data: {id : id},
-				    dataType:'json',
-				    mysuccess: function(json){
-				    	alert('删除成功');
-				      	doSearch();
-				    }
-				  });
+				layer.confirm('确定要删除该条记录吗？', {
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+						YW.ajax({
+						    type: 'post',
+						    url: '/c/article/delete',
+						    data: {id : id},
+						    dataType:'json',
+						    mysuccess: function(json){
+						    	alert('删除成功');
+						      	doSearch();
+						    }
+					    });
+					}, function(){
+				});
+				
 			}
 			function openEdit(id){
 				 layer.open({

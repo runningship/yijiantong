@@ -110,15 +110,19 @@ public class HomeService {
 	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type , String device){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder hql = new StringBuilder("select p.id as id, p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
-		hql.append(" and device=? ");
 		List<Object> params =new ArrayList<Object>();
-		params.add(device);
-		hql.append(" and type=? ");
+		
+		hql.append(" and record.type=? ");
 		params.add(type);
+		
+		hql.append(" and (record.device=? ");
+		
+		params.add(device);
 		if(uid!=null){
-			hql.append(" or uid=? ");
+			hql.append(" or record.uid=? ");
 			params.add(uid);
 		}
+		hql.append(")");
 		page = dao.findPage(page , hql.toString(), true , params.toArray() );
 		mv.data.put("page", JSONHelper.toJSON(page));
 		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");

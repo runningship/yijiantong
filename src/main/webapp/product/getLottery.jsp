@@ -186,7 +186,7 @@ function getYzm(){
 		return ;
 	}
 	//send sms code
-	sendSMSCode();
+	sendSMSCode(tel);
 	timer=60;
 	tickDown();
 }
