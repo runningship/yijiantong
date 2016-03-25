@@ -186,7 +186,7 @@ public class ProductService {
 	}
 	
 	@WebMethod
-	public ModelAndView listItem(Page<ProductItem> page , Integer productId , Integer batchId){
+	public ModelAndView listItem(Page<ProductItem> page , Integer productId , Integer batchId , String qrCode , String verifyCode , Integer lotteryActive){
 		ModelAndView mv = new ModelAndView();
 		ProductBatch table = dao.get(ProductBatch.class, batchId);
 		MyInterceptor.getInstance().tableNameSuffix.set(table.tableOffset);
@@ -194,6 +194,19 @@ public class ProductService {
 		List<Object> params = new ArrayList<Object>();
 		params.add(productId);
 		params.add(batchId);
+		
+		if(StringUtils.isNotEmpty(qrCode)){
+			sql.append(" and qrCode like ?");
+			params.add("%"+qrCode+"%");
+		}
+		if(StringUtils.isNotEmpty(verifyCode)){
+			sql.append(" and verifyCode like ?");
+			params.add("%"+verifyCode+"%");
+		}
+		if(lotteryActive!=null){
+			sql.append(" and lotteryActive=?" );
+			params.add(lotteryActive);
+		}
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;

@@ -75,6 +75,7 @@ request.setAttribute("batch", batch);
 		
 		<style type="text/css">
 			#lotteryInfo div{height: 30px;    line-height: 30px;    font-size: 14px; }
+			.search{    width: 200px;    display: inline-block;}
 		</style>
 	</head>
 	
@@ -105,8 +106,16 @@ request.setAttribute("batch", batch);
 													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="packAndDownload.jsp?batchId=${batch.id }"  target="_blank">导出所有二维码</a>
 													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="genBatchQR.jsp?batchId=${batch.id }"  target="_blank">重新生成所有二维码图片</a>
 													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="history.go(-1)">返回</button>
-													<input type="search" name="title" class="form-control" placeholder="二维码编号" aria-controls="datatable-default">
-													<label></label>
+												</div>
+												<div style="margin-bottom: 10px; margin-left: 15px;">
+													兑奖码 <input type="search" name="qrCode" class="form-control search" placeholder="" aria-controls="datatable-default">
+													校验码 <input type="search" name="verifyCode" class="form-control search" placeholder="" aria-controls="datatable-default">
+													状态 <select class="form-control select search" name="lotteryActive">
+															<option value="">所有</option>
+															<option value="0">未兑奖</option>
+															<option value="1">已兑奖</option>
+														</select>
+													<button type="button" class="bk-margin-5 btn btn-primary btn-sm" style="float:right;"  onclick="doSearch()">搜索</button>
 												</div>
 											</div>
 											</form>
@@ -162,7 +171,6 @@ request.setAttribute("batch", batch);
 		
 		<!-- Pages JS -->
 		<!-- end: JavaScript-->
-		<div>如果看到这个说明不是缓存页面</div>
 	</body>
 	
 </html>

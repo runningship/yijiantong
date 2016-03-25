@@ -48,6 +48,24 @@
 			            content: 'edit.jsp?productId='+id
 			        });
 			}
+			
+			function deleteProduct(id){
+				layer.confirm('确定要删除改产品信息吗？', {
+					  btn: ['确定','取消'] //按钮
+					}, function(){
+					  YW.ajax({
+						    type: 'post',
+						    url: '/c/product/delete',
+						    data: {id : id},
+						    dataType:'json',
+						    mysuccess: function(json){
+						    	layer.msg('删除成功');
+						    	doSearch();
+						    }
+					  });
+					}, function(){
+					});
+			}
 		</script>
 		
 		<style type="text/css">
@@ -110,6 +128,7 @@
 												<td>$[spec]</td>
 												<td><a class="batch" href="#" onclick="openPici($[id]);">批次信息</a>
 														<a class="edit" href="#" onclick="openEdit($[id]);">编辑</a>
+														<a class="edit" href="#" onclick="deleteProduct($[id]);">删除</a>
 												</td>
 											</tr>
 										</tbody>
