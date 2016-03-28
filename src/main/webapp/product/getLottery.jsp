@@ -237,7 +237,7 @@ function tickDown(){
 					<div class="lottery_value">10<span class="unit">元</span></div>
 					<div class="tips">(手机费或流量包)</div>
 					<c:if test="${client ne 'kuaiyisao' }">
-						<div class="jingxi"><span>下载快易扫更多惊喜</span><span onclick="window.location='http://www.zhongjiebao.com/download.html'" class="download">下载APP</span></div>
+						<div class="jingxi"><span>下载快易扫更多惊喜</span><span onclick="window.location='../download.html'" class="download">下载APP</span></div>
 					</c:if>
 					<c:if test="${client eq 'kuaiyisao' }">
 						<div class="jingxi"><span>天天快易扫，天天有红包</span></div>
