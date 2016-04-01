@@ -54,8 +54,10 @@ public class QRCodeUtil {
 		bitMatrix = updateBit(bitMatrix, 0);
 		
 		BufferedImage bi =  MatrixToImageWriter.toBufferedImage(bitMatrix);
-		BufferedImage image = zoomInImage(bi,QRCODE_SIZE,QRCODE_SIZE);
 		
+		BufferedImage image = zoomInImage(bi,QRCODE_SIZE,QRCODE_SIZE);
+		// 插入图片
+		insertImage(image, imgPath, needCompress);
 //		BufferedImage image = new BufferedImage(width, height,	BufferedImage.TYPE_INT_RGB);
 //		for (int x = 0; x < width; x++) {
 //			for (int y = 0; y < height; y++) {
@@ -66,8 +68,7 @@ public class QRCodeUtil {
 		if (imgPath == null || "".equals(imgPath)) {
 			return image;
 		}
-		// 插入图片
-		insertImage(image, imgPath, needCompress);
+		
 		//缩小图片到40%
 		
 //		int size = 60;
@@ -118,8 +119,8 @@ public class QRCodeUtil {
 		int x = (QRCODE_SIZE - width) / 2;
 		int y = (QRCODE_SIZE - height) / 2;
 		graph.drawImage(src, x, y, width, height, null);
-		Shape shape = new RoundRectangle2D.Float(x, y, width, width, 10, 10);
-		graph.setStroke(new BasicStroke(2f));
+		Shape shape = new RoundRectangle2D.Float(x, y, width, width, 1, 1);
+		graph.setStroke(new BasicStroke(0f));
 		graph.draw(shape);
 		graph.dispose();
 	}

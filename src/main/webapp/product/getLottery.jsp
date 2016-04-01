@@ -30,7 +30,7 @@ String scanType = request.getHeader("type");
 request.setAttribute("scanType", scanType);
 String uidStr = request.getHeader("uid");
 String device = request.getHeader("device");
-String tel = request.getHeader("tel");
+//String tel = request.getHeader("tel");
 request.setCharacterEncoding("utf8");
 String address = request.getHeader("address");
 if(StringUtils.isNotEmpty(address)){

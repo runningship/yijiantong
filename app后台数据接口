@@ -48,13 +48,13 @@
  	name : 商品名称
 
  	扫码后打开兑奖页面需要通过http header传递以下参数
- 	1.client="kuiyisao" (必填)
- 	2.lat 
- 	3.lng
+ 	1.client="kuaiyisao" (必填)
+ 	2.lat 经度
+ 	3.lng 经度
  	4.address 扫描地点 (必填)
  	5.uid (必填)
  	6.device 手机设备号 (必填)
- 	7.scanType //1 查真伪，2 查兑奖 (必填)
+ 	7.type //1 查真伪，2 查兑奖 (必填)
 
  	用户注册
  	http://h1y6.com/c/app/u/reg?account=afasfa&pwd=123456
@@ -64,3 +64,6 @@
 
  	商城首页
  	http://h1y6.com/c/app/mall/listGoods
+ 	
+ 	生活小贴士
+ 	http://h1y6.com/c/app/tips

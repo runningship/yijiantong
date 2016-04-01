@@ -33,14 +33,14 @@
 	QRCodeUtil qrUtil = new QRCodeUtil();
 	if(batch.qrCodeWidth!=null){
 		qrUtil.QRCODE_SIZE=batch.qrCodeWidth;
-		qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.19);
-		qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.19);
+		qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.21);
+		qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.21);
 	}else{
 		qrUtil.QRCODE_SIZE=60;
 		qrUtil.LOGO_HEIGHT = 13;
 		qrUtil.LOGO_WIDTH = 13;	
 	}
-	qrUtil.scal = 4f;
+	qrUtil.scal = 5f;
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
 		qrUtil.encode(url, realLogoPath , verifyDestPath , true);
