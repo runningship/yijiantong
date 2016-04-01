@@ -28,8 +28,8 @@
 	request.setAttribute("url" , url);
 	String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
-	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"duijiang.png";
-	String verifyDestPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"jiaoyan.png";
+	String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"-DJ-"+item.qrCode+".png";
+	String verifyDestPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"-JY-"+item.verifyCode+".png";
 	QRCodeUtil qrUtil = new QRCodeUtil();
 	if(batch.qrCodeWidth!=null){
 		qrUtil.QRCODE_SIZE=batch.qrCodeWidth;
@@ -86,8 +86,8 @@ request.setAttribute("batchId", batchId);
 <body>
 <a href="packAndDownload.jsp?batchId=${batchId }">打包下载</a>
 <c:forEach items="${items }" var="pi">
-	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}duijiang.png"/>
-	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}jiaoyan.png"/>
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-DJ-${pi.qrCode}.png"/>
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-JY-${pi.verifyCode }.png"/>
 </c:forEach>
 </body>
 </html>
