@@ -25,6 +25,7 @@
 	ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 	String appHost = ConfigCache.get("app_host", "h1y6.com");
 	String url = "http://"+appHost+"/p/"+item.qrCode;
+	String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
 	request.setAttribute("url" , url);
 	String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
@@ -43,7 +44,7 @@
 	qrUtil.scal = 5f;
 	try{
 		qrUtil.encode(url, realLogoPath , destPath , true);
-		qrUtil.encode(url, realLogoPath , verifyDestPath , true);
+		qrUtil.encode(verifyUrl, realLogoPath , verifyDestPath , true);
 	}catch(Exception ex){
 		ex.printStackTrace();
 		return false;
@@ -86,8 +87,8 @@ request.setAttribute("batchId", batchId);
 <body>
 <a href="packAndDownload.jsp?batchId=${batchId }">打包下载</a>
 <c:forEach items="${items }" var="pi">
-	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-DJ-${pi.qrCode}.png"/>
-	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-JY-${pi.verifyCode }.png"/>
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-DJ-${pi.qrCode}.png"/>${pi.id}-DJ-${pi.qrCode}
+	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-JY-${pi.verifyCode }.png"/>${pi.id}-JY-${pi.verifyCode}
 </c:forEach>
 </body>
 </html>

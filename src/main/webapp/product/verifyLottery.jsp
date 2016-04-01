@@ -102,7 +102,9 @@ if(lv!=null){
 body{font-family: 微软雅黑; margin:1pt;}
 .title{text-align:center;    font-size: 17pt;    font-weight: bold;    height: 32pt;    line-height: 32pt;    background: #D94D3E;    color: white;}
 
-.yiduijiang{background:url('../assets/img/bj.png') ;  position:relative;   height: 110pt;     background-repeat: no-repeat;background-size: 100%;border-radius: 4pt;    margin-bottom: 10pt;    margin-left: 0.5%; }
+.yiduijiang{
+/* background:url('../assets/img/bj.png') ;   height: 110pt;  */
+position:relative;      background-repeat: no-repeat;background-size: 100%;border-radius: 4pt;    margin-bottom: 10pt;    margin-left: 0.5%; }
 .yiduijiang .info{margin-left:auto;margin-right:auto;}
 .yiduijiang .tips{ color: #c60000;    height: 23pt;    line-height: 23pt;    font-size: 18pt; text-align:center;   font-weight: bold;    padding-top: 46pt;}
 
@@ -163,7 +165,7 @@ function jiaoyan(){
 			<p><span class="key">批 次 号</span><span class="value even ">${batch.no }</span></p>
 		</div>
 		<div class="yiduijiang">
-			<div class="tips">校验码 : ${item.verifyCode }</div>
+<%-- 			<div class="tips">校验码 : ${item.verifyCode }</div> --%>
 			<c:if test="${lv ne null && lv.status==0 }">
 				<div style="text-align:center;">
 					<div >审核中</div>

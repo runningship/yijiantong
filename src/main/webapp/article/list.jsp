@@ -85,6 +85,10 @@
 				}
 			}
 		</script>
+		
+		<style type="text/css">
+			.search{    width: 300px;    display: inline-block;}
+		</style>
 	</head>
 	
 	<body>
@@ -120,11 +124,10 @@
 								<div class="panel-body">
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
-											<div class="col-sm-12 col-md-6">
-												<div id="datatable-default_filter" class="dataTables_filter">
-													<input type="search" name="title" class="form-control" placeholder="产品名称" aria-controls="datatable-default"><label></label>
+												<div style="margin-bottom: 10px; margin-left: 15px;">
+												产品名称 <input type="search" name="title" class="form-control search" placeholder="" aria-controls="datatable-default">
+												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="doSearch()">搜索</button>
 												</div>
-											</div>
 											</form>
 									</div>
 									<table class="table table-bordered table-striped mb-none" id="datatable-editable">
