@@ -103,8 +103,8 @@ request.setAttribute("batch", batch);
 											<input type="hidden" name="batchId" value="${batch.id}"/>
 											<div class="col-sm-12col-md-6">
 												<div id="datatable-default_filter" class="dataTables_filter">
+													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="genBatchQR.jsp?batchId=${batch.id }"  target="_blank">生成所有二维码图片</a>
 													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="packAndDownload.jsp?batchId=${batch.id }"  target="_blank">导出所有二维码</a>
-													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="genBatchQR.jsp?batchId=${batch.id }"  target="_blank">重新生成所有二维码图片</a>
 													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="history.go(-1)">返回</button>
 												</div>
 												<div style="margin-bottom: 10px; margin-left: 15px;">
