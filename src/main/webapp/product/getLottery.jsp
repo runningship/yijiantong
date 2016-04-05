@@ -102,7 +102,7 @@ request.setAttribute("qrCode", qrCode);
 body{font-family: 微软雅黑; margin:1pt;}
 .title{text-align:center;    font-size: 17pt;    font-weight: bold;    height: 32pt;    line-height: 32pt;    background: #D94D3E;    color: white;}
 .duijiang{background:url('../assets/img/bj.png') ;     height: 140pt;     background-repeat: no-repeat;background-size: 100%;border-radius: 4pt;    margin-bottom: 10pt;    margin-left: 0.5%;    width: 99%;}
-.lottery_value{font-size: 83pt;   color: #D94D3E;    font-weight: bold;    font-family: -webkit-pictograph;text-align:center;    height: 82pt;}
+.lottery_value{font-size: 83pt;   color: #D94D3E;    font-weight: bold;    text-align:center;    height: 82pt;}
 .duijiang .unit{font-size:30pt;}
 .duijiang .tips{    text-align: center;    color: #C95D5D;height: 23pt;    line-height: 23pt; font-size:11pt;}
 .duijiang .jingxi{    text-align: center; color: #BB0322;    font-weight: bold;position:relative;    font-size: 13pt;}
@@ -129,7 +129,7 @@ body{font-family: 微软雅黑; margin:1pt;}
 .tel{ line-height: 30pt;    width: 98%;    border-radius: 2pt;    border: 1px solid #ddd;    font-size: 12pt; font-weight:bold;height: 30pt;}
 .btn-ok{    height: 30pt;    background: #D94D3E;    line-height: 30pt;    width: 98%;    display: inline-block;    margin-top: 5pt;    border-radius: 4pt;    color: white;    font-weight: bold;    margin-bottom: 10pt;}
 .yzm{    width: 200px;    float: left;    margin-left: 0.5%;margin-top:3pt;}
-.getYzm{    float: right;    height: 33pt;    margin-right: 2pt; margin-top:3pt;border: none;    color: white;    background: purple;    width: 60pt;}
+.getYzm{    float: right;    height: 33pt;    margin-right: 2pt; margin-top:3pt;border: none;    color: white;    background: purple;    width: 70pt;}
 </style>
 <script src="/assets/vendor/js/jquery-2.1.1.min.js"></script>
 <script src="/assets/js/houyi/buildHtml.js"></script>
@@ -253,11 +253,12 @@ function tickDown(){
 							<input class="tel"  placeholder="请输入你的手机号码"  />
 							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
 							<div class="btn-ok" onclick="duijiang();">一键领取</div>
-<!-- 							<div class="btn-ok" onclick="alert('请先登录')">登录后领奖</div> -->
 						</c:if>
 					</div>
 				</c:if>
-				
+				<input class="tel"  placeholder="请输入你的手机号码"  />
+				<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
+				<div class="btn-ok" onclick="duijiang();">一键领取</div>
 			</div>
 		</c:if>
 </div>

@@ -62,6 +62,10 @@ public class ProductService {
 	@WebMethod
 	public ModelAndView saveBatch(ProductBatch batch){
 		ModelAndView mv = new ModelAndView();
+		ProductBatch po = dao.getUniqueByKeyValue(ProductBatch.class, "no", batch.no);
+		if(po!=null){
+			throw new GException(PlatformExceptionType.BusinessException,"批次号不能重复");
+		}
 		batch.addtime = new Date();
 		dao.saveOrUpdate(batch);
 		return mv;
@@ -239,7 +243,9 @@ public class ProductService {
 		mv.data.put("activeTime", DataHelper.sdf.format(item.activeTime));
 		mv.data.put("activeAddr" , item.activeAddr);
 		User owner = dao.get(User.class, item.lotteryOwnerId);
-		mv.data.put("activeTel" , owner.tel);
+		if(owner!=null){
+			mv.data.put("activeTel" , owner.tel);
+		}
 		
 		mv.data.put("result", 0);
 		return mv;

@@ -92,6 +92,7 @@
 											<div style="margin-bottom: 10px; margin-left: 15px;">
 												校验码 <input type="search" name="code" class="form-control search"  aria-controls="datatable-default">
 												手机号码 <input type="search" name="tel" class="form-control search"  aria-controls="datatable-default">
+												批次号 <input type="search" name="batchNo" class="form-control search"  aria-controls="datatable-default">
 												状态 <select class="form-control select search" name="status">
 													<option value="">所有</option>
 													<option value="0">待审核</option>

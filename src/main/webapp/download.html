@@ -9,8 +9,23 @@
 		        return false;
 		    }
 		}
+		
+		function isIOS(){
+			var ua = navigator.userAgent.toLowerCase();
+		    if (ua.indexOf('iphone')>-1) {
+		        return true;
+		    } else {
+		        return false;
+		    }
+		}
+		
 	    if(!isWeixin()){
-	    	window.location="http://www.h1y6.com/HouyiApp.apk";
+	    	if(isIOS){
+	    		window.location="http://www.h1y6.com/HouyiApp.apk";
+	    	}else{
+	    		window.location="http://www.h1y6.com/HouyiApp.apk";	
+	    	}
+	    	
 		}
 	</script>
 </head>

@@ -67,7 +67,7 @@ public class HomeService {
 		ModelAndView mv = new ModelAndView();
 		page.setPageSize(3);
 		page = dao.findPage(page, "select art.id as id, art.title as title , art.isAd as isTop, art.conts as conts, img.path as img from Article art , Image img where img.id=art.imgId"
-				+ " and leibie='tips' order by art.isAd desc, art.id desc ", true, new Object[]{});
+				+ " and leibie='tips' and art.publishFlag=1 order by art.isAd desc, art.id desc ", true, new Object[]{});
 		//make abstract
 		for(Map art : page.getResult()){
 			String conts = art.get("conts").toString();
