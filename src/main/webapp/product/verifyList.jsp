@@ -107,6 +107,7 @@
 										<thead>
 											<tr>
 												<th>产品名称</th>
+												<th>批次号</th>
 												<th>产品规格</th>
 												<th>兑奖号码</th>
 												<th>兑奖地址</th>
@@ -119,6 +120,7 @@
 										<tbody>
 											<tr class="gradeA repeat" style="display:none;">
 												<td>$[title]</td>
+												<td>$[batchNo]</td>
 												<td>$[spec]</td>
 												<td>$[tel]</td>
 												<td>$[activeAddr]</td>

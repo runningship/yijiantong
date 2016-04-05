@@ -82,7 +82,7 @@ public class LotteryService {
 	}
 	
 	@WebMethod
-	public ModelAndView addVerify(String qrCode , String verifyCode , String tel , Integer uid , String activeAddr , Integer productId){
+	public ModelAndView addVerify(String qrCode , String verifyCode , String tel , Integer uid , String activeAddr , Integer productId , String batchNo){
 		ModelAndView mv = new ModelAndView();
 		LotteryVerify lv = new LotteryVerify();
 		lv.activeAddr = activeAddr;
@@ -93,6 +93,7 @@ public class LotteryService {
 		lv.addtime = new Date();
 		lv.qrCode = qrCode;
 		lv.status = 0;
+		lv.batchNo = batchNo;
 		dao.saveOrUpdate(lv);
 		mv.data.put("result", 0);
 		return mv;
@@ -102,7 +103,7 @@ public class LotteryService {
 	public ModelAndView listVerify(Page<Map> page , String code , String tel , Integer status){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder hql = new StringBuilder("select lv.id as id , lv.status as status, pro.title as title , pro.spec as spec, lv.tel as tel , lv.activeAddr as activeAddr, "
-				+ "lv.verifyCode as verifyCode,lv.qrCode as qrCode, lv.addtime as addtime from LotteryVerify lv , Product pro  where lv.productId=pro.id");
+				+ "lv.verifyCode as verifyCode,lv.qrCode as qrCode, lv.batchNo as batchNo, lv.addtime as addtime from LotteryVerify lv , Product pro  where lv.productId=pro.id");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(code)){
 			hql.append(" and lv.verifyCode like ? ");

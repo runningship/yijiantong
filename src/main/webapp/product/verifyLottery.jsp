@@ -134,6 +134,7 @@ $(function(){
 });
 
 function jiaoyan(){
+	
 	var tel = '${tel}';
 	//var tel='15856985558';
 	if(!tel){
@@ -143,7 +144,7 @@ function jiaoyan(){
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/addVerify',
-	    data:{tel : tel , verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id} , qrCode:'${item.qrCode}'},
+	    data:{tel : tel , batchNo: ${batch.no}, verifyCode: '${verifyCode}' , uid: '${uid}' , activeAddr: '${address}' , productId: ${product.id} , qrCode:'${item.qrCode}'},
 	    mysuccess: function(data){
 	    	layer.msg('提交验证成功');
 	    	setTimeout(function(){

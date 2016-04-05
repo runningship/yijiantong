@@ -16,6 +16,8 @@ public class LotteryVerify {
 	
 	public Integer productId;
 	
+	public String batchNo;
+	
 	public String tel;
 	
 	public String activeAddr;
