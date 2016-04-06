@@ -83,13 +83,13 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">奖券 <span class="required">*</span></label>
 											<div class="col-sm-6">
-												<input type="text" name="lottery" desc="奖券" class="form-control" placeholder="" required/>元
+												<input type="text"  value="10" name="lottery" desc="奖券" class="form-control" placeholder="" required/>元
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">二维码大小 </label>
 											<div class="col-sm-6">
-												<input type="text"  value="60" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px
+												<input type="text"  value="76" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px
 											</div>
 										</div>
 										<div class="form-group">

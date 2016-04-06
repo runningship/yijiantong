@@ -39,16 +39,15 @@ request.setAttribute("batch", batch);
 				if(status==0){
 					return "未兑奖";
 				}else{
-					return '<a onclick="getLotteryInfo(\''+qrCode+'\')" href="javascript:void(0)" >已兑奖</a>'
+					return '<a onclick="getLotteryInfo(\''+qrCode+'\');" href="#" >已兑奖</a>';
 				}
 			}
 			
 			function getLotteryInfo(qrCode){
 				YW.ajax({
-				    type: 'post',
+				    type: 'get',
 				    url: '/c/product/getLotteryInfo?'+new Date().getTime(),
-				    cache:false,
-				    data: {qrCode : qrCode},
+				    data:'qrCode='+qrCode,
 				    dataType:'json',
 				    mysuccess: function(json){
 				    	console.log(1);
