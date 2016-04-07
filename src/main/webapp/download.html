@@ -12,16 +12,17 @@
 		
 		function isIOS(){
 			var ua = navigator.userAgent.toLowerCase();
-		    if (ua.indexOf('iphone')>-1) {
+		    if (ua.indexOf('iphone')>-1 || ua.indexOf('ipad')>-1) {
 		        return true;
 		    } else {
 		        return false;
 		    }
 		}
 		
-	    if(!isWeixin()){
+	    if(isWeixin()){
+	    	//window.location="http://a.app.qq.com/o/simple.jsp?pkgname=com.houyi.android";
 	    	if(isIOS){
-	    		window.location="http://www.h1y6.com/HouyiApp.apk";
+	    		window.location="http://a.app.qq.com/o/simple.jsp?pkgname=com.houyi.android";
 	    	}else{
 	    		window.location="http://www.h1y6.com/HouyiApp.apk";	
 	    	}

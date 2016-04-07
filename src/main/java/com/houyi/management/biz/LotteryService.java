@@ -122,6 +122,8 @@ public class LotteryService {
 			hql.append(" and status=? ");
 			params.add(status);
 		}
+		page.order="desc";
+		page.orderBy="lv.addtime";
 		page = dao.findPage(page, hql.toString() ,true , params.toArray());
 		mv.data.put("page",JSONHelper.toJSON(page));
 		mv.data.put("result", 0);
