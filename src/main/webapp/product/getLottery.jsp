@@ -260,9 +260,6 @@ function tickDown(){
 						</c:if>
 					</div>
 				</c:if>
-				<input class="tel"  placeholder="请输入你的手机号码"  />
-				<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
-				<div class="btn-ok" onclick="duijiang();">一键领取</div>
 			</div>
 		</c:if>
 </div>
