@@ -87,6 +87,13 @@
 											</div>
 										</div>
 										<div class="form-group">
+											<label class="col-sm-2 control-label">是否开放兑奖 </label>
+											<select class="form-control select search" name="openForLottery">
+												<option  value="1">是</option>
+												<option  value="0">否</option>
+											</select>
+										</div>
+										<div class="form-group">
 											<label class="col-sm-2 control-label">二维码大小 </label>
 											<div class="col-sm-6">
 												<input type="text"  value="76" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px

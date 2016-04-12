@@ -166,7 +166,7 @@ public class HomeService {
 	@WebMethod
 	public ModelAndView listGoods(Page<Map> page , String name , Integer uid){
 		ModelAndView mv = new ModelAndView();
-		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.imgId=img.id ");
+		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.isAd=1 and goods.imgId=img.id ");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(name)){
 			sql.append(" and title like ?");

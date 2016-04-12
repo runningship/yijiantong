@@ -80,6 +80,7 @@ public class ProductService {
 			po.conts = batch.conts;
 			po.autoCashLottery = batch.autoCashLottery;
 			po.autoVerifyLottery = batch.autoVerifyLottery;
+			po.openForLottery = batch.openForLottery;
 			dao.saveOrUpdate(po);
 		}
 		return mv;

@@ -37,6 +37,6 @@ public class Goods {
 	//主图片id
 	public Integer imgId;
 	
-	//是否广告
+	//是否上架
 	public Integer isAd;
 }

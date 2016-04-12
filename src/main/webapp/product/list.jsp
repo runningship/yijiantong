@@ -31,6 +31,7 @@
 			            title: '批次信息',
 			            shadeClose: true,
 			            shade: false,
+			            id:'aaaaaaaaaa',
 			            maxmin: true, //开启最大化最小化按钮
 			            area: ['900px', '600px'],
 			            content: 'listBatch.jsp?productId='+id

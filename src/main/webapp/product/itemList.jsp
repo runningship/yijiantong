@@ -44,13 +44,13 @@ request.setAttribute("batch", batch);
 			}
 			
 			function getLotteryInfo(qrCode){
+				var a=$('form[name=form1]').serialize();
 				YW.ajax({
 				    type: 'get',
 				    url: '/c/product/getLotteryInfo?'+new Date().getTime(),
 				    data:'qrCode='+qrCode,
 				    dataType:'json',
 				    mysuccess: function(json){
-				    	console.log(1);
 				    	$('#lotteryInfo .tel').text(json.activeTel);
 				    	$('#lotteryInfo .addr').text(json.activeAddr);
 				    	$('#lotteryInfo .time').text(json.activeTime);
@@ -69,6 +69,10 @@ request.setAttribute("batch", batch);
 					    layer.close(index);
 					  }
 					});
+			}
+			
+			function goBack(){
+				window.location='listBatch.jsp?productId='+'${productId}';
 			}
 		</script>
 		
@@ -104,7 +108,7 @@ request.setAttribute("batch", batch);
 												<div id="datatable-default_filter" class="dataTables_filter">
 													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="genBatchQR.jsp?batchId=${batch.id }"  target="_blank">生成所有二维码图片</a>
 													<a type="button" class="bk-margin-5 btn btn-primary btn-sm"  href="packAndDownload.jsp?batchId=${batch.id }"  target="_blank">导出所有二维码</a>
-													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="history.go(-1)">返回</button>
+													<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  style="float:right;" onclick="goBack()">返回</button>
 												</div>
 												<div style="margin-bottom: 10px; margin-left: 15px;">
 													兑奖码 <input type="search" name="qrCode" class="form-control search" placeholder="" aria-controls="datatable-default">

@@ -57,7 +57,11 @@ if(item==null){
 	out.println("没有找到商品信息");
 	return;
 }
-
+ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
+if(batch.openForLottery!=Integer.valueOf(1)){
+	out.println("安徽厚易科技公司未开放该二维码兑奖功能");
+	return;
+}
 try{
 	ScanRecord record = new ScanRecord();
 	record.productId = item.productId;
@@ -82,7 +86,7 @@ try{
 	LogUtil.info("添加扫描记录失败,qrCode="+qrCode);
 }
 request.setAttribute("item", item);
-ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
+
 request.setAttribute("batch", batch);
 Product product = dao.get(Product.class, item.productId);
 request.setAttribute("product", product);

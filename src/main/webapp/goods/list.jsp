@@ -98,6 +98,7 @@
 											<tr>
 												<th>产品名称</th>
 												<th>产品规格</th>
+												<th>上架时间</th>
 												<th></th>
 											</tr>
 										</thead>
@@ -105,6 +106,7 @@
 											<tr class="gradeA repeat" style="display:none;">
 												<td>$[title]</td>
 												<td>$[spec]</td>
+												<td>$[addtime]</td>
 												<td>
 														<a class="edit" href="#" onclick="openEdit($[id]);">编辑</a>
 														<a class="del" href="#" onclick="delGoods($[id]);">删除</a>

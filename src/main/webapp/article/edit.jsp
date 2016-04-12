@@ -59,8 +59,7 @@
 	        ]
 	  	});
 		ue.addListener( 'ready', function( editor ) {
-			var conts = $('#conts').html();
-	        ue.setContent(conts);
+			ue.setContent('${article.conts}');
 	    });
 		var img=JSON.parse('{}');
 		img.path = 'http://${imageHost}/article_image_path/${image.path}';

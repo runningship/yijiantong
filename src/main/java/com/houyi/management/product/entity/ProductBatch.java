@@ -44,4 +44,7 @@ public class ProductBatch {
 	
 	// 是否自动校验  0,不自动校验 1,自动校验
 	public Integer autoVerifyLottery;
+	
+	//是否开放兑奖功能
+	public Integer openForLottery;
 }

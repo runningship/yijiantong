@@ -59,8 +59,7 @@
 	  });
 	
 		ue.addListener( 'ready', function( editor ) {
-			var conts = $('#conts').html();
-	        ue.setContent(conts);
+	        ue.setContent('${product.conts}');
 	    });
 		
 		var img=JSON.parse('{}');
