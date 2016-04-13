@@ -124,8 +124,15 @@
 								<div class="panel-body">
 									<div class="row">
 											<form name="form1" onsubmit="doSearch();return false;">
-												<div style="margin-bottom: 10px; margin-left: 15px;">
-												产品名称 <input type="search" name="title" class="form-control search" placeholder="" aria-controls="datatable-default">
+												<div style="margin-bottom: 10px;">
+												标题 <input type="search" name="title" class="form-control search" placeholder="" aria-controls="datatable-default">
+												<div class="col-sm-3">
+														<select class="form-control select" name="leibie">
+															<option value="">所有</option>
+															<option value="news">行业新闻</option>
+															<option value="tips">生活小贴士</option>
+														</select>
+													</div>
 												<button type="button" class="bk-margin-5 btn btn-primary btn-sm"  onclick="doSearch()">搜索</button>
 												</div>
 											</form>

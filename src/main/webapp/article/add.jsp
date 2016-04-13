@@ -165,7 +165,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">排序 </label>
 											<div class="col-sm-9">
-												<input type="text" name="orderx" class="form-control" placeholder="" />
+												<input type="text" name="orderx" class="form-control" placeholder="整数数字" />
 											</div>
 										</div>
 										<div class="form-group">

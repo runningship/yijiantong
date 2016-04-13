@@ -78,13 +78,17 @@ public class ArticleService {
 	}
 	
 	@WebMethod
-	public ModelAndView list(Page<Article> page , String title){
+	public ModelAndView list(Page<Article> page , String title , String leibie){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sql = new StringBuilder("from Article where 1=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(title)){
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
+		}
+		if(StringUtils.isNotEmpty(leibie)){
+			sql.append(" and leibie = ?");
+			params.add(leibie);
 		}
 		sql.append(" order by isAd desc , id desc");
 		page = dao.findPage(page, sql.toString() , params.toArray());

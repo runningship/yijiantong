@@ -57,6 +57,13 @@
 	}
 	
 	</script>
+	
+	<style type="text/css">
+			.search{    width: 300px;    display: inline-block;}
+			.field{width:350px; display:inline-block;margin-left: -16px;}
+			.field input{width:300px;display:inline-block;}
+			.form-horizontal .control-label{width:116px;}
+		</style>
 	</head>
 	
 	<body>
@@ -75,20 +82,20 @@
 									<div class="panel-body">
 										<div class="form-group">
 											<label class="col-sm-2 control-label">批次号 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="no"   readonly="readonly" value="${batch.no }" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">数量 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="count"  value="${batch.count }"  readonly="readonly" desc="数量" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">奖券 <span class="required">*</span></label>
-											<div class="col-sm-6">
-												<input type="text" name="lottery"  readonly="readonly" value="${batch.lottery }" desc="奖券" class="form-control" placeholder="" required/>元
+											<div class="col-sm-6 field">
+												<input type="text" name="lottery"  readonly="readonly" value="${batch.lottery }" desc="奖券" class="form-control" placeholder="" required/><span>元</span>
 											</div>
 										</div>
 										<div class="form-group">
@@ -114,13 +121,13 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">二维码大小 </label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text"  value="${batch.qrCodeWidth }" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">描述 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="conts" value="${batch.conts }" class="form-control" placeholder="" required/>
 											</div>
 										</div>
