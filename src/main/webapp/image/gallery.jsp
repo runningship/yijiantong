@@ -17,7 +17,8 @@
 			.media-gallery .mg-files .thumbnail{padding:0px;margin-bottom:0px;}
 			.isotope-item{width:150px;padding:3px;display:inline-block;}
 			.media-gallery{margin-top:25px;margin-left:20px;}
-			.btn-ok{position: absolute;    top: 0px;    right: 30px;}
+			.btn-ok{position: absolute;    top: 0px;    right: 115px;}
+			#upload{margin-left: 15px;}
 		</style>
 		<script type="text/javascript" src="/assets/js/uploadify/jquery.uploadify.js"></script>
 		<script type="text/javascript">
@@ -26,6 +27,10 @@
 				doSearch();
 			});
 			
+			function changeImageType(){
+				initUploadHouseImage(${user.id});
+				doSearch();
+			}
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({
@@ -68,14 +73,19 @@
 				initUploadHouseImage(${user.id});
 			},100);
 			
-			
+			var uploader;
 			function initUploadHouseImage(uid){
-				  $('#upload').uploadify({
+				uploader = $('#upload').uploadify({
 				      'swf'      : '/assets/js/uploadify/uploadify.swf',
-				      'uploader' : '/c/image/upload?uid='+uid,
+				      'uploader' : '/c/image/upload?uid='+uid+'&leibie='+$('#leibie').val(),
 				      'buttonText': '上传图片',
 				      'removeTimeout': 0.1,
 				      'fileSizeLimit' : '5MB',
+				      'method':'get',
+				      'onUploadStart':function(file){
+				          //this.settings.uploader='/c/image/upload?uid='+uid+'&leibie='+$('#leibie').val();
+				          //$('#uploadify').uploadify('settings','uploader' , '/c/image/upload?uid='+uid+'&leibie='+$('#leibie').val());
+				      },
 				      'onUploadError' : function(file, errorCode, errorMsg, errorString){
 				          //console.log('The file ' + file.name + ' could not be uploaded: ' + errorString);
 				      },
@@ -116,6 +126,28 @@
 				var index =parent.layer.getFrameIndex(window.name)
 				parent.layer.close(index);
 			}
+			
+			function deleteBatchImage(){
+				var imgs = $('.thumbnail-selected img');
+				var ids='';
+				for(var i=0;i<imgs.length;i++){
+					var id = $(imgs[i]).attr('data-id');
+					if(id.indexOf('$')>-1){
+						continue;
+					}
+					ids = ids+$(imgs[i]).attr('data-id')+',';
+				}
+				YW.ajax({
+				    type: 'get',
+				    url: '/c/image/deleteBatch',
+				    data: {ids : ids},
+				    dataType:'json',
+				    mysuccess: function(json){
+				    	layer.msg('删除成功');
+				    	doSearch();
+				    }
+				 });
+			}
 		</script>
 		
 	</head>
@@ -129,12 +161,22 @@
 				<!-- Main Page -->
 				<div class="">
 					<div class="media-gallery">
-						<form name="form1" onsubmit="doSearch();return false;"></form>
+						<form name="form1" onsubmit="doSearch();return false;">
+							<div class="col-sm-3">
+								<select class="form-control select"  onchange="changeImageType()" id="leibie" name="leibie">
+									<option value="">所有</option>
+									<option value="news">新闻资讯</option>
+									<option value="product">产品管理</option>
+									<option value="mall">易商城</option>
+								</select>
+							</div>
+						</form>
 						<div class="row">
 								<div class="col-sm-12 col-md-6">
 									<div id="datatable-default_filter" class="dataTables_filter">
 										<input id="upload"  style="display:none;">
 										<button onclick="doSelect()" type="button" class="btn-ok bk-margin-5 btn btn-success btn-xs">确定</button>
+										<button onclick="deleteBatchImage()" type="button" style="position: absolute;    top: 0px; right:30px;" class="bk-margin-5 btn btn-success btn-xs">删除选中</button>
 									</div>
 								</div>
 						</div>
@@ -145,7 +187,7 @@
 									<div class="thumbnail">
 										<div class="thumb-preview">
 											<a class="thumb-image" href="http://${imageHost }/article_image_path//$[path]">
-												<img data-id="$[id]" src="http://${imageHost }/article_image_path/$[path]" class="img-responsive" style="">
+												<img data-id="$[id]" src="http://${imageHost }/article_image_path/$[path]" class="img-responsive" style="height:120px;">
 											</a>
 											<div class="mg-thumb-options">
 												<div class="mg-toolbar">

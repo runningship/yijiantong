@@ -41,6 +41,16 @@
  	device : 设备号
  	type: 1 查真伪，2 查兑奖
 
+	删除扫描记录
+	http://h1y6.com:8181/c/app/deleteScanRecord?id=121
+	参数
+	id : ScanRecord的id
+
+	批量删除扫描记录
+	http://h1y6.com:8181/c/app/deleteBatchScanRecord?ids=121,123,124
+	参数
+	ids : ScanRecord的id用,分隔
+	
  	搜索商品
  	http://h1y6.com/c/app/searchGoods
  	参数(post方式，否则中文乱码)

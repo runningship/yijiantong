@@ -15,4 +15,7 @@ public class Image {
 	public String path;
 	
 	public Integer uid;
+	
+	//分类
+	public String leibie;
 }

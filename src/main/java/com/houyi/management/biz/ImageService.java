@@ -82,7 +82,7 @@ public class ImageService {
 	}
 	
 	@WebMethod
-	public ModelAndView list(Page<Image> page , String title){
+	public ModelAndView list(Page<Image> page , String title , String leibie){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sql = new StringBuilder("from Image where 1=1 ");
 		List<Object> params = new ArrayList<Object>();
@@ -90,6 +90,12 @@ public class ImageService {
 			sql.append(" and title like ?");
 			params.add("%"+title+"%");
 		}
+		if(StringUtils.isNotEmpty(leibie)){
+			sql.append(" and leibie = ?");
+			params.add(leibie);
+		}
+		page.orderBy="id";
+		page.order="desc";
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;
@@ -101,6 +107,22 @@ public class ImageService {
 		Image po = dao.get(Image.class, id);
 		if(po!=null){
 			dao.delete(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView deleteBatch(String ids){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(ids)){
+			return mv;
+		}
+		String[] idArr = ids.split(",");
+		for(String id : idArr){
+			Image po = dao.get(Image.class, Integer.valueOf(id));
+			if(po!=null){
+				dao.delete(po);
+			}	
 		}
 		return mv;
 	}

@@ -7,11 +7,13 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
+import org.bc.sdak.GException;
 import org.bc.sdak.Page;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
 import org.bc.web.ModelAndView;
 import org.bc.web.Module;
+import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.MyInterceptor;
@@ -109,7 +111,7 @@ public class HomeService {
 	@WebMethod
 	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type , String device){
 		ModelAndView mv = new ModelAndView();
-		StringBuilder hql = new StringBuilder("select p.id as id, p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
+		StringBuilder hql = new StringBuilder("select p.id as id, p.title as title , p.vender as vender , p.spec as spec,record.addtime as addtime , img.path as img,record.id as scanId from Product p ,ScanRecord record , Image img where record.productId=p.id and p.imgId=img.id ");
 		List<Object> params =new ArrayList<Object>();
 		
 		hql.append(" and record.type=? ");
@@ -131,6 +133,36 @@ public class HomeService {
 	}
 	
 	@WebMethod
+	public ModelAndView deleteScanRecord(Integer id){
+		ModelAndView mv = new ModelAndView();
+		ScanRecord po = dao.get(ScanRecord.class, id);
+		if(po!=null){
+			dao.delete(po);
+		}else{
+			throw new GException(PlatformExceptionType.BusinessException,"记录不存在或已经删除");
+		}
+		mv.data.put("result", "success");
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView deleteBatchScanRecord(String ids){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(ids)){
+			throw new GException(PlatformExceptionType.BusinessException,"参数ids不能为空");
+		}
+		String[] idArr = ids.split(",");
+		for(String id : idArr){
+			ScanRecord po = dao.get(ScanRecord.class, Integer.valueOf(id));
+			if(po!=null){
+				dao.delete(po);
+			}
+		}
+		mv.data.put("result", "success");
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView sendSMSCode(String tel){
 		ModelAndView mv = new ModelAndView();
 		return mv;
@@ -142,6 +174,7 @@ public class HomeService {
 		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.imgId=img.id ");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(name)){
+			System.out.println(name);
 			sql.append(" and title like ?");
 			params.add("%"+name+"%");
 		}
