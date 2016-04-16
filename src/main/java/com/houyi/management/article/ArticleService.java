@@ -27,10 +27,37 @@ public class ArticleService {
 	public ModelAndView save(Article article){
 		ModelAndView mv = new ModelAndView();
 		article.addtime = new Date();
+		if(article.isAd==Integer.valueOf(1)){
+			article.setTopTime=new Date();
+		}
 		dao.saveOrUpdate(article);
 		return mv;
 	}
 
+	@WebMethod
+	public ModelAndView setToTop(Integer id){
+		ModelAndView mv = new ModelAndView();
+		Article po = dao.get(Article.class, id);
+		if(po!=null){
+			po.isAd = 1;
+			po.setTopTime = new Date();
+			dao.saveOrUpdate(po);
+		}
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView revokeSetTop(Integer id){
+		ModelAndView mv = new ModelAndView();
+		Article po = dao.get(Article.class, id);
+		if(po!=null){
+			po.isAd = 0;
+			po.setTopTime = null;
+			dao.saveOrUpdate(po);
+		}
+		return mv;
+	}
+	
 	@WebMethod
 	public ModelAndView update(Article article){
 		ModelAndView mv = new ModelAndView();
@@ -90,7 +117,7 @@ public class ArticleService {
 			sql.append(" and leibie = ?");
 			params.add(leibie);
 		}
-		sql.append(" order by isAd desc , id desc");
+		sql.append(" order by setTopTime desc , id desc");
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;

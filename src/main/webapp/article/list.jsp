@@ -76,6 +76,30 @@
 				  });
 			}
 			
+			function setToTop(id){
+				YW.ajax({
+				    type: 'post',
+				    url: '/c/article/setToTop',
+				    data: {id : id},
+				    dataType:'json',
+				    mysuccess: function(json){
+				      	doSearch();
+				    }
+				  });
+			}
+			
+			function revokeSetTop(id){
+				YW.ajax({
+				    type: 'post',
+				    url: '/c/article/revokeSetTop',
+				    data: {id : id},
+				    dataType:'json',
+				    mysuccess: function(json){
+				      	doSearch();
+				    }
+				  });
+			}
+			
 			function getPublishFlag(flag){
 				if(flag){
 					//已发布
@@ -155,6 +179,8 @@
 												<td runscript="true">getLebie('$[leibie]')</td>
 												<td><a href="#" onclick="openEdit($[id]);">编辑</a> <a href="#" onclick="delArticle($[id]);">删除</a> 
 														<a href="#"  runscript="true" onclick="togglePublishFlag($[id]);">getPublishFlag($[publishFlag])</a> 
+														<a href="#" onclick="setToTop($[id]);">置顶</a>
+														<a style="color:red;" show="$[isAd]==1" href="#" onclick="revokeSetTop($[id]);">取消置顶</a> 
 												</td>
 											</tr>
 										</tbody>

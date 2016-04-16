@@ -37,4 +37,6 @@ public class Article {
 	public Integer imgId;
 	
 	public String leibie;
+	
+	public Date setTopTime;
 }

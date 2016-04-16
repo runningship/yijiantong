@@ -25,7 +25,7 @@
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
-	
+	<script type="text/javascript" charset="utf-8" src="../assets/js/houyi/placeholder.js"></script>
 	<script type="text/javascript">
 	var ue;
 	$(function(){
@@ -172,12 +172,12 @@
 												</select>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-2 control-label">排序 </label>
-											<div class="col-sm-9">
-												<input type="text" name="orderx"  value="${article.orderx }" class="form-control" placeholder="" />
-											</div>
-										</div>
+<!-- 										<div class="form-group"> -->
+<!-- 											<label class="col-sm-2 control-label">排序 </label> -->
+<!-- 											<div class="col-sm-9"> -->
+<%-- 												<input type="text" name="orderx"  value="${article.orderx }" class="form-control" placeholder="整数数字" /> --%>
+<!-- 											</div> -->
+<!-- 										</div> -->
 										<div class="form-group">
 											<label class="col-sm-2 control-label">是否发布</label>
 											<div class="col-lg-6 col-md-4 col-sm-4 col-xs-4">

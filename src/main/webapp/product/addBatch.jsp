@@ -52,6 +52,13 @@
 	}
 	
 	</script>
+	
+	<style type="text/css">
+		.search{    width: 300px;    display: inline-block;}
+		.field{width:350px; display:inline-block;margin-left: -16px;}
+		.field input{width:300px;display:inline-block;}
+		.form-horizontal .control-label{width:116px;}
+	</style>
 	</head>
 	
 	<body>
@@ -68,21 +75,21 @@
 								<input type="hidden" name="productId" value="${productId }"/>
 								<div class="panel panel-default" style="height:100%;">
 									<div class="panel-body">
-										<div class="form-group">
+										<div class="form-group ">
 											<label class="col-sm-2 control-label">批次号 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="no" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">数量 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="count" desc="数量" class="form-control" placeholder="" required/>
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">奖券 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text"  value="10" name="lottery" desc="奖券" class="form-control" placeholder="" required/>元
 											</div>
 										</div>
@@ -95,13 +102,13 @@
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">二维码大小 </label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text"  value="76" name="qrCodeWidth" desc="二维码大小" class="form-control" placeholder="" />px
 											</div>
 										</div>
 										<div class="form-group">
 											<label class="col-sm-2 control-label">描述 <span class="required">*</span></label>
-											<div class="col-sm-6">
+											<div class="col-sm-6 field">
 												<input type="text" name="conts" value="" class="form-control" placeholder="" required/>
 											</div>
 										</div>

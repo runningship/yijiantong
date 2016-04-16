@@ -36,7 +36,7 @@
 			            shadeClose: true,
 			            shade: false,
 			            maxmin: true, //开启最大化最小化按钮
-			            area: ['400px', '460px'],
+			            area: ['600px', '460px'],
 			            content: 'addBatch.jsp?productId=${productId}'
 			        });
 			}
