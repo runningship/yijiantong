@@ -55,7 +55,7 @@ public class GoodsService {
 	@WebMethod
 	public ModelAndView list(Page<Map> page , String title){
 		ModelAndView mv = new ModelAndView();
-		StringBuilder sql = new StringBuilder("select id as id , title as title , imgId as imgId , spec as spec ,vender as vender , price as price , addtime as addtime from Goods where 1=1 ");
+		StringBuilder sql = new StringBuilder("select id as id , title as title , imgId as imgId , spec as spec ,vender as vender , price as price , isAd as isAd, addtime as addtime from Goods where 1=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(title)){
 			sql.append(" and title like ?");

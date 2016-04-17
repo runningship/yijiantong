@@ -48,7 +48,21 @@
 				    }
 				  });
 			}
+			
+			function getStatus(code){
+				if(!code){
+					return '已下架';
+				}else if(code==0){
+					return '已下架';
+				}else{
+					return '已上架';
+				}
+			}
 		</script>
+		
+		<style type="text/css">
+			.status_1{color:blue;}
+		</style>
 	</head>
 	
 	<body>
@@ -98,6 +112,7 @@
 											<tr>
 												<th>产品名称</th>
 												<th>产品规格</th>
+												<th>状态</th>
 												<th>上架时间</th>
 												<th></th>
 											</tr>
@@ -106,6 +121,7 @@
 											<tr class="gradeA repeat" style="display:none;">
 												<td>$[title]</td>
 												<td>$[spec]</td>
+												<td runscript="true" class="status_$[isAd]">getStatus($[isAd])</td>
 												<td>$[addtime]</td>
 												<td>
 														<a class="edit" href="#" onclick="openEdit($[id]);">编辑</a>

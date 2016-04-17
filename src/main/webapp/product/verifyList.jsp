@@ -50,7 +50,7 @@
 		</script>
 		
 		<style type="text/css">
-			.search{    width: 300px;    display: inline-block;}
+			.search{    width: 120px;    display: inline-block;}
 		</style>
 	</head>
 	

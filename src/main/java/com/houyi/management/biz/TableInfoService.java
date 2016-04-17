@@ -43,8 +43,8 @@ public class TableInfoService {
 				+ ",[lottery] int NULL "
 				+ ",[lotteryActive] int NULL "
 				+",[activeAddr] nvarchar(100) NULL"
-				+"[activeLat] float NULL"
-				+"[activeLng] float NULL"
+				+",[activeLat] float NULL"
+				+",[activeLng] float NULL"
 				+ ",[lotteryOwnerId] int NULL "
 				+ ", [addtime] datetime NULL)";
 		dao.executeSQL(sql);

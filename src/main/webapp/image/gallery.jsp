@@ -19,7 +19,7 @@
 			.media-gallery{margin-top:25px;margin-left:20px;}
 			.btn-ok{position: absolute;    top: 0px;    right: 115px;}
 			#upload{margin-left: 15px;}
-			.mg-main{margin-top:15px;}
+			.mg-main{margin-top:20px;}
 		</style>
 		<script type="text/javascript" src="/assets/js/uploadify/jquery.uploadify.js"></script>
 		<script type="text/javascript">
