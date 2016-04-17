@@ -80,6 +80,8 @@ try{
 		if(po==null){
 			dao.saveOrUpdate(record);
 		}	
+	}else{
+		LogUtil.info("信息不全，无法添加扫描记录");
 	}
 }catch(Exception ex){
 	ex.printStackTrace();

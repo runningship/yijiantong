@@ -11,6 +11,7 @@ import org.bc.sdak.GException;
 import org.bc.sdak.Page;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
+import org.bc.sdak.utils.LogUtil;
 import org.bc.web.ModelAndView;
 import org.bc.web.Module;
 import org.bc.web.PlatformExceptionType;
@@ -125,6 +126,7 @@ public class HomeService {
 			params.add(uid);
 		}
 		hql.append(")");
+		LogUtil.info("listScanRecord uid="+uid+",device="+device+",type="+type+",hql="+hql);
 		page = dao.findPage(page , hql.toString(), true , params.toArray() );
 		mv.data.put("page", JSONHelper.toJSON(page));
 		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");

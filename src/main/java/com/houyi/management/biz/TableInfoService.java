@@ -42,7 +42,7 @@ public class TableInfoService {
 				+ ",[batchId] int NOT NULL "
 				+ ",[lottery] int NULL "
 				+ ",[lotteryActive] int NULL "
-				+",[activeAddr] nvarchar(100) NULL"
+				+",[activeAddr] nvarchar(500) NULL"
 				+",[activeLat] float NULL"
 				+",[activeLng] float NULL"
 				+ ",[lotteryOwnerId] int NULL "

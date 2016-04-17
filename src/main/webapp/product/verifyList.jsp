@@ -32,7 +32,7 @@
 				    data: {id:id , status : status},
 				    dataType:'json',
 				    mysuccess: function(json){
-				    	layer.msg('兑奖审核成功');
+				    	layer.msg('操作成功');
 				        doSearch();
 				    }
 				  });
