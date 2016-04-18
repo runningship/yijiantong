@@ -58,7 +58,7 @@ if(item==null){
 }
 ProductBatch batch = dao.get(ProductBatch.class, item.batchId);
 if(batch.openForLottery!=Integer.valueOf(1)){
-	out.println("安徽厚易科技公司未开放该二维码兑奖功能");
+	out.println("<div style='font-size:25px;text-align:center;'>安徽厚易科技公司未开放该二维码兑奖功能<div>");
 	return;
 }
 try{

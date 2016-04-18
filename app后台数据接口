@@ -77,3 +77,12 @@
  	
  	生活小贴士
  	http://h1y6.com/c/app/tips
+ 	
+ 	发送短信验证码
+ 	http://h1y6.com/c/admin/user/sendVerifyCode?tel=15856985122
+ 	
+ 	重置密码
+ 	http://h1y6.com/c/app/u/resetPwd?tel=15856985122&pwd=111111&smsCode=2716
+ 	
+ 	签到
+ 	http://h1y6.com/c/app/u/checkIn?uid=123

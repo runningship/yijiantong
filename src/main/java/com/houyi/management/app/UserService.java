@@ -1,5 +1,6 @@
 package com.houyi.management.app;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import net.sf.json.JSONObject;
@@ -16,8 +17,12 @@ import org.bc.web.ThreadSession;
 import org.bc.web.WebMethod;
 
 import com.houyi.management.SysConstants;
+import com.houyi.management.user.entity.CheckIn;
+import com.houyi.management.user.entity.TelVerifyCode;
 import com.houyi.management.user.entity.User;
+import com.houyi.management.util.BcloudSMSSender;
 import com.houyi.management.util.SecurityHelper;
+import com.houyi.management.util.VerifyCodeHelper;
 
 
 @Module(name="/app/u/")
@@ -34,6 +39,7 @@ public class UserService {
 		if(StringUtils.isEmpty(user.pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
 		}
+		
 		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "type"},  new Object[]{user.account , 1});
 		if(po==null){
 			throw new GException(PlatformExceptionType.BusinessException,"账号不存在");
@@ -79,6 +85,54 @@ public class UserService {
 		dao.saveOrUpdate(user);
 		mv.data.put("result", "success");
 		mv.data.put("uid", user.id);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView resetPwd(String tel , String pwd , String smsCode){
+		ModelAndView mv = new ModelAndView();
+		if(StringUtils.isEmpty(tel)){
+			throw new GException(PlatformExceptionType.BusinessException,"请先填写手机号码");
+		}
+		if(StringUtils.isEmpty(pwd)){
+			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
+		}
+		if(StringUtils.isEmpty(smsCode)){
+			throw new GException(PlatformExceptionType.BusinessException,"请先填写短信验证码");
+		}
+		
+		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
+		tvc.verifyTime = new Date();
+		dao.saveOrUpdate(tvc);
+		User po  = dao.getUniqueByKeyValue(User.class, "tel", tel);
+		if(po==null){
+			throw new GException(PlatformExceptionType.BusinessException,"手机号码不存在");
+		}
+		po.pwd = pwd;
+		dao.saveOrUpdate(po);
+		mv.data.put("result", "success");
+		mv.data.put("uid", po.id);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView checkIn(Integer uid){
+		ModelAndView mv = new ModelAndView();
+		Calendar today = Calendar.getInstance();
+		today.set(Calendar.HOUR_OF_DAY, 0);
+		today.set(Calendar.MINUTE, 0);
+		today.set(Calendar.SECOND, 0);
+		
+		CheckIn po = dao.getUniqueByParams(CheckIn.class, new String[]{"uid" , "addtimeInLong"}, new Object[]{uid , today.getTimeInMillis()/1000});
+		if(po!=null){
+			throw new GException(PlatformExceptionType.BusinessException,"今天已经签到过了");
+		}
+		CheckIn checkIn = new CheckIn();
+		checkIn.addtime = today.getTime();
+		checkIn.uid = uid;
+		checkIn.addtimeInLong = today.getTimeInMillis()/1000;
+		dao.saveOrUpdate(checkIn);
+		mv.data.put("result", "success");
 		return mv;
 	}
 	
