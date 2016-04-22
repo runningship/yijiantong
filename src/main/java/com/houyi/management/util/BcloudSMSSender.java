@@ -15,10 +15,14 @@ import org.apache.commons.httpclient.methods.GetMethod;
  */
 public class BcloudSMSSender {
 
+	public static void main(String[] args){
+		doSendVerifyCode("15856985122" , "1232fdsf");
+	}
+	
 	public static String doSendVerifyCode(String tel , String code){
-		String url = "http://222.73.117.158/msg/";// 应用地址
+		String url = "http://222.73.117.156/msg/";// 应用地址
 		String account = "jiekou-clcs-02";// 账号
-		String pswd = "Tch112233";// 密码
+		String pswd = "Tch20160202";// 密码
 		String msg = "亲爱的用户，您的验证码是"+code+"，5分钟内有效。";// 短信内容
 		boolean needstatus = true;// 是否需要状态报告，需要true，不需要false
 		String product = null;// 产品ID

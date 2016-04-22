@@ -86,3 +86,6 @@
  	
  	签到
  	http://h1y6.com/c/app/u/checkIn?uid=123
+ 	
+ 	获取签到次数
+ 	http://h1y6.com/c/app/u/getCheckInCount?uid=123

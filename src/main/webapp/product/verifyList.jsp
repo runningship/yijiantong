@@ -42,9 +42,9 @@
 				if(status==0){
 					return "待审核";
 				}else if(status==1){
-					return "已兑奖";
+					return "已通过";
 				}else if(status==2){
-					return "无效码";
+					return "不通过";
 				}
 			}
 		</script>
@@ -131,7 +131,7 @@
 												<td>
 													<span show="$[status]==0">
 														<a class="batch" href="#" onclick="setStatus($[id] , 1)">通过</a>
-														<a class="batch" href="#" onclick="setStatus($[id] , 2)">无效</a>
+														<a class="batch" href="#" onclick="setStatus($[id] , 2)">不通过</a>
 													</span>
 													<span show="$[status]!=0" runscript="true">getStatuText($[status])</span>
 												</td>

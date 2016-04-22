@@ -125,13 +125,29 @@ public class UserService {
 		
 		CheckIn po = dao.getUniqueByParams(CheckIn.class, new String[]{"uid" , "addtimeInLong"}, new Object[]{uid , today.getTimeInMillis()/1000});
 		if(po!=null){
-			throw new GException(PlatformExceptionType.BusinessException,"今天已经签到过了");
+//			throw new GException(PlatformExceptionType.BusinessException,"今天已经签到过了");
+			long count = dao.countHql("select count(*) from CheckIn where uid=?", uid);
+			mv.data.put("totalCheckInCount", count);
+			mv.data.put("msg", "今天已经签到过了");
+			mv.data.put("result", "success");
+			return mv;
 		}
 		CheckIn checkIn = new CheckIn();
 		checkIn.addtime = today.getTime();
 		checkIn.uid = uid;
 		checkIn.addtimeInLong = today.getTimeInMillis()/1000;
 		dao.saveOrUpdate(checkIn);
+		long count = dao.countHql("select count(*) from CheckIn where uid=?", uid);
+		mv.data.put("result", "success");
+		mv.data.put("totalCheckInCount", count);
+		return mv;
+	}
+	
+	@WebMethod
+	public ModelAndView getCheckInCount(Integer uid){
+		ModelAndView mv = new ModelAndView();
+		long count = dao.countHql("select count(*) from CheckIn where uid=?", uid);
+		mv.data.put("totalCheckInCount", count);
 		mv.data.put("result", "success");
 		return mv;
 	}
