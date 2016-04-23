@@ -77,6 +77,9 @@ public class UserService {
 		if(po!=null){
 			throw new GException(PlatformExceptionType.BusinessException,"账号已经被注册");
 		}
+		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(user.tel, smsCode);
+		tvc.verifyTime = new Date();
+		dao.saveOrUpdate(tvc);
 		user.pwd = SecurityHelper.Md5(user.pwd);
 		user.type = 1;
 		user.name = user.account;

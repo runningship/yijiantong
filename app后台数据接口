@@ -67,7 +67,7 @@
  	7.type //1 查真伪，2 查兑奖 (必填)
 
  	用户注册
- 	http://h1y6.com/c/app/u/reg?account=afasfa&pwd=123456
+ 	http://h1y6.com/c/app/u/reg?account=afasfa&pwd=123456&smsCode=2222
 
  	用户登录
  	http://h1y6.com/c/app/u/login?account=afasfa&pwd=123456
