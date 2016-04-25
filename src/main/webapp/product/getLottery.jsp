@@ -166,7 +166,7 @@ function duijiang(){
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
-	    		window.location="/success.jsp?client=${client}";
+	    		window.location="/success.jsp?productId=${product.id}&client=${client}";
 	    	}, 1000);
 	    }
     });

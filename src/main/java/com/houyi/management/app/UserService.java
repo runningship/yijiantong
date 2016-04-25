@@ -68,7 +68,7 @@ public class UserService {
 	public ModelAndView reg(User user , String smsCode){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.account)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录账号");
+			throw new GException(PlatformExceptionType.BusinessException,"请先填写手机号");
 		}
 		if(StringUtils.isEmpty(user.pwd)){
 			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
@@ -77,7 +77,7 @@ public class UserService {
 		if(po!=null){
 			throw new GException(PlatformExceptionType.BusinessException,"账号已经被注册");
 		}
-		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(user.tel, smsCode);
+		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(user.account, smsCode);
 		tvc.verifyTime = new Date();
 		dao.saveOrUpdate(tvc);
 		user.pwd = SecurityHelper.Md5(user.pwd);

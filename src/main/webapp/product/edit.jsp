@@ -24,7 +24,7 @@
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.config.js"></script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/ueditor.all.yw.min.js"> </script>
 	<script type="text/javascript" charset="utf-8" src="../assets/js/ueditor1_4_3/lang/zh-cn/zh-cn.js"></script>
-	
+	<script type="text/javascript" charset="utf-8" src="../assets/js/houyi/placeholder.js"></script>
 	<script type="text/javascript">
 	var ue;
 	$(function(){
@@ -167,7 +167,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">规格信息 <span class="required">*</span></label>
 											<div class="col-sm-9">
-												<input type="text" name="spec" class="form-control" placeholder=""  value="${product.spec }" required/>
+												<input type="text" name="spec" class="form-control" placeholder="酒容量(毫升)、酒精度"  value="${product.spec }" required/>
 											</div>
 										</div>
 										<div class="form-group">

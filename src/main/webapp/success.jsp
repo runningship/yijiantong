@@ -10,7 +10,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
-String qrCode = request.getParameter("qrCode");
+String id = request.getParameter("productId");
+Product product = dao.get(Product.class, id);
+request.setAttribute("product", product);
 String client = request.getParameter("client");
 request.setAttribute("client", client);
 %>
@@ -54,9 +56,7 @@ $(function(){
 				</c:if>
 			</div>
 			<div class="content">
-				<div class="title"  id="title">金种子酒</div>
-				<p>安徽金种子集团有限公司始建于1949年，是全国重点骨干酿酒企业，金种子股票于1998年在上交所上市，现年创利税13亿元，员工5000人。近年来，先后荣获“全国绿色食品示范企业”、“中国上市公司资本品牌溢价百强”和“全国十佳新锐上市公司”、全国轻工系统工业化、信息化“两化融合示范企业”等100多项荣誉称号。</p>
-				<p>金种子酒业地处黄淮名酒带，这里自古就是名酒之乡，金种子酿酒古窖池被批准为安徽省文物保护单位，“金种子”牌、“种子”牌、“醉三秋”牌、“颍州”牌系列白酒荣获国家地理标志保护产品， “金种子”、“醉三秋”两个品牌荣获“中国驰名商标”，颍州佳酿被国家商务部授予“中华老字号”。金种子坚持聚集资源做强主业白酒，努力打造中国大众名酒实力品牌，“金种子”连续四次上榜“中国最具价值品牌500强”，“金种子”品牌价值高达105.33亿元。公司经营业绩自2005年以来连续七年保持高速增长，2009、2010年，金种子酒股票市价值连续两年涨幅位居全国食品饮料行业第一。</p>
+				${product.conts }
 			</div>
 		</div>
 </div>

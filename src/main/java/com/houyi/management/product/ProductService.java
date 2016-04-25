@@ -81,6 +81,8 @@ public class ProductService {
 			po.autoCashLottery = batch.autoCashLottery;
 			po.autoVerifyLottery = batch.autoVerifyLottery;
 			po.openForLottery = batch.openForLottery;
+			po.expireDate = batch.expireDate;
+			po.productionDate = batch.productionDate;
 			dao.saveOrUpdate(po);
 		}
 		return mv;

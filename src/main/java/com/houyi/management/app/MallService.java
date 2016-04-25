@@ -26,12 +26,19 @@ public class MallService {
 	public ModelAndView listGoods(Page<Map> page , String name , Integer uid){
 		ModelAndView mv = new ModelAndView();
 		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , "
-				+ "goods.vender as vender , goods.price as price , goods.originalPrice as originalPrice from Goods goods , Image img  where goods.imgId=img.id ");
+				+ "goods.vender as vender , goods.price as price , goods.originalPrice as originalPrice from Goods goods , Image img  where goods.imgId=img.id and goods.isAd=1 ");
 		List<Object> params = new ArrayList<Object>();
 		if(StringUtils.isNotEmpty(name)){
 			sql.append(" and title like ?");
 			params.add("%"+name+"%");
 		}
+		if(StringUtils.isNotEmpty(name)){
+			SearchHistory search = new SearchHistory();
+			search.uid = uid;
+			search.text = name;
+			dao.saveOrUpdate(search);
+		}
+		
 		page.order="desc";
 		page.orderBy = "addtime";
 		page.setPageSize(10);
