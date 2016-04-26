@@ -159,10 +159,15 @@ function duijiang(){
 		return ;
 	}
 	var smsCode = $('#smsCode').val();
+	var pwd = $('#pwd').val();
+	if(pwd && pwd.length!=6){
+		layer.msg('请输入6位密码');
+		return;
+	}
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/lottery/add',
-	    data:{qrCode : '${qrCode}' , tel : tel , smsCode: smsCode , activeAddr:'${address}' , uid : '${uid}'},
+	    data:{pwd : pwd ,qrCode : '${qrCode}' , tel : tel , smsCode: smsCode , activeAddr:'${address}' , uid : '${uid}'},
 	    mysuccess: function(data){
 	    	layer.msg('兑奖成功');
 	    	setTimeout(function(){
@@ -182,6 +187,21 @@ function sendSMSCode(tel){
 	    }
     });
 }
+
+function checkTel(input){
+	var tel = $(input).val();
+	YW.ajax({
+	    type: 'POST',
+	    url: '/c/admin/user/checkTel',
+	    data:{tel : tel},
+	    mysuccess: function(data){
+	    	if(data.telHasReg==0){
+	    		$('#pwd').show();	
+	    	}
+	    }
+    });
+}
+
 var timer=0;
 function getYzm(){
 	if(timer>0){
@@ -257,7 +277,7 @@ function tickDown(){
 						</c:if>
 						<c:if test="${empty uid }">
 							<input class="tel"  placeholder="请输入你的手机号码"  />
-							<input class="pwd"  placeholder="请设置登录密码"  />
+							<input class="tel"  type="password" id="pwd"  placeholder="请设置登录密码"  style="display:none;" />
 							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
 							<div class="btn-ok" onclick="duijiang();">一键领取</div>
 						</c:if>

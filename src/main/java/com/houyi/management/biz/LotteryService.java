@@ -45,14 +45,11 @@ public class LotteryService {
 		if(item.lotteryActive==1){
 			throw new GException(PlatformExceptionType.BusinessException,"改商品已经兑奖，请联系商户检查");
 		}
-//		if(StringUtils.isEmpty(verifyCode)){
-//			throw new GException(PlatformExceptionType.BusinessException,"请先输入兑奖码");
+//		if(StringUtils.isEmpty(uid)){
+//			TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
+//			tvc.verifyTime = new Date();
+//			dao.saveOrUpdate(tvc);
 //		}
-		if(StringUtils.isEmpty(uid)){
-			TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
-			tvc.verifyTime = new Date();
-			dao.saveOrUpdate(tvc);
-		}
 		User u = dao.getUniqueByKeyValue(User.class, "tel", tel);
 		if(u==null){
 			u = new User();

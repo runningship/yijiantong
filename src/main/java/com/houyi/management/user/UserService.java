@@ -187,6 +187,20 @@ public class UserService {
 	}
 	
 	@WebMethod
+	public ModelAndView checkTel(String tel){
+		//检查手机号码是否已经注册
+		ModelAndView mv = new ModelAndView();
+		User po = dao.getUniqueByKeyValue(User.class, "account", tel);
+		if(po==null){
+			mv.data.put("telHasReg", 0);
+		}else{
+			mv.data.put("telHasReg", 1);
+		}
+		
+		return mv;
+	}
+	
+	@WebMethod
 	public ModelAndView reg(String tel , String account, String verifyCode , String pwd){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(account)){

@@ -11,7 +11,7 @@
 <%
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 String id = request.getParameter("productId");
-Product product = dao.get(Product.class, id);
+Product product = dao.get(Product.class, Integer.valueOf(id));
 request.setAttribute("product", product);
 String client = request.getParameter("client");
 request.setAttribute("client", client);
