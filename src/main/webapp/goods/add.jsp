@@ -142,9 +142,9 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">价格 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">价格 </label>
 											<div class="col-sm-9">
-												<input type="text" name="price" class="form-control" placeholder="" required/>
+												<input type="text" name="price" class="form-control" placeholder="" />
 											</div>
 										</div>
 										<div class="form-group">

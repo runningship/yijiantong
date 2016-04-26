@@ -153,9 +153,9 @@
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-2 control-label">价格 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">价格 </label>
 											<div class="col-sm-9">
-												<input type="text" name="price"  value="${goods.price }" class="form-control"  desc="价格" placeholder="" required/>
+												<input type="text" name="price"  value="${goods.price }" class="form-control"  desc="价格" placeholder="" />
 											</div>
 										</div>
 										<div class="form-group">

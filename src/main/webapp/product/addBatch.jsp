@@ -82,15 +82,15 @@
 											</div>
 										</div>
 										<div class="form-group ">
-											<label class="col-sm-2 control-label">生产日期 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">生产日期 </label>
 											<div class="col-sm-6 field">
-												<input type="text" name="productionDate" class="form-control" placeholder="2016-12-12" required/>
+												<input type="text" name="productionDate" class="form-control" placeholder="2016-12-12" />
 											</div>
 										</div>
 										<div class="form-group ">
-											<label class="col-sm-2 control-label">保质期 <span class="required">*</span></label>
+											<label class="col-sm-2 control-label">保质期 </label>
 											<div class="col-sm-6 field">
-												<input type="text" name="expireDate" class="form-control" placeholder="2016-12-12" required/>
+												<input type="text" name="expireDate" class="form-control" placeholder="2016-12-12" />
 											</div>
 										</div>
 										<div class="form-group">
