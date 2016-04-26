@@ -257,6 +257,7 @@ function tickDown(){
 						</c:if>
 						<c:if test="${empty uid }">
 							<input class="tel"  placeholder="请输入你的手机号码"  />
+							<input class="pwd"  placeholder="请设置登录密码"  />
 							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
 							<div class="btn-ok" onclick="duijiang();">一键领取</div>
 						</c:if>

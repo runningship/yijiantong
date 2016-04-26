@@ -34,7 +34,7 @@ public class LotteryService {
 
 	@WebMethod
 	@Transactional
-	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr , String uid){
+	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr , String uid , String pwd){
 		ModelAndView mv = new ModelAndView();
 		String[] arr = qrCode.split("\\.");
 		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
@@ -61,7 +61,8 @@ public class LotteryService {
 			u.name=tel;
 			u.type=1;
 			u.addtime = new Date();
-			u.pwd = SecurityHelper.Md5(smsCode);
+//			u.pwd = SecurityHelper.Md5(smsCode);
+			u.pwd = SecurityHelper.Md5(pwd);
 			dao.saveOrUpdate(u);
 		}
 		
@@ -141,7 +142,7 @@ public class LotteryService {
 				String[] arr = po.verifyCode.split("\\.");
 				MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
 				ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "verifyCode" , po.verifyCode);
-				add(item.qrCode , po.tel , "" , po.activeAddr , po.activeUid==null ? null : po.activeUid.toString());
+				add(item.qrCode , po.tel , "" , po.activeAddr , po.activeUid==null ? null : po.activeUid.toString() , "");
 			}
 			dao.saveOrUpdate(po);
 		}
