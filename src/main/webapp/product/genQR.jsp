@@ -42,8 +42,8 @@ ProductBatch batch = dao.get(ProductBatch.class, Integer.valueOf(item.batchId));
 QRCodeUtil qrUtil = new QRCodeUtil();
 if(batch.qrCodeWidth!=null){
 	qrUtil.QRCODE_SIZE= batch.qrCodeWidth;
-	qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.21);
-	qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.21);
+	qrUtil.LOGO_HEIGHT = (int)(batch.qrCodeWidth*0.26);
+	qrUtil.LOGO_WIDTH = (int)(batch.qrCodeWidth*0.26);
 }else{
 	qrUtil.QRCODE_SIZE=60;
 	qrUtil.LOGO_HEIGHT = 13;
