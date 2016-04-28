@@ -37,7 +37,7 @@ body{font-family: 微软雅黑; margin:1pt;}
 <script type="text/javascript">
 $(function(){
 	if(window.navigator.appVersion.indexOf('SM-G9198')>-1){
-		$('.lottery_value').css('font-size','26pt');
+		$('.lottery_value').css('font-size','20pt');
 	}
 });
 </script>

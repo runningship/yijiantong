@@ -25,8 +25,10 @@ request.setAttribute("pi" , item);
 String imageHost = ConfigCache.get("image_host", "houyikeji.com");
 String appHost = ConfigCache.get("app_host", "h1y6.com");
 request.setAttribute("image_host" , imageHost);
-String url = "http://"+appHost+"/p/"+item.qrCode;
-String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
+//String url = "http://"+appHost+"/p/"+item.qrCode;
+//String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
+String url = item.qrCode;
+String verifyUrl = item.verifyCode;
 request.setAttribute("url" , url);
 request.setAttribute("verifyUrl" , verifyUrl);
 

@@ -24,8 +24,13 @@
 	CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 	ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 	String appHost = ConfigCache.get("app_host", "h1y6.com");
-	String url = "http://"+appHost+"/p/"+item.qrCode;
-	String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
+	
+	//String url = "http://"+appHost+"/p/"+item.qrCode;
+	//String verifyUrl = "http://"+appHost+"/p/"+item.verifyCode;
+	
+	String url = item.qrCode;
+	String verifyUrl = item.verifyCode;
+	
 	request.setAttribute("url" , url);
 	String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
 	String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");

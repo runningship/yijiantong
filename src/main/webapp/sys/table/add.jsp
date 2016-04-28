@@ -47,6 +47,12 @@
 	    });
 	}
 	
+	function suffixChanged(){
+		var suffix = $('#suffix').val();
+		if(suffix && suffix.length>1){
+			$('#suffix').val(suffix[0]);
+		}
+	}
 	</script>
 	</head>
 	
@@ -66,7 +72,7 @@
 										<div class="form-group">
 											<label class="col-sm-2 control-label">编号 <span class="required">*</span></label>
 											<div class="col-sm-6">
-												<input type="text" name="suffix" class="form-control" placeholder="" required/>
+												<input type="text"  id="suffix" name="suffix" onkeyup="suffixChanged();" class="form-control" placeholder="1位数字或字母" required/>
 											</div>
 										</div>
 										<div class="row">

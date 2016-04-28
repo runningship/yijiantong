@@ -141,6 +141,7 @@ body{font-family: 微软雅黑; margin:1pt;}
 <script src="/assets/js/houyi/buildHtml.js"></script>
 <script src="/assets/js/layer/layer.js"></script>
 <script type="text/javascript">
+var needPwd;
 $(function(){
 	if(window.navigator.appVersion.indexOf('SM-G9198')>-1){
 		$('.title').css('height','42pt');
@@ -160,6 +161,10 @@ function duijiang(){
 	}
 	var smsCode = $('#smsCode').val();
 	var pwd = $('#pwd').val();
+	if(needPwd && !pwd){
+		layer.msg('请先输入密码');
+		return;
+	}
 	if(pwd && pwd.length!=6){
 		layer.msg('请输入6位密码');
 		return;
@@ -190,13 +195,24 @@ function sendSMSCode(tel){
 
 function checkTel(input){
 	var tel = $(input).val();
+	if(!isMobile(tel)){
+		layer.msg('请输入有效的手机号');
+		return ;
+	}
+	if(!tel){
+		return;
+	}
 	YW.ajax({
 	    type: 'POST',
 	    url: '/c/admin/user/checkTel',
 	    data:{tel : tel},
 	    mysuccess: function(data){
 	    	if(data.telHasReg==0){
+	    		needPwd=true;
 	    		$('#pwd').show();	
+	    	}else{
+	    		needPwd=false;
+	    		$('#pwd').hide();
 	    	}
 	    }
     });
@@ -276,13 +292,14 @@ function tickDown(){
 							<div class="btn-ok" onclick="duijiang();">立即领取</div>
 						</c:if>
 						<c:if test="${empty uid }">
-							<input class="tel"  placeholder="请输入你的手机号码"  />
+							<input class="tel"  placeholder="请输入你的手机号码"  onblur="checkTel(this);"/>
 							<input class="tel"  type="password" id="pwd"  placeholder="请设置登录密码"  style="display:none;" />
 							<input id="smsCode" class="tel yzm"  placeholder="请输入短信验证码"  /><button class="getYzm" onclick="getYzm();">获取验证码</button>
 							<div class="btn-ok" onclick="duijiang();">一键领取</div>
 						</c:if>
 					</div>
 				</c:if>
+				
 			</div>
 		</c:if>
 </div>

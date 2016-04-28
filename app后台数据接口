@@ -89,3 +89,5 @@
  	
  	获取签到次数
  	http://h1y6.com/c/app/u/getCheckInCount?uid=123
+ 	
+ 	http://h1y6.com/c/admin/lottery?uid=123&qrCode=1212.11&tel=15889899898&smsCode
