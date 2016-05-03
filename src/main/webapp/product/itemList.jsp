@@ -54,12 +54,12 @@ request.setAttribute("batch", batch);
 				    	$('#lotteryInfo .tel').text(json.activeTel);
 				    	$('#lotteryInfo .addr').text(json.activeAddr);
 				    	$('#lotteryInfo .time').text(json.activeTime);
-				    	showLotterInfo();
+				    	showLotteryInfo();
 				    }
 				  });
 			}
 			
-			function showLotterInfo(){
+			function showLotteryInfo(){
 				layer.open({
 					  type: 1,
 					  shade: false,
@@ -164,7 +164,7 @@ request.setAttribute("batch", batch);
 		
 		<div class="clearfix"></div>		
 		
-		<div id="lotteryInfo" style="width: 250px;background: lightblue; display:none;">
+		<div id="lotteryInfo" style="width: 350px;background: lightblue; display:none;">
 			<div>兑奖时间: <span class="time"></span></div>
 			<div>兑奖地址: <span class="addr"></span></div>
 			<div>兑奖号码: <span class="tel"></span></div>

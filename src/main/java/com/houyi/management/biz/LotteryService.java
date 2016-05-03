@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.apache.commons.lang.StringUtils;
 import org.bc.sdak.CommonDaoService;
 import org.bc.sdak.GException;
 import org.bc.sdak.Page;
+import org.bc.sdak.SessionFactoryBuilder;
 import org.bc.sdak.Transactional;
 import org.bc.sdak.TransactionalServiceHelper;
 import org.bc.sdak.utils.JSONHelper;
@@ -16,6 +19,7 @@ import org.bc.web.ModelAndView;
 import org.bc.web.Module;
 import org.bc.web.PlatformExceptionType;
 import org.bc.web.WebMethod;
+import org.hibernate.Session;
 
 import com.houyi.management.MyInterceptor;
 import com.houyi.management.biz.entity.LotteryVerify;
@@ -23,6 +27,7 @@ import com.houyi.management.biz.entity.ScanRecord;
 import com.houyi.management.product.entity.ProductItem;
 import com.houyi.management.user.entity.TelVerifyCode;
 import com.houyi.management.user.entity.User;
+import com.houyi.management.util.LockUtil;
 import com.houyi.management.util.SecurityHelper;
 import com.houyi.management.util.VerifyCodeHelper;
 
@@ -36,6 +41,8 @@ public class LotteryService {
 	@Transactional
 	public ModelAndView add(String qrCode ,String tel, String smsCode,  String activeAddr , String uid , String pwd){
 		ModelAndView mv = new ModelAndView();
+		Lock lock = LockUtil.getLock(qrCode);
+		lock.lock();
 		String[] arr = qrCode.split("\\.");
 		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
 		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode" , qrCode);
@@ -43,7 +50,7 @@ public class LotteryService {
 			throw new GException(PlatformExceptionType.BusinessException,"没有找到兑奖信息");
 		}
 		if(item.lotteryActive==1){
-			throw new GException(PlatformExceptionType.BusinessException,"改商品已经兑奖，请联系商户检查");
+			throw new GException(PlatformExceptionType.BusinessException,"该商品已经兑奖，请联系商户检查");
 		}
 		if(StringUtils.isEmpty(uid)){
 			TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
@@ -76,6 +83,8 @@ public class LotteryService {
 		}
 		//充话费
 		mv.data.put("result", 0);
+		LockUtil.releaseLock(qrCode);
+		lock.unlock();
 		return mv;
 	}
 	
