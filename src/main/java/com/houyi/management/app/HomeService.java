@@ -32,7 +32,7 @@ public class HomeService {
 	
 	@WebMethod
 	public ModelAndView init(String tel){
-		//http://localhost:8181/c/app/init
+		//https://localhost:8181/c/app/init
 		ModelAndView mv = new ModelAndView();
 		//新闻
 		Page<Map> page = new Page<Map>();
@@ -52,10 +52,10 @@ public class HomeService {
 		
 		page = dao.findPage(page, "select product.id as id, product.title as title , img.path as img from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
 		mv.data.put("products", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
-		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
-		mv.data.put("newsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
+		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("productDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
+		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
+		mv.data.put("newsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
 		return mv;
 	}
 
@@ -81,8 +81,8 @@ public class HomeService {
 			art.put("conts", conts);
 		}
 		mv.data.put("tips", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("tipsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
+		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("tipsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
 		return mv;
 	}
 	
@@ -94,7 +94,7 @@ public class HomeService {
 	
 //	@WebMethod
 	public ModelAndView addScanRecord(ScanRecord record){
-		//test url http://localhost:8181/c/app/addScanRecord?uid=12&qrCode=1454316150171.11&type=1
+		//test url https://localhost:8181/c/app/addScanRecord?uid=12&qrCode=1454316150171.11&type=1
 		ModelAndView mv = new ModelAndView();
 		String[] arr = record.qrCode.split("\\.");
 		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
@@ -129,8 +129,8 @@ public class HomeService {
 		LogUtil.info("listScanRecord uid="+uid+",device="+device+",type="+type+",hql="+hql);
 		page = dao.findPage(page , hql.toString(), true , params.toArray() );
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("productDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("productDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
+		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		return mv;
 	}
 	
@@ -193,8 +193,8 @@ public class HomeService {
 		}
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
+		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
 	
@@ -220,8 +220,8 @@ public class HomeService {
 		}
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("goodsDetailUrl", "http://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
+		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
 }

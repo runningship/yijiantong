@@ -30,7 +30,7 @@ public class QRCodeService {
 		String tableSuffix = qrCode.split("\\.")[1];
 		MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
 		String appHost = ConfigCache.get("app_host", "h1y6.com");
-		String url = "http://"+appHost+"/p/"+qrCode;
+		String url = "https://"+appHost+"/p/"+qrCode;
 		String realLogoPath = ThreadSession.getHttpSession().getServletContext().getRealPath("assets/img/yi.png");
 		
 		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
