@@ -1,0 +1,16 @@
+1.工程代码
+a.https://github.com/runningship/yijiantong 易鉴通后台
+b.https://github.com/runningship/bc-ueditor ueditor轻度自定义
+c.https://github.com/runningship/proxool-bc 数据库连接池
+d.https://github.com/runningship/sdak 基于hibernate4的dao封装，后期为了方便加入了本该另起工程的前端mvc框架，在org.bc.web包中(因此没有使用spring,struts或springmvc)
+e.所有工程均为eclipse maven工程,jdk版本1.7
+
+2.开发
+我使用的是jetty8服务器,安装eclipse插件即可
+3.打包
+	mvn war:war
+4.部署
+	war包解压到tomcat/webapps/Root/目录下
+5.webapp/BIN/目录和webapp/web.config 为iis集成tomcat所需要的文件，如果不用tomcat（nginx代替）做跳转可不用该目录
+
+6.系统启动入口为StartUpListener,系统配置文件请关注 com.houyi.management.cache.ConfigCache
