@@ -12,5 +12,5 @@ e.所有工程均为eclipse maven工程,jdk版本1.7
 4.部署
 	war包解压到tomcat/webapps/Root/目录下
 5.webapp/BIN/目录和webapp/web.config 为iis集成tomcat所需要的文件，如果不用tomcat（nginx代替）做跳转可不用该目录
-
+	(如果iis跳转tomcat有问题请解压AJP13.rar文件 , 然后安装Connector_Setup.exe)
 6.系统启动入口为StartUpListener,系统配置文件请关注 com.houyi.management.cache.ConfigCache
