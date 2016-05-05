@@ -52,7 +52,7 @@ public class HomeService {
 		
 		page = dao.findPage(page, "select product.id as id, product.title as title , img.path as img from Product product , Image img where img.id=product.imgId and product.isAd=1", true, new Object[]{});
 		mv.data.put("products", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		mv.data.put("productDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
 		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		mv.data.put("newsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
@@ -81,7 +81,7 @@ public class HomeService {
 			art.put("conts", conts);
 		}
 		mv.data.put("tips", JSONHelper.toJSONArray(page.getResult()));
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		mv.data.put("tipsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/article/view.jsp");
 		return mv;
 	}
@@ -130,7 +130,7 @@ public class HomeService {
 		page = dao.findPage(page , hql.toString(), true , params.toArray() );
 		mv.data.put("page", JSONHelper.toJSON(page));
 		mv.data.put("productDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/product/view.jsp");
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		return mv;
 	}
 	
@@ -193,7 +193,7 @@ public class HomeService {
 		}
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}
@@ -220,7 +220,7 @@ public class HomeService {
 		}
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}

@@ -52,7 +52,7 @@ public class MallService {
 		}
 		
 		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "https://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
+		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
 		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
 		return mv;
 	}

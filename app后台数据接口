@@ -23,9 +23,9 @@
 2）已兑奖时显示兑奖地点和时间及时实现。
 
 	首页初始化
-	http://h1y6.com/c/app/init
+	https://h1y6.com/c/app/init
 	返回值示例
-	{"news":[{"id":114,"img":"2/9c3354ae-8189-4387-ae7e-d3e89c7550d2.jpg","conts":" 【摘要】：全球化时代的新闻界，“数据新闻”已经不是新名词，它代表着全球新闻业在大数据时代背景下新的实践。在信息爆炸的时代，如何通","title":"数据新闻：大数据时代的新闻新模式"},{"id":113,"img":"2/76917394-07eb-4bcb-86dd-5b892624d1a1.jpg","conts":"2014-12-28 \r02:42:43 来源：星辰在线-长沙晚报  作者：李金 　　本报讯 （记者 李金）前日，恒大冰泉“一瓶一","title":"二维码防伪确保严密性"}],"products":[{"img":"2/8d35f3ce-20a4-4eb9-aeec-913b85412fcb.jpg","id":1,"title":"金种子红柔和"}],"imgUrl":"http://60.172.229.58/article_image_path","productDetailUrl":"http://h1y6.com/product/view.jsp","goodsDetailUrl":"http://h1y6.com/goods/view.jsp","newsDetailUrl":"http://h1y6.com/article/view.jsp"}
+	{"news":[{"id":114,"img":"2/9c3354ae-8189-4387-ae7e-d3e89c7550d2.jpg","conts":" 【摘要】：全球化时代的新闻界，“数据新闻”已经不是新名词，它代表着全球新闻业在大数据时代背景下新的实践。在信息爆炸的时代，如何通","title":"数据新闻：大数据时代的新闻新模式"},{"id":113,"img":"2/76917394-07eb-4bcb-86dd-5b892624d1a1.jpg","conts":"2014-12-28 \r02:42:43 来源：星辰在线-长沙晚报  作者：李金 　　本报讯 （记者 李金）前日，恒大冰泉“一瓶一","title":"二维码防伪确保严密性"}],"products":[{"img":"2/8d35f3ce-20a4-4eb9-aeec-913b85412fcb.jpg","id":1,"title":"金种子红柔和"}],"imgUrl":"https://60.172.229.58/article_image_path","productDetailUrl":"https://h1y6.com/product/view.jsp","goodsDetailUrl":"https://h1y6.com/goods/view.jsp","newsDetailUrl":"https://h1y6.com/article/view.jsp"}
 
 	备注
 		图片访问方式 imgUrl+"/"+img
@@ -35,24 +35,24 @@
 
 
  	获取扫描记录
- 	http://h1y6.com/c/app/listScanRecord
+ 	https://h1y6.com/c/app/listScanRecord
  	参数
  	uid:用户id
  	device : 设备号
  	type: 1 查真伪，2 查兑奖
 
 	删除扫描记录
-	http://h1y6.com:8181/c/app/deleteScanRecord?id=121
+	https://h1y6.com:8181/c/app/deleteScanRecord?id=121
 	参数
 	id : ScanRecord的id
 
 	批量删除扫描记录
-	http://h1y6.com:8181/c/app/deleteBatchScanRecord?ids=121,123,124
+	https://h1y6.com:8181/c/app/deleteBatchScanRecord?ids=121,123,124
 	参数
 	ids : ScanRecord的id用,分隔
 	
  	搜索商品
- 	http://h1y6.com/c/app/searchGoods
+ 	https://h1y6.com/c/app/searchGoods
  	参数(post方式，否则中文乱码)
  	uid:用户id
  	name : 商品名称
@@ -67,27 +67,27 @@
  	7.type //1 查真伪，2 查兑奖 (必填)
 
  	用户注册
- 	http://h1y6.com/c/app/u/reg?account=afasfa&pwd=123456&smsCode=2222
+ 	https://h1y6.com/c/app/u/reg?account=afasfa&pwd=123456&smsCode=2222
 
  	用户登录
- 	http://h1y6.com/c/app/u/login?account=afasfa&pwd=123456
+ 	https://h1y6.com/c/app/u/login?account=afasfa&pwd=123456
 
  	商城首页
- 	http://h1y6.com/c/app/mall/listGoods
+ 	https://h1y6.com/c/app/mall/listGoods
  	
  	生活小贴士
- 	http://h1y6.com/c/app/tips
+ 	https://h1y6.com/c/app/tips
  	
  	发送短信验证码
- 	http://h1y6.com/c/admin/user/sendVerifyCode?tel=15856985122
+ 	https://h1y6.com/c/admin/user/sendVerifyCode?tel=15856985122
  	
  	重置密码
- 	http://h1y6.com/c/app/u/resetPwd?tel=15856985122&pwd=111111&smsCode=2716
+ 	https://h1y6.com/c/app/u/resetPwd?tel=15856985122&pwd=111111&smsCode=2716
  	
  	签到
- 	http://h1y6.com/c/app/u/checkIn?uid=123
+ 	https://h1y6.com/c/app/u/checkIn?uid=123
  	
  	获取签到次数
- 	http://h1y6.com/c/app/u/getCheckInCount?uid=123
+ 	https://h1y6.com/c/app/u/getCheckInCount?uid=123
  	
- 	http://h1y6.com/c/admin/lottery?uid=123&qrCode=1212.11&tel=15889899898&smsCode
+ 	https://h1y6.com/c/admin/lottery?uid=123&qrCode=1212.11&tel=15889899898&smsCode
