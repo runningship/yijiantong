@@ -43,8 +43,7 @@ File dir = new File(destPath);
 //通过过滤器过滤掉校验码
 File[] files = dir.listFiles(new FilenameFilter(){
 	public boolean accept(File dir, String name){
-		if(name.contains("-DJ-")){
-			//兑奖码,校验码可以用 name.contains("-JY-")
+		if(name.contains("-JY-")){
 			return true;	
 		}else{
 			return false;

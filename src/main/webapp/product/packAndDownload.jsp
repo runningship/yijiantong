@@ -24,6 +24,7 @@
  <%@ page trimDirectiveWhitespaces="true"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
+//打包二维码 ，包括兑奖码和校验码
 String batchId = request.getParameter("batchId");
 if(StringUtils.isEmpty(batchId)){
 	out.println("缺少批次信息");
