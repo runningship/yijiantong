@@ -10,7 +10,7 @@
 				Page.Init();
 				doSearch();
 			});
-			
+			//ProductService
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
 				YW.ajax({

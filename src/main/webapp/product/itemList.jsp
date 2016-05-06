@@ -23,6 +23,7 @@ request.setAttribute("batch", batch);
 			
 			function doSearch(){
 				var a=$('form[name=form1]').serialize();
+				//ProductService
 				YW.ajax({
 				    type: 'get',
 				    url: '/c/product/listItem?'+new Date().getTime(),

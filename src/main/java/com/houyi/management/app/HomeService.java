@@ -25,11 +25,16 @@ import com.houyi.management.product.entity.ProductItem;
 import com.houyi.management.util.HTMLSpirithHelper;
 
 
+/**
+ * 
+ *APP 首页相关接口
+ */
 @Module(name="/app")
 public class HomeService {
 
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
+	//首页初始化
 	@WebMethod
 	public ModelAndView init(String tel){
 		//https://localhost:8181/c/app/init
@@ -65,6 +70,7 @@ public class HomeService {
 		return mv;
 	}
 	
+	//生活帮
 	@WebMethod
 	public ModelAndView tips(Page<Map> page){
 		ModelAndView mv = new ModelAndView();
@@ -92,23 +98,15 @@ public class HomeService {
 		return mv;
 	}
 	
-//	@WebMethod
-	public ModelAndView addScanRecord(ScanRecord record){
-		//test url https://localhost:8181/c/app/addScanRecord?uid=12&qrCode=1454316150171.11&type=1
-		ModelAndView mv = new ModelAndView();
-		String[] arr = record.qrCode.split("\\.");
-		MyInterceptor.getInstance().tableNameSuffix.set(arr[1]);
-		ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode" , record.qrCode);
-		record.productId = item.productId;
-		record.addtime = new Date();
-		ScanRecord po = dao.getUniqueByParams(ScanRecord.class, new String[]{"uid" , "productId" , "type"}, new Object[]{record.uid , record.productId , record.type});
-		if(po==null){
-			dao.saveOrUpdate(record);
-		}
-		mv.data.put("result", 0);
-		return mv;
-	}
 	
+	/**
+	 * 扫描历史记录
+	 * @param page
+	 * @param uid
+	 * @param type
+	 * @param device
+	 * @return
+	 */
 	@WebMethod
 	public ModelAndView listScanRecord(Page<Map> page ,Integer uid , Integer type , String device){
 		ModelAndView mv = new ModelAndView();
@@ -134,6 +132,7 @@ public class HomeService {
 		return mv;
 	}
 	
+	//删除扫描记录
 	@WebMethod
 	public ModelAndView deleteScanRecord(Integer id){
 		ModelAndView mv = new ModelAndView();
@@ -147,6 +146,7 @@ public class HomeService {
 		return mv;
 	}
 	
+	//批量删除扫描记录
 	@WebMethod
 	public ModelAndView deleteBatchScanRecord(String ids){
 		ModelAndView mv = new ModelAndView();
@@ -170,6 +170,7 @@ public class HomeService {
 		return mv;
 	}
 	
+	//产品搜索
 	@WebMethod
 	public ModelAndView searchGoods(Page<Map> page , String name , Integer uid){
 		ModelAndView mv = new ModelAndView();
@@ -198,30 +199,4 @@ public class HomeService {
 		return mv;
 	}
 	
-//	@WebMethod
-	public ModelAndView listGoods(Page<Map> page , String name , Integer uid){
-		ModelAndView mv = new ModelAndView();
-		StringBuilder sql = new StringBuilder("select goods.id as id , goods.title as title , img.path as img , goods.spec as spec , goods.vender as vender , goods.price as price from Goods goods , Image img  where goods.isAd=1 and goods.imgId=img.id ");
-		List<Object> params = new ArrayList<Object>();
-		if(StringUtils.isNotEmpty(name)){
-			sql.append(" and title like ?");
-			params.add("%"+name+"%");
-		}
-		page.order="desc";
-		page.orderBy = "addtime";
-		page.setPageSize(10);
-		page = dao.findPage(page, sql.toString() , true , params.toArray());
-		
-		if(StringUtils.isNotEmpty(name)){
-			SearchHistory search = new SearchHistory();
-			search.uid = uid;
-			search.text = name;
-			dao.saveOrUpdate(search);
-		}
-		
-		mv.data.put("page", JSONHelper.toJSON(page));
-		mv.data.put("imgUrl", "http://"+ConfigCache.get("image_host", "localhost")+"/article_image_path");
-		mv.data.put("goodsDetailUrl", "https://"+ConfigCache.get("app_host", "localhost")+"/goods/view.jsp");
-		return mv;
-	}
 }

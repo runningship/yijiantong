@@ -27,6 +27,7 @@ public class Article {
 	
 	public String conts;
 	
+	//是否发布 1 发布
 	public Integer publishFlag;
 	
 	// 当作是否置顶 
@@ -38,5 +39,6 @@ public class Article {
 	
 	public String leibie;
 	
+	//设置置顶时间
 	public Date setTopTime;
 }

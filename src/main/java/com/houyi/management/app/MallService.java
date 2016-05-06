@@ -17,11 +17,16 @@ import com.houyi.management.biz.entity.SearchHistory;
 import com.houyi.management.cache.ConfigCache;
 
 
+/**
+ * 
+ *app 易商城相关接口
+ */
 @Module(name="/app/mall")
 public class MallService {
 
 	CommonDaoService dao = TransactionalServiceHelper.getTransactionalService(CommonDaoService.class);
 	
+	//搜索商品
 	@WebMethod
 	public ModelAndView listGoods(Page<Map> page , String name , Integer uid){
 		ModelAndView mv = new ModelAndView();

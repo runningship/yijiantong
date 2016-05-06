@@ -16,9 +16,9 @@
 <%@page import="javax.imageio.ImageIO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
-	String qrCode = request.getParameter("code");
+String qrCode = request.getParameter("code");
 String tableSuffix = qrCode.split("\\.")[1];
-MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);
+MyInterceptor.getInstance().tableNameSuffix.set(tableSuffix);//访问ProductItem表的后缀
 CommonDaoService dao = SimpDaoTool.getGlobalCommonDaoService();
 ProductItem item = dao.getUniqueByKeyValue(ProductItem.class, "qrCode", qrCode);
 request.setAttribute("pi" , item);
@@ -33,10 +33,15 @@ request.setAttribute("url" , url);
 request.setAttribute("verifyUrl" , verifyUrl);
 
 response.setContentType("text/html");
+//二维码logo图片地址 
 String realLogoPath = request.getServletContext().getRealPath("assets/img/yi.png");
+//获取二维码生成目录地址
 String qrCodeDir = ConfigCache.get("qrcode_image_path", "C:\\inetpub\\wwwroot\\qrcode_image_path");
+//二维码文件名
 String destPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"duijiang.png";
+//校验码文件名
 String verifyDestPath = qrCodeDir+"\\"+item.productId+"\\"+item.batchId+"\\"+item.id+"jiaoyan.png";
+//获取产品批次信息
 ProductBatch batch = dao.get(ProductBatch.class, Integer.valueOf(item.batchId));
 
 QRCodeUtil qrUtil = new QRCodeUtil();

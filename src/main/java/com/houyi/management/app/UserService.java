@@ -25,6 +25,10 @@ import com.houyi.management.util.SecurityHelper;
 import com.houyi.management.util.VerifyCodeHelper;
 
 
+/**
+ * 
+ *APP 鐢ㄦ埛鐩稿叧鎺ュ彛
+ */
 @Module(name="/app/u/")
 public class UserService {
 
@@ -34,21 +38,21 @@ public class UserService {
 	public ModelAndView login(User user){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.account)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录账号");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鐧诲綍璐﹀彿");
 		}
 		if(StringUtils.isEmpty(user.pwd)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鐧诲綍瀵嗙爜");
 		}
 		
 		User po = dao.getUniqueByParams(User.class, new String[]{"account" , "type"},  new Object[]{user.account , 1});
 		if(po==null){
-			throw new GException(PlatformExceptionType.BusinessException,"账号不存在");
+			throw new GException(PlatformExceptionType.BusinessException,"璐﹀彿涓嶅瓨鍦�");
 		}
 		if(po.pwd==null){
 			po.pwd="";
 		}
 		if(!po.pwd.equals(SecurityHelper.Md5(user.pwd)) && !po.pwd.equals(user.pwd) ){
-			throw new GException(PlatformExceptionType.BusinessException,"密码不正确");
+			throw new GException(PlatformExceptionType.BusinessException,"瀵嗙爜涓嶆纭�");
 		}
 		ThreadSession.getHttpSession().setAttribute(SysConstants.Session_Attr_User, po);
 		JSONObject userJson = JSONHelper.toJSON(po);
@@ -68,14 +72,14 @@ public class UserService {
 	public ModelAndView reg(User user , String smsCode){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(user.account)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写手机号");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鎵嬫満鍙�");
 		}
 		if(StringUtils.isEmpty(user.pwd)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鐧诲綍瀵嗙爜");
 		}
 		User po  = dao.getUniqueByKeyValue(User.class, "account", user.account);
 		if(po!=null){
-			throw new GException(PlatformExceptionType.BusinessException,"账号已经被注册");
+			throw new GException(PlatformExceptionType.BusinessException,"璐﹀彿宸茬粡琚敞鍐�");
 		}
 		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(user.account, smsCode);
 		tvc.verifyTime = new Date();
@@ -95,13 +99,13 @@ public class UserService {
 	public ModelAndView resetPwd(String tel , String pwd , String smsCode){
 		ModelAndView mv = new ModelAndView();
 		if(StringUtils.isEmpty(tel)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写手机号码");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鎵嬫満鍙风爜");
 		}
 		if(StringUtils.isEmpty(pwd)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写登录密码");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鐧诲綍瀵嗙爜");
 		}
 		if(StringUtils.isEmpty(smsCode)){
-			throw new GException(PlatformExceptionType.BusinessException,"请先填写短信验证码");
+			throw new GException(PlatformExceptionType.BusinessException,"璇峰厛濉啓鐭俊楠岃瘉鐮�");
 		}
 		
 		TelVerifyCode tvc = VerifyCodeHelper.verifySMSCode(tel, smsCode);
@@ -109,7 +113,7 @@ public class UserService {
 		dao.saveOrUpdate(tvc);
 		User po  = dao.getUniqueByKeyValue(User.class, "tel", tel);
 		if(po==null){
-			throw new GException(PlatformExceptionType.BusinessException,"手机号码不存在");
+			throw new GException(PlatformExceptionType.BusinessException,"鎵嬫満鍙风爜涓嶅瓨鍦�");
 		}
 		po.pwd = pwd;
 		dao.saveOrUpdate(po);
@@ -118,6 +122,7 @@ public class UserService {
 		return mv;
 	}
 	
+	//绛惧埌
 	@WebMethod
 	public ModelAndView checkIn(Integer uid){
 		ModelAndView mv = new ModelAndView();
@@ -128,10 +133,10 @@ public class UserService {
 		
 		CheckIn po = dao.getUniqueByParams(CheckIn.class, new String[]{"uid" , "addtimeInLong"}, new Object[]{uid , today.getTimeInMillis()/1000});
 		if(po!=null){
-//			throw new GException(PlatformExceptionType.BusinessException,"今天已经签到过了");
+//			throw new GException(PlatformExceptionType.BusinessException,"浠婂ぉ宸茬粡绛惧埌杩囦簡");
 			long count = dao.countHql("select count(*) from CheckIn where uid=?", uid);
 			mv.data.put("totalCheckInCount", count);
-			mv.data.put("msg", "今天已经签到过了");
+			mv.data.put("msg", "浠婂ぉ宸茬粡绛惧埌杩囦簡");
 			mv.data.put("result", "success");
 			return mv;
 		}

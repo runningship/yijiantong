@@ -92,6 +92,7 @@ request.setAttribute("batchId", batchId);
 <body>
 <a href="packAndDownload.jsp?batchId=${batchId }">打包下载二维码+校验码</a>
 <a href="packAndDownloadQRCode.jsp?batchId=${batchId }">打包下载二维码</a>
+<a href="packAndDownloadVerifyCode.jsp?batchId=${batchId }">打包下载校验码</a>
 <c:forEach items="${items }" var="pi">
 	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-DJ-${pi.qrCode}.png"/>${pi.id}-DJ-${pi.qrCode}
 	<img src="http://${image_host }/qrcode_image_path/${pi.productId}/${pi.batchId}/${pi.id}-JY-${pi.verifyCode }.png"/>${pi.id}-JY-${pi.verifyCode}

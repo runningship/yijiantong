@@ -97,11 +97,17 @@ public class ProductService {
 		return mv;
 	}
 	
+	/**
+	 * 生成二维码到数据库，不包括图片部分
+	 * @param batchId
+	 * @return
+	 */
 	@WebMethod
 	public ModelAndView generateQRCode(Integer batchId){
 		ModelAndView mv = new ModelAndView();
 		ProductBatch batch = dao.get(ProductBatch.class, batchId);
 		//根据 batch.count找到合适的item表,插入数据并设置batch.tableOffset
+		//顺序从tableinfo表中找出空间足够的表
 		List<TableInfo> list = dao.listByParams(TableInfo.class, "from TableInfo where size<?", MAX_TABLE_ROWS-batch.count);
 		if(list.isEmpty()){
 			throw new GException(PlatformExceptionType.BusinessException,"没有足够的空间生成二维码, 请联系系统管理员");
@@ -109,13 +115,13 @@ public class ProductService {
 		TableInfo table = list.get(0);
 		batch.tableOffset=table.suffix;
 		batch.active = 1;
-		table.size+= batch.count;
 		dao.saveOrUpdate(batch);
-		dao.saveOrUpdate(table);
 		
 		MyInterceptor.getInstance().tableNameSuffix.set(batch.tableOffset);
 		for(int i=0;i<batch.count/DB_BATCH_ADD_SIZE; i++){
 			batchAdd(batch, DB_BATCH_ADD_SIZE);
+			table.size+= DB_BATCH_ADD_SIZE;
+			dao.saveOrUpdate(table);
 		}
 		batchAdd(batch , batch.count%DB_BATCH_ADD_SIZE);
 		return mv;
@@ -193,8 +199,10 @@ public class ProductService {
 	}
 	
 	@WebMethod
-	public ModelAndView listItem(Page<ProductItem> page , Integer productId , Integer batchId , String qrCode , String verifyCode , Integer lotteryActive){
+	public ModelAndView listItem(Page<ProductItem> page ,String tel, Integer productId , Integer batchId , String qrCode , String verifyCode , Integer lotteryActive){
 		ModelAndView mv = new ModelAndView();
+		
+		
 		ProductBatch table = dao.get(ProductBatch.class, batchId);
 		MyInterceptor.getInstance().tableNameSuffix.set(table.tableOffset);
 		StringBuilder sql = new StringBuilder("from ProductItem where productId=? and batchId=? ");
@@ -214,6 +222,15 @@ public class ProductService {
 			sql.append(" and lotteryActive=?" );
 			params.add(lotteryActive);
 		}
+		if(StringUtils.isNotEmpty(tel)){
+			//根据tel查找user,再根据uid查询兑奖信息
+			User user = dao.getUniqueByKeyValue(User.class, "tel", tel);
+			if(user!=null){
+				sql.append(" and lotteryOwnerId=?" );
+				params.add(user.id);
+			}
+		}
+		sql.append(" order by activeTime desc");
 		page = dao.findPage(page, sql.toString() , params.toArray());
 		mv.data.put("page", JSONHelper.toJSON(page));
 		return mv;
