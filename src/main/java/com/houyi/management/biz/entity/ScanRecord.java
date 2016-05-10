@@ -8,6 +8,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 //不做为兑奖记录
+/**
+ * 扫描记录
+ */
 @Entity
 public class ScanRecord {
 
@@ -15,15 +18,18 @@ public class ScanRecord {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
+	//用户id
 	public Integer uid;
 	
 	public Integer productId;
 	
+	//兑奖码
 	public String qrCode;
 	
 	//扫描设备
 	public String device;
 	
+	//扫码时间
 	public Date addtime;
 	
 	public String city;

@@ -19,11 +19,14 @@ public class TelVerifyCode {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
+	// 验证码
 	public String code;
 	
 	public String tel;
 	
+	// 验证码发送时间
 	public Date sendtime;
 	
+	// 验证码验证时间
 	public Date verifyTime;
 }

@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * 签到表
+ */
 @Entity
 public class CheckIn {
 
@@ -16,8 +19,10 @@ public class CheckIn {
 
 	public Integer uid;
 	
+	// 签到时间
 	public Date addtime;
 	
+	// 签到时间long 时间格式
 	public Long addtimeInLong;
 	
 }

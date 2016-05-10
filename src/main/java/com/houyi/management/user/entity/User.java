@@ -8,16 +8,21 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * 用户表
+ */
 @Entity
-@Table(name="uc_user")
+@Table(name="uc_user") // 数据库表名为uc_user
 public class User {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 
+	// 用户手机号码
 	public String tel;
 	
+	// 登录账号
 	public String account;
 	
 	public String name;
@@ -26,6 +31,7 @@ public class User {
 	
 	public Date addtime;
 	
+	// 最后登录时间
 	public Date lasttime;
 	
 	public Integer jifen;
@@ -43,5 +49,6 @@ public class User {
 	
 	public String email;
 	
+	// 签名
 	public String sign;
 }

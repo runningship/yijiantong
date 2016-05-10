@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * 易商城商品信息表
+ */
 @Entity
 public class Goods {
 
@@ -14,14 +17,19 @@ public class Goods {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
+	// 商品名称
 	public String title;
 	
+	// 生成商
 	public String vender;
 	
+	// 生产商代码
 	public String vernderCode;
 	
+	// 产地
 	public String verderPlace;
 	
+	// 当前价格 
 	public Float price;
 	
 	//原价
@@ -29,7 +37,8 @@ public class Goods {
 	
 	//规格
 	public String spec;
-	//
+	
+	// 添加时间
 	public Date addtime;
 	
 	public String conts;

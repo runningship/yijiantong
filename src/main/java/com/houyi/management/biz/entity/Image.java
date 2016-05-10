@@ -12,8 +12,10 @@ public class Image {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	public Integer id;
 	
+	//图片保存路径
 	public String path;
 	
+	//图片上传人
 	public Integer uid;
 	
 	//分类

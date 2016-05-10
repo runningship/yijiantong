@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * 用户轨迹表，用户切换城市时候用
+ */
 @Entity
 public class UserTrack {
 
